@@ -5,6 +5,7 @@ let deposit;
 let mission;
 let period;
 
+alert ('Доброго дня!');
 
 /* function pow(x, n) {
     var result = 1;
