@@ -1,3 +1,11 @@
+let money;
+let income;
+let addExpenses;
+let deposit;
+let mission;
+let period;
+
+
 /* function pow(x, n) {
     var result = 1;
 
@@ -16,10 +24,3 @@ if (n < 0) {
 } else {
     alert( pow (x, n) );
 } */
-
-let money;
-let income;
-let addExpenses;
-let deposit;
-let mission;
-let period;
