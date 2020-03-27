@@ -5,7 +5,9 @@ let deposit;
 let mission;
 let period;
 
-alert ('Доброго дня!');
+// alert ('Доброго дня!');
+
+console.log ('Изучаем git, все идет по плану');
 
 /* function pow(x, n) {
     var result = 1;
