@@ -7,6 +7,7 @@ console.log(income + '$');
 let addExpenses = 'Car, Internet, Insurance, Apartments, Mobile';
 console.log(addExpenses.length);
 console.log(addExpenses.toLowerCase());
+console.log(addExpenses.split(', '));
 
 let deposit = true;
 console.log(deposit);
