@@ -1,21 +1,16 @@
-let money = 1000;
-console.log(money + '$');
+let num = 266219;
 
-let income = 2000;
-console.log(income + '$');
+num = String(num);
 
-let addExpenses = 'Car, Internet, Insurance, Apartments, Mobile';
-console.log(addExpenses.length);
-console.log(addExpenses.toLowerCase());
+let results = 1;
 
-let deposit = true;
-console.log(deposit);
+for(let i = 0; i < num.length; i++){
+    results *= num[i];
+}
 
-let mission = 1000000000;
-console.log('Цель заработать ' + mission + ' долларов');
+let res = results ** 3;
+console.log(res);
 
-let period = 24;
-console.log('Период равен ' + period + ' месяцев');
-
-let budgetDay = 2000/30;
-console.log(budgetDay);
+let message = String(res);
+alert(message[0]);
+alert(message[1]);
