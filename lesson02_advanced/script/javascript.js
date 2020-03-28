@@ -12,5 +12,4 @@ let res = results ** 3;
 console.log(res);
 
 let message = String(res);
-alert(message[0]);
-alert(message[1]);
+alert(message.slice(0, 2));
