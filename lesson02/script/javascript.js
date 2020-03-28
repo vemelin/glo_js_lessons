@@ -18,5 +18,5 @@ console.log('Цель заработать ' + mission + ' долларов');
 let period = 24;
 console.log('Период равен ' + period + ' месяцев');
 
-let budgetDay = 2000/30;
+let budgetDay = money/30;
 console.log(budgetDay);
