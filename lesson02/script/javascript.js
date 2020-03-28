@@ -1,8 +1,8 @@
 let money = 1000;
 console.log(money + '$');
 
-let income = 2000;
-console.log(income + '$');
+let income = 'Freelance';
+console.log(income);
 
 let addExpenses = 'Car, Internet, Insurance, Apartments, Mobile';
 console.log(addExpenses.length);
