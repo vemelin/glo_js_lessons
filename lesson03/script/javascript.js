@@ -34,10 +34,7 @@ let amount2 = +prompt('1 Количество: Во сколько это обо
 let budgetMonth = money - (amount1 + amount2);
 console.log(budgetMonth);
 
-let budgetDay = budgetMonth/30;
-console.log(budgetDay);
-
-budgetDay = Math.ceil(mission/budgetMonth);
+let budgetDay = Math.ceil(budgetMonth/30);
 console.log(budgetDay);
 
 if (budgetDay > 1200) {
