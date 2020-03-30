@@ -1,11 +1,13 @@
-// 1 task
-let lang = ['ru', 'en'];
-(lang[3] == 'ru') ? console.log('Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье') :  
-(lang[1] == 'en') ? console.log('Monday, Tuesday, Wensday, Thursday, Friday, Saturday, Sunday') :  
+'use strict';
+
+// 1st task
+let lang = prompt('Выберите язык используя короткие префиксы ru или en', '');
+(lang == 'ru') ? console.log('Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье') :  
+(lang == 'en') ? console.log('Monday, Tuesday, Wensday, Thursday, Friday, Saturday, Sunday') :  
 console.log('По вашему запросу ничего не найдено');
 
-// 2 task
-let namePerson = ['Артем', 'Максим'];
-(namePerson[1] == 'Артем') ? console.log('Директор') :  
-(namePerson[3] == 'Максим') ? console.log('Преподаватель') :  
+// 2nd task
+let namePerson = prompt('Вас зовут Артем или Максим?', '');
+(namePerson == 'Артем') ? console.log('Директор') :  
+(namePerson == 'Максим') ? console.log('Преподаватель') :  
 console.log('Студент');
