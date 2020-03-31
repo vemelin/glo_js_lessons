@@ -1,5 +1,7 @@
 'use sctrict';
+let money = 1000;
 let income = 'Freelance';
+let deposit = true;
 let mission = 20000;
 
 //New criteria from lesson 3
