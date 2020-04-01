@@ -6,7 +6,7 @@ let isNumber = function(number){
 
 let money = 1000,
     income = 'Freelance',
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Car, Internet, Insurance, Apartments, Mobile'),
+    addExpenses = prompt('Перечислите возможные расходы через запятую'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
     mission = 20000,
     expenses = [];
@@ -32,10 +32,10 @@ let getExpensesMonth = function(){
     
     for (let i = 0; i < 2; i++) {
 
-        expenses[i] = prompt('Опишите расходы черзе запятую?');        
+        expenses[i] = prompt('Введите обязательную статью расходов');        
 
         if (isNumber(sum)){
-            sum += +prompt('Сумма расходов?');
+            sum += +prompt('Во сколько это обойдется?');
         } else {
             break;
         }
