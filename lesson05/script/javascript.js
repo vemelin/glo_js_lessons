@@ -56,8 +56,8 @@ let getTargetMonth = function(){
     
     let goal = mission / accumulatedMonth;
 
-    if (goal >= 0){
-        console.log('Цель будет достигнута через > ' + goal + ' < месяца');
+    if (goal > 0){
+        console.log('Цель будет достигнута через > ' + Math.ceil(goal) + ' < месяца');
         return goal; 
     } 
     else if (goal < 0) {
@@ -79,11 +79,22 @@ let getStatusIncome = function(){
     }
 };
 
+// preview type of variables: money, income, deposit
 console.log(showTypeOff(money));
 console.log(showTypeOff(income));
 console.log(showTypeOff(deposit));
-console.log('Ваши расходы за месяц: ' + expensesAmount);
+
+// preview total expenses per month
+console.log('Ваши расходы за месяц: ' + Math.ceil(expensesAmount));
+
+// getting massive from expenses and transform it to lowercases
 console.log(addExpenses.toLowerCase().split(', '));
+
+//rounding float values to a larger number 
 console.log(Math.ceil(getTargetMonth()));
+
+//rounding float days to a larger number of days 
 console.log(Math.ceil(budgetDay));
+
+//just traking the status of our incomes (totaly 3 status) 
 console.log(getStatusIncome());
