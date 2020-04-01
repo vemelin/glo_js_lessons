@@ -6,7 +6,7 @@ let mission = 20000;
 
 //New criteria from lesson 3
 money = +prompt('Ваш месячный доход?', 5000);
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Car, Internet, Insurance, Apartments, Mobile');
+let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Car, Internet, Insurance, Apartments, Mobile');
 deposit = confirm('Есть ли у вас депозит в банке?');
 
 let expenses1 = prompt('Введите обязательную статью расходов?', 'Expenses 1');
@@ -18,24 +18,19 @@ let amount2 = +prompt('1 Количество: Во сколько это обо
 
 //New criteria by lesson 4
 let showTypeOff = function(data){
-    console.log(data, typeof(data));
+    return data + ' >> ' + typeof(data);
 };
 
-showTypeOff(money);
-showTypeOff(income);
-showTypeOff(deposit);
-
 let getExpensesMonth = function(){
-    return amount1 + amount2
+    return amount1 + amount2;
 };
 
 let getAccumulatedMonth = function(){
-    return money - (amount1 + amount2);
+    return money - getExpensesMonth();
 };
 
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Car, Internet, Insurance, Apartments, Mobile');
-
 let accumulatedMonth = getAccumulatedMonth();
+
 
 let getTargetMonth = function(accumulatedMonth){
     let budgetDay = Math.ceil(accumulatedMonth/30);
@@ -57,4 +52,11 @@ let getStatusIncome = function(){
     }
 };
 
+console.log(showTypeOff(money));
+console.log(showTypeOff(income));
+console.log(showTypeOff(deposit));
+console.log(getExpensesMonth());
+console.log(addExpenses.split(', '));
+console.log(getTargetMonth(accumulatedMonth));
+console.log(budgetDay);
 console.log(getStatusIncome());
