@@ -7,7 +7,7 @@ let argResults = function(data){
     }else if (typeof(data) === 'string' && data.length < 30){
         console.log(data.trim());
     }else if (data.length >= 30){
-        console.log(data.substr(0, 30) + '...');
+        console.log(data.substring(0, 30) + '...');
     }
 };
 
