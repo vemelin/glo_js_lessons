@@ -15,7 +15,7 @@ let argResults = function(data){
 // argResults(2020);
 
 // Push stroke with length < 30
-// argResults('Hey-yo vasko asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf');
+// argResults('Hey-yo vasko this is your awesome and finaly decisions by advanced lesson04');
 
 // Push stroke with length > 30
 argResults('Hey-yo vasko this is your awesome and finaly decisions by advanced lesson04');
