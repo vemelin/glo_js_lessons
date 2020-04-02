@@ -4,7 +4,7 @@ let isNumber = function(number){
     return !isNaN(parseFloat(number)) && isFinite(number);
 };
 
-let money,
+let money, amount,
     income = 'Freelance',
     addExpenses = prompt('Перечислите возможные расходы через запятую'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
@@ -24,28 +24,29 @@ let showTypeOff = function(data){
 };
 
 let getExpensesMonth = function(){
-    let sum = 0;
     
     for (let i = 0; i < 2; i++) {
+        let sum;
 
         expenses[i] = prompt('Введите обязательную статью расходов');
 
         do {
             sum = prompt('Во сколько это обойдется?');
         } while (!isNumber(sum));
-        
+
+        amount += +sum;
 
     }
     console.log(expenses);
-    return sum;
+    return amount;
 };
 
 let expensesAmount = getExpensesMonth();
 
-console.log('Расходы за месяц: ' + expensesAmount + ' ' + typeof(expensesAmount));
+console.log('Расходы за месяц: ' + expensesAmount);
 
 let getAccumulatedMonth = function(){
-    return result = money - expensesAmount;
+    return money - expensesAmount;
 };
 
 console.log(getAccumulatedMonth());
