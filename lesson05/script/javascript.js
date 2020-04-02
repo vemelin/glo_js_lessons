@@ -12,24 +12,9 @@ let money,
     expenses = [];
 
 let start = function(){
-    //money = prompt('Ваш месячный доход?');
-
-    // while (!isNumber(money)){
-    //     money = prompt('Ваш месячный доход?');
-    // }
-
-    // while(isNaN(parseFloat(money))){
-    //     money = prompt('Ваш месячный доход?');
-    // }
-
-    // while (isNaN(money) || money.trim() === '' || moeny === null) {
-    //     money = +prompt('Ваш месячный доход?');
-    // }
-
     do {
-        money = +prompt('Ваш месячный доход?');
+        money = prompt('Ваш месячный доход?');
     } while(!isNumber(money));
-
 };
 
 start();
@@ -44,17 +29,10 @@ let getExpensesMonth = function(){
     for (let i = 0; i < 2; i++) {
 
         expenses[i] = prompt('Введите обязательную статью расходов');
-        sum += +prompt('Во сколько это обойдется?');
 
-        // if (isNumber(sum)){
-        //     sum += +prompt('Во сколько это обойдется?');
-        // } else {
-        //     break;
-        // }
-
-        // do {
-        //     sum += +prompt('Во сколько это обойдется?');
-        // } while (!isNumber(sum));
+        do {
+            sum = prompt('Во сколько это обойдется?');
+        } while (!isNumber(sum));
         
 
     }
