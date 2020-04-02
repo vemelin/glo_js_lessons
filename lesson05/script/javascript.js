@@ -7,7 +7,7 @@ let isNumber = function(number){
 let money, 
     amount = 0,
     income = 'Freelance',
-    addExpenses = prompt('Перечислите возможные расходы через запятую', 'Vehicle, Insurance, Internet, Mobile'),
+    addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
     mission = 20000,
     expenses = [];
