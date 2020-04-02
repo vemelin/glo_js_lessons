@@ -49,7 +49,7 @@ let getAccumulatedMonth = function(){
 };
 
 console.log(getAccumulatedMonth());
-console.log(typeof(money));
+console.log(typeof(+money));
 
 let accumulatedMonth = getAccumulatedMonth();
 
@@ -81,7 +81,7 @@ let getStatusIncome = function(){
 };
 
 // preview type of variables: money, income, deposit
-console.log(showTypeOff(money));
+console.log(showTypeOff(+money));
 console.log(showTypeOff(income));
 console.log(showTypeOff(deposit));
 
