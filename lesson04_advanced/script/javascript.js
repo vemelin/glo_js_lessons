@@ -1,18 +1,21 @@
 'use sctrict';
 
-// let argResults = function(data){
+let argResults = function(data){
     
-//     if(typeof(data) != String()){
+    if (!isNaN(data)){
+        console.log('Вы получили число');
+    }else if (typeof(data) === 'string' && data.length < 30){
+        console.log(data.trim());
+    }else if (data.length >= 30){
+        console.log(data.substr(0, 30) + '...');
+    }
+};
 
-//         console.log('data');
+// Push number
+// argResults(2020);
 
-//     }
-//     // return data + ' >> ' + typeof(data);
-//     // else if(){
+// Push stroke with length < 30
+// argResults('Hey-yo vasko asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf');
 
-//     // }
-// };
-
-// console.log(argResults('Hey-yo vasko'));
-
-//     //console.log(data.trim());
+// Push stroke with length > 30
+argResults('Hey-yo vasko this is your awesome and finaly decisions by advanced lesson04');
