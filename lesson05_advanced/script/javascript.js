@@ -1,5 +1,6 @@
 'use sctrict';
 
+// 1 task 
 let arr = [
     '65465456',
     '268984',
@@ -20,28 +21,19 @@ for (let i = 0; i < arr.length; i++){
     }
 }
 
-let n = 30, a, b;
 
-for (a = 2; a < n; a++){
+// 2 task solution
+let n = 100;
+
+start:
+for (let a = 2; a < n; a++){
     
-    for (b = 2; b < a; b++){
-    
-        if (a % b == 0) continue;
+    for (let b = 2; b < a; b++){    
+
+        if (a % b == 0) continue start;
 
     }
 
-    console.log('Делители этого числа: ' + a + ' и ' + b);
+    console.log('Делители этого числа: ' + a);
 
 }
-
-
-// let n = 30, i, j;
-
-// for (i = 2; i <= n; i++) { // Для всех i...
-
-//   for (j = 2; j < i; j++) { // проверить, делится ли число..
-//     if (i % j == 0) continue; // не подходит, берём следующее
-//     console.log('Делители этого числа: ' + j)
-//   }
-//   console.log('Делители этого числа: ' + i)
-// }
