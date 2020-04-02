@@ -4,17 +4,18 @@ let isNumber = function(number){
     return !isNaN(parseFloat(number)) && isFinite(number);
 };
 
-let money, amount,
+let money, 
+    amount = 0,
     income = 'Freelance',
-    addExpenses = prompt('Перечислите возможные расходы через запятую'),
+    addExpenses = prompt('Перечислите возможные расходы через запятую', 'Vehicle, Insurance, Internet, Mobile'),
     deposit = confirm('Есть ли у вас депозит в банке?'),
     mission = 20000,
     expenses = [];
 
 let start = function(){
     do {
-        money = prompt('Ваш месячный доход?');
-    } while(!isNumber(money));
+        money = prompt('Ваш месячный доход?', 5000);
+    } while(!isNumber(money) || money.trim() === '' || money === null);
 };
 
 start();
@@ -28,10 +29,10 @@ let getExpensesMonth = function(){
     for (let i = 0; i < 2; i++) {
         let sum;
 
-        expenses[i] = prompt('Введите обязательную статью расходов');
+        expenses[i] = prompt('Введите обязательную статью расходов', 'Expenses');
 
         do {
-            sum = prompt('Во сколько это обойдется?');
+            sum = prompt('Во сколько это обойдется?', 500);
         } while (!isNumber(sum));
 
         amount += +sum;
