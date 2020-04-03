@@ -38,18 +38,21 @@ const gameRandom = function (attemps) {
                 const num = +userNumber;
 
                 if (num > randomNum) {
-                    alert ('Загаданное число меньше, осталось попыток ...');
+                    let text1 = 'Загаданное число меньше, осталось попыток ' + count;
+                    alert (text1, '');
                     return checkNumber();
                     
                 } else if (num < randomNum) {
-                    alert ('Загаданное число больше, осталось попыток ...');
+                    let text2 = 'Загаданное число больше, осталось попыток ' + count;
+                    alert (text2, '');
                     return checkNumber();
                 }
 
                 repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
 
             } else {
-                repeat = confirm('Попытки закончились, хотите сыграть еще?');
+                let text3 = 'Ваши ' + count + ' попыток закончились, хотите сыграть еще?';
+                repeat = confirm(text3, '');
             }
             
             if (repeat) gameRandom(attemps);
