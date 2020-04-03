@@ -20,12 +20,14 @@ const getCounter = function () {
 const gameRandom = function (attemps) {
     
     const randomNum = getRandomNum(1, 100);
-    const counter = getCounter();
     console.log('Спрятанное число: ' + randomNum);
+
+    const counter = getCounter();
     
-    return function checkNumber () {
+    return (function checkNumber () {
         const count = counter();
         const userNumber = prompt('Попробуй угадать число?', count);
+        console.log(count);
 
         if (isNum(userNumber)) {
             
@@ -44,10 +46,10 @@ const gameRandom = function (attemps) {
                     return checkNumber();
                 }
 
-                const repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+                repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
 
             } else {
-                const repeat = confirm('Попытки закончились, хотите сыграть еще?');
+                repeat = confirm('Попытки закончились, хотите сыграть еще?');
             }
             
             if (repeat) gameRandom(attemps);
@@ -61,10 +63,9 @@ const gameRandom = function (attemps) {
         }
 
         alert ('Пока друг');
-    }
+    }());
 
 };
 
-let game = gameRandom(10);
 //Function to start game;
-game();
+gameRandom(10);
