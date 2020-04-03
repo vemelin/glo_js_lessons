@@ -1,41 +1,70 @@
 'use sctrict';
 
-function funcMath(a) {
-    return function (b) {
-        console.log(a * b);
+const isNum = function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
+const getRandomNum = function (min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max + min + 1)) + min;
+};
+
+const getCounter = function () {
+    let counter = 0;
+    return function () {
+        return ++counter;
     }
-}
+};
 
-const matPow = funcMath(6);
-matPow(5);
-console.dir(matPow);
-
-
-// function funcMath() {
-//     const a = 10;
-//     return function () {
-//         console.log(a * a);
-//     }
-// }
-
-// const matPow = funcMath();
-// matPow();
-// console.dir(matPow);
-
-// let argResults = function(data){
+const gameRandom = function (attemps) {
     
-//     if (!isNaN(data)){
-//         console.log('Вы получили число');
-//     }else if (typeof(data) === 'string' && data.length >= 30){
-//         data.trim();
-//         console.log(data.substring(0, 30) + '...');
-//     }else{
-//         console.log(data);
-//     }
-// };
+    const randomNum = getRandomNum(1, 100);
+    const counter = getCounter();
+    console.log('Спрятанное число: ' + randomNum);
+    
+    return function checkNumber () {
+        const count = counter();
+        const userNumber = prompt('Попробуй угадать число?', count);
 
-// Push number
-// argResults(2020);
+        if (isNum(userNumber)) {
+            
+            let repeat = false;
 
-// Push stroke with length > 30
-argResults('Hey-yo vasko this is your awesome and finaly decisions by advanced lesson04');
+            if (count < attemps) {
+
+                const num = +userNumber;
+
+                if (num > randomNum) {
+                    alert ('Загаданное число меньше, осталось попыток ...');
+                    return checkNumber();
+                    
+                } else if (num < randomNum) {
+                    alert ('Загаданное число больше, осталось попыток ...');
+                    return checkNumber();
+                }
+
+                const repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+
+            } else {
+                const repeat = confirm('Попытки закончились, хотите сыграть еще?');
+            }
+            
+            if (repeat) gameRandom(attemps);
+
+        } else {
+
+            if (userNumber !== null) {
+                alert ('Введите число!');
+                checkNumber();
+            }
+        }
+
+        alert ('Пока друг');
+    }
+
+};
+
+let game = gameRandom(10);
+//Function to start game;
+game();
