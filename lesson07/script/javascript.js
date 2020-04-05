@@ -1,8 +1,17 @@
 'use sctrict';
+let money,
 
-let isNumber = function(number){
+    isNumber = function(number){
         return !isNaN(parseFloat(number)) && isFinite(number);
+    },
+
+    start = function(){
+        do {
+            money = prompt('Ваш месячный доход?', 5000);
+        } while(!isNumber(money) || money.trim() === '' || money === null);
     };
+
+    start();
 
 let appData = {
     income:                 {},
@@ -16,14 +25,7 @@ let appData = {
     budgetMonth:            0,
     expensesMonth:          0,
 
-    budget:                 function(){
-        
-                                do {
-                                    appData.budget = prompt('Ваш месячный доход?', 5000);
-                                } while(!isNumber(appData.budget) || appData.budget.trim() === '' || appData.budget === null);
-                                
-                                return appData.budget;
-                            },
+    budget:                 +money,
                             
     asking:                 function () {
                                 let addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
@@ -58,17 +60,17 @@ let appData = {
                             },
 
     getAccumulatedMonth:    function(){
-                                return appData.getAccumulatedMonth = appData.budget - appData.getExpensesMonth();
+                                return appData.budget - expensesAmount;
                             },
 
     getTargetMonth:         function(){
-                                let goal = Math.ceil(appData.mission / appData.getAccumulatedMonth);
-                            
+                                let goal = Math.ceil(appData.mission / accumulatedMonth);
+
                                 if (goal > 0){
-                                    return ('Цель будет достигнута через > ' + goal + ' < месяца.');
+                                    return ('Цель будет достигнута через > ' + goal + ' < месяца');
                                 } 
                                 else if (goal < 0) {
-                                    return ('Цель не будет достигнута.');
+                                    return ('Цель не будет достигнута');
                                 }
                             },
 
@@ -87,13 +89,15 @@ let appData = {
                             }
 };
 
-appData.budget();
 appData.asking();
 
 console.log(appData);
 
+let expensesAmount = appData.getExpensesMonth();
+let accumulatedMonth = appData.getAccumulatedMonth();
+
 //Total expenses per month (Total income - expenses)
-console.log('Ваши расходы за месяц: ' + appData.getAccumulatedMonth());
+console.log('Ваши расходы за месяц: ' + Math.ceil(expensesAmount));
 
 //Return messages in what time we would achieve our goal
 console.log(appData.getTargetMonth());
