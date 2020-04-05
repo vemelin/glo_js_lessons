@@ -84,11 +84,6 @@ let appData = {
 appData.budget();
 appData.asking();
 
-// preview type of variables: money, income, deposit
-console.log(typeof(+appData.budget));
-console.log(typeof(appData.income));
-console.log(typeof(appData.deposit));
-
 //Total expenses per month (Total income - expenses)
 console.log('Ваши расходы за месяц: ' + appData.getAccumulatedMonth());
 
