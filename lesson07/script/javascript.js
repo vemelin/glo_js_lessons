@@ -35,17 +35,23 @@ let appData = {
     getExpensesMonth:       function(){
                                 let amount = 0;
 
-                                for (let i = 0; i < 2; i++) {
-                                    let sum;
+                                for (let i = 1; i < 3; i++) {
+                                    let sum, getKey, getText;
                             
-                                    appData.expenses[i] = prompt('Введите обязательную статью расходов', 'Expenses');
+                                    //temporary variable for test
+                                    getText = 'Expense '+ [i];
+                                    
+                                    getKey = prompt('Введите обязательную статью расходов', getText);
                             
                                     do {
                                         sum = prompt('Во сколько это обойдется?', 500);
                                     } while (!isNumber(sum));
-                            
+
                                     amount += +sum;
-                            
+
+                                    //Creating new keys and values for nested expenses object
+                                    appData.expenses[getKey] = +sum;
+
                                 }
 
                                 return amount;
@@ -83,6 +89,8 @@ let appData = {
 
 appData.budget();
 appData.asking();
+
+console.log(appData);
 
 //Total expenses per month (Total income - expenses)
 console.log('Ваши расходы за месяц: ' + appData.getAccumulatedMonth());
