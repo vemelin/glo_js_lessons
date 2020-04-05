@@ -23,14 +23,8 @@ let appData = {
     period:                 30,
     expensesMonth:          0,
     budget:                 +money,
-
-    budgetDay:              function () {
-                              // return Math.ceil(appData.budgetMonth() / appData.period);
-                            },
-
-    budgetMonth:            function (){
-                              //  return appData.budget - appData.getExpensesMonth();
-                            },
+    budgetDay:              0,
+    budgetMonth:            0,
                             
     asking:                 function () {
                                 let addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
@@ -65,11 +59,12 @@ let appData = {
                             },
 
     getBudget:              function(){
-                                return appData.budgetMonth() - appData.budgetDay();
+                                appData.budgetMonth = appData.budget - appData.getExpensesMonth();
+                                appData.budgetDay = Math.ceil(appData.budgetMonth / appData.period);
                             },
 
     getTargetMonth:         function(){
-                                let goal = Math.ceil(appData.mission / appData.getBudget());
+                                let goal = Math.ceil(appData.mission / appData.getBudget);
 
                                 if (goal > 0){
                                     return ('Цель будет достигнута через > ' + goal + ' < месяца');
@@ -81,24 +76,25 @@ let appData = {
 
     getStatusIncome:        function(){
 
-                                if (appData.budgetDay() > 1200) {
+                                if (appData.budgetDay > 1200) {
                                     return ('У вас высокий уровень дохода.');
-                                } else if (appData.budgetDay() >= 600 && appData.budgetDay() <= 1200) {
+                                } else if (appData.budgetDay >= 600 && appData.budgetDay <= 1200) {
                                     return ('У вас средний уровень дохода.');
-                                } else if (appData.budgetDay() < 600) {
+                                } else if (appData.budgetDay < 600) {
                                     return ('К сожалению у вас уровень дохода ниже среднего, крепитесь.');
-                                } else if (appData.budgetDay() < 0) { 
+                                } else if (appData.budgetDay < 0) { 
                                     return ('Что то пошло не так.');
                                 }
 
                             }
 };
 
+
 appData.asking();
 console.log(appData);
 
 let expensesAmount = appData.getExpensesMonth();
-let accumulatedMonth = appData.getBudget();
+//let accumulatedMonth = appData.getBudget();
 
 //Total expenses per month (Total income - expenses)
 console.log('Ваши расходы за месяц: ' + appData.expensesMonth);
