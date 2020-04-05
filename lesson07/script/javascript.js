@@ -29,8 +29,7 @@ let appData = {
     asking:                 function () {
                                 let addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
                                     appData.addExpenses = addExpenses.toLowerCase().split(',');
-                                    appData.deposit = confirm('Есть ли у вас депозит в банке?');
-                
+                                    appData.deposit = confirm('Есть ли у вас депозит в банке?');                
                             },
 
     getExpensesMonth:       function(){
@@ -59,15 +58,17 @@ let appData = {
                             },
 
     getBudget:              function(){
-                                appData.budgetMonth = appData.budget - appData.getExpensesMonth();
+                                let getExpensesMonth = appData.getExpensesMonth();
+                                
+                                appData.budgetMonth = appData.budget - getExpensesMonth;
                                 appData.budgetDay = Math.ceil(appData.budgetMonth / appData.period);
                             },
 
     getTargetMonth:         function(){
-                                let goal = Math.ceil(appData.mission / appData.getBudget);
+                                let goal = Math.ceil(appData.mission / appData.budgetDay);
 
                                 if (goal > 0){
-                                    return ('Цель будет достигнута через > ' + goal + ' < месяца');
+                                    return ('Цель будет достигнута через {' + goal + '} месяца');
                                 } 
                                 else if (goal < 0) {
                                     return ('Цель не будет достигнута');
@@ -89,15 +90,16 @@ let appData = {
                             }
 };
 
-
 appData.asking();
-console.log(appData);
+appData.getBudget();
 
-let expensesAmount = appData.getExpensesMonth();
-//let accumulatedMonth = appData.getBudget();
+console.log('Наша программа включает в себя данные: ');
+for (let key in appData) {
+    console.log('Свойство: ' + key + ' /  Значение: ' + appData[key]);
+}
 
 //Total expenses per month (Total income - expenses)
-console.log('Ваши расходы за месяц: ' + appData.expensesMonth);
+console.log('Расходы за месяц: ' + appData.expensesMonth);
 
 //Return messages in what time we would achieve our goal
 console.log(appData.getTargetMonth());
