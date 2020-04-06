@@ -36,11 +36,13 @@ let appData = {
 
                                             do {
                                                 itemIncome = prompt('Какой у вас есть дополнительный заработок?', 'UX/UI Design')
-                                            } while (isNumber(itemIncome) || itemIncome.trim() === '' || itemIncome === null);
+                                            } while (isNumber(itemIncome) || itemIncome === '' || itemIncome === 'string' || itemIncome === null);
 
                                             do {
                                                 cashIncom = prompt('Сколько в месяц вы на этом зарабатываете?', 1000);
-                                            } while (!isNumber(cashIncom) || cashIncom.trim() === '' || cashIncom === null);
+                                            } while (!isNumber(cashIncom) || cashIncom === '' || cashIncom === null);
+                                            
+                                            cashIncom = cashIncom.trim(', ');
 
                                             appData.income[itemIncome] = +cashIncom;
 
@@ -48,7 +50,7 @@ let appData = {
 
                                     do {
                                         addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
-                                    } while (isNumber(addExpenses) || addExpenses.trim() === '' || addExpenses === null);
+                                    } while (isNumber(addExpenses) || addExpenses === '' || addExpenses === null);
 
                                     if (addExpenses) {
                                         appData.addExpenses = addExpenses.toLowerCase().split(', ');
@@ -66,11 +68,11 @@ let appData = {
 
                                         do {
                                             getKey = prompt('Введите обязательную статью расходов', getText);
-                                        } while (isNumber(getKey) || getKey.trim() === '' || getKey === null);
+                                        } while (isNumber(getKey) || getKey === '' || getKey === null);
                                     
                                         do {
                                             sum = prompt('Во сколько это обойдется?', 500);
-                                        } while (!isNumber(sum) || sum.trim() === '' || sum === null);
+                                        } while (!isNumber(sum) || sum === '' || sum === null);
                                     
                                         //Creating new nested elements of expenses object
                                         appData.expenses[getKey] = +sum;
@@ -125,14 +127,14 @@ let appData = {
                                         
                                         do {
                                             appData.percentDeposit = prompt('Какой % годового депозита', '10');
-                                        } while (!isNumber(appData.percentDeposit) || appData.percentDeposit.trim() === '' ||appData.percentDeposit === null);
+                                        } while (!isNumber(appData.percentDeposit) || appData.percentDeposit === '' ||appData.percentDeposit === null);
                                     
                                         //Add New value % for percentDeposit property
                                         appData.percentDeposit = +appData.percentDeposit;
                                         
                                         do {
                                             appData.moneyDeposit = prompt('Какая сумма заложена?', 5000);
-                                        } while (!isNumber(appData.moneyDeposit) || appData.moneyDeposit.trim() === '' || appData.moneyDeposit === null);
+                                        } while (!isNumber(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
                                     
                                         //Add New value for moneyDeposit property
                                         appData.moneyDeposit = +appData.moneyDeposit;
