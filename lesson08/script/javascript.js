@@ -153,7 +153,9 @@ let appData = {
                                         array[i] = data[i].charAt(0).toUpperCase() + data[i].slice(1);
                                     }   
 
-                                    console.log(array.join(', '));
+                                    console.log('');
+                                    console.log('Вывести строкой список расходов, каждое слово с большой буквы, слова разделены запятой и пробелом');
+                                    console.log('Результат: ' + array.join(', '));
 
                                 },
 };
@@ -175,6 +177,7 @@ console.log(appData.getTargetMonth());
 console.log(appData.getStatusIncome());
 
 //Display array of expenses (1st letter for each word should start from Uppercase)
+//The method is consist from cicle For of array + join new array with changed
 appData.getDataFromArray(appData.addExpenses);
 
 console.log('');
