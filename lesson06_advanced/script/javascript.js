@@ -4,11 +4,11 @@ const isNum = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-const getRandomNum = function (min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max + min + 1)) + min;
-};
+// const getRandomNum = function (min, max) {
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     return Math.floor(Math.random() * (max + min + 1)) + min;
+// };
 
 const getCounter = function () {
     let counter = 0;
@@ -19,12 +19,13 @@ const getCounter = function () {
 
 const gameRandom = function (attemps) {
     
-    const randomNum = getRandomNum(1, 100);
+    const randomNum = Math.floor(Math.random() * 100);
     console.log('Спрятанное число: ' + randomNum);
 
     const counter = getCounter();
     
     return (function checkNumber () {
+        
         const count = counter();
         const userNumber = prompt('Попробуй угадать число?', count);
         console.log(count);
@@ -49,29 +50,32 @@ const gameRandom = function (attemps) {
                     alert (text2);
                     return checkNumber();
                 }
-
+    
                 repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+                
+                (repeat) ? gameRandom(attemps) : alert ('Пока друг');                
 
             } else {
+
                 let text3 = 'Ваши ' + count + ' попыток закончились, хотите сыграть еще?';
                 repeat = confirm(text3);
-            }
-            
-            if (repeat) gameRandom(attemps);
+
+            }            
+
+        } else if (userNumber !== null) {
+
+            alert ('Введите число!');
+            checkNumber();
 
         } else {
 
-            if (userNumber !== null) {
-                alert ('Введите число!');
-                checkNumber();
-            }
+            alert ('Пока друг');
+            
         }
 
-        alert ('Пока друг');
     }());
-
-};
-
+    
+}
 //Function to start game;
 gameRandom(10);
 
