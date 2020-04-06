@@ -140,12 +140,12 @@ let appData = {
 
                                     let array = [];
 
-                                    for (let i = 0; i < appData.addExpenses.length; i++) {
+                                    for (let i = 0; i < data.length; i++) {
                                         array[i] = data[i].charAt(0).toUpperCase()  + data[i].slice(1);
                                     }   
 
                                     console.log(array.join(', '));
-                                    
+
                                 },
 };
 
@@ -173,6 +173,6 @@ appData.getDataFromArray(appData.addExpenses);
 console.log('');
 console.log('⭕писание объекта appData:');
 
-// for (let key in appData) {
-//     console.log(key + ': ' + appData[key]);
-// }
+for (let key in appData) {
+    console.log(key + ': ' + appData[key]);
+}
