@@ -27,41 +27,49 @@ let appData = {
     budgetMonth:            0,
                             
     asking:                 function () {
+
                                 let addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
                                     appData.addExpenses = addExpenses.toLowerCase().split(',');
-                                    appData.deposit = confirm('Есть ли у вас депозит в банке?');                
+                                    appData.deposit = confirm('Есть ли у вас депозит в банке?');
+
+                                    let amount = 0;
+
+                                    for (let i = 1; i < 3; i++) {
+                                        let sum, getKey, getText;
+                                
+                                        //temporary variable for test
+                                        getText = 'Expense_'+ [i];
+                                        
+                                        getKey = prompt('Введите обязательную статью расходов', getText);
+                                
+                                        do {
+                                            sum = prompt('Во сколько это обойдется?', 500);
+                                        } while (!isNumber(sum));
+    
+                                        //amount += sum;
+    
+                                        //Creating new keys and values for nested expenses object
+                                        appData.expenses[getKey] = +sum;
+    
+                                    }
+                                    //return amount;
+
                             },
 
     getExpensesMonth:       function(){
-                                let amount = 0;
 
-                                for (let i = 1; i < 3; i++) {
-                                    let sum, getKey, getText;
-                            
-                                    //temporary variable for test
-                                    getText = 'Expense '+ [i];
-                                    
-                                    getKey = prompt('Введите обязательную статью расходов', getText);
-                            
-                                    do {
-                                        sum = prompt('Во сколько это обойдется?', 500);
-                                    } while (!isNumber(sum));
-
-                                    appData.expensesMonth = amount += +sum;
-
-                                    //Creating new keys and values for nested expenses object
-                                    appData.expenses[getKey] = +sum;
-
+                                for (let key in appData.expenses) {
+                                    appData.expensesMonth += +appData.expenses[key];
                                 }
+                                return appData.expensesMonth;
 
-                                return amount;
                             },
 
     getBudget:              function(){
-                                let getExpensesMonth = appData.getExpensesMonth();
                                 
-                                appData.budgetMonth = appData.budget - getExpensesMonth;
+                                appData.budgetMonth = appData.budget - appData.expensesMonth;
                                 appData.budgetDay = Math.ceil(appData.budgetMonth / appData.period);
+                                
                             },
 
     getTargetMonth:         function(){
@@ -91,12 +99,10 @@ let appData = {
 };
 
 appData.asking();
+appData.getExpensesMonth();
 appData.getBudget();
-
-console.log('Наша программа включает в себя данные: ');
-for (let key in appData) {
-    console.log('Свойство: ' + key + ' /  Значение: ' + appData[key]);
-}
+appData.getTargetMonth();
+appData.getStatusIncome();
 
 //Total expenses per month (Total income - expenses)
 console.log('Расходы за месяц: ' + appData.expensesMonth);
@@ -106,3 +112,10 @@ console.log(appData.getTargetMonth());
 
 //The message of the rank of your income (totaly 3 status) 
 console.log(appData.getStatusIncome());
+
+console.log('');
+console.log('⭕писание объекта appData:');
+
+for (let key in appData) {
+    console.log(key + ': ' + appData[key]);
+}
