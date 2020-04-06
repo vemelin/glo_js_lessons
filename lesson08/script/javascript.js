@@ -30,45 +30,52 @@ let appData = {
 
     asking:                     function () {
 
+                                    let itemIncome, cashIncom, addExpenses;
+
                                     if (confirm('Если у вас дополнительный источник заработка?')) {
 
-                                        let itemIncome = prompt('Какой у вас есть дополнительный заработок?', 'UX/UI Design'),
-                                            cashIncom;
+                                            do {
+                                                itemIncome = prompt('Какой у вас есть дополнительный заработок?', 'UX/UI Design')
+                                            } while (isNumber(itemIncome) || itemIncome.trim() === '' || itemIncome === null);
 
                                             do {
                                                 cashIncom = prompt('Сколько в месяц вы на этом зарабатываете?', 1000);
-                                            } while (!isNumber(cashIncom) || cashIncom === '' || cashIncom === null);
+                                            } while (!isNumber(cashIncom) || cashIncom.trim() === '' || cashIncom === null);
 
                                             appData.income[itemIncome] = +cashIncom;
 
                                     }
 
-                                    let addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
-                                        
-                                        if (addExpenses) {
-                                            appData.addExpenses = addExpenses.toLowerCase().split(', ');
-                                        }
+                                    do {
+                                        addExpenses = prompt('Перечислите возможные расходы через запятую', 'Apartments, Vehicle, Insurance, Internet, Mobile');
+                                    } while (isNumber(addExpenses) || addExpenses.trim() === '' || addExpenses === null);
 
-                                        appData.deposit = confirm('Есть ли у вас депозит в банке?');
+                                    if (addExpenses) {
+                                        appData.addExpenses = addExpenses.toLowerCase().split(', ');
+                                    }
 
-                                        let amount = 0;
+                                    appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
-                                        for (let i = 1; i < 3; i++) {
-                                            let sum, getKey, getText;
-                                        
-                                            //temporary variable for test
-                                            getText = 'Expense_'+ [i];
+                                    let amount = 0;
 
+                                    for (let i = 1; i < 3; i++) {
+                                        let sum, getKey, getText;
+                                    
+                                        //temporary variable for test
+                                        getText = 'Expense_'+ [i];
+
+                                        do {
                                             getKey = prompt('Введите обязательную статью расходов', getText);
-                                        
-                                            do {
-                                                sum = prompt('Во сколько это обойдется?', 500);
-                                            } while (!isNumber(sum) || sum === '' || sum === null);
-                                        
-                                            //Creating new nested elements of expenses object
-                                            appData.expenses[getKey] = +sum;
-                                        
-                                        }
+                                        } while (isNumber(getKey) || getKey.trim() === '' || getKey === null);
+                                    
+                                        do {
+                                            sum = prompt('Во сколько это обойдется?', 500);
+                                        } while (!isNumber(sum) || sum.trim() === '' || sum === null);
+                                    
+                                        //Creating new nested elements of expenses object
+                                        appData.expenses[getKey] = +sum;
+                                    
+                                    }
 
                                 },
 
@@ -118,14 +125,14 @@ let appData = {
                                         
                                         do {
                                             appData.percentDeposit = prompt('Какой % годового депозита', '10');
-                                        } while (!isNumber(appData.percentDeposit) || appData.percentDeposit === '' ||appData.percentDeposit === null);
+                                        } while (!isNumber(appData.percentDeposit) || appData.percentDeposit.trim() === '' ||appData.percentDeposit === null);
                                     
                                         //Add New value % for percentDeposit property
                                         appData.percentDeposit = +appData.percentDeposit;
                                         
                                         do {
                                             appData.moneyDeposit = prompt('Какая сумма заложена?', 5000);
-                                        } while (!isNumber(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
+                                        } while (!isNumber(appData.moneyDeposit) || appData.moneyDeposit.trim() === '' || appData.moneyDeposit === null);
                                     
                                         //Add New value for moneyDeposit property
                                         appData.moneyDeposit = +appData.moneyDeposit;
@@ -141,7 +148,7 @@ let appData = {
                                     let array = [];
 
                                     for (let i = 0; i < data.length; i++) {
-                                        array[i] = data[i].charAt(0).toUpperCase()  + data[i].slice(1);
+                                        array[i] = data[i].charAt(0).toUpperCase() + data[i].slice(1);
                                     }   
 
                                     console.log(array.join(', '));
@@ -155,8 +162,6 @@ appData.getBudget();
 appData.getTargetMonth();
 appData.getStatusIncome();
 appData.getInfoDeposit();
-
-console.log(appData);
 
 //Total expenses per month (Total income - expenses)
 console.log('Расходы за месяц: ' + appData.expensesMonth);
