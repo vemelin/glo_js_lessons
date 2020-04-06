@@ -46,13 +46,10 @@ let appData = {
                                             sum = prompt('Во сколько это обойдется?', 500);
                                         } while (!isNumber(sum));
     
-                                        //amount += sum;
-    
-                                        //Creating new keys and values for nested expenses object
+                                        //Creating new nested elements of expenses object
                                         appData.expenses[getKey] = +sum;
     
                                     }
-                                    //return amount;
 
                             },
 
@@ -69,7 +66,7 @@ let appData = {
                                 
                                 appData.budgetMonth = appData.budget - appData.expensesMonth;
                                 appData.budgetDay = Math.ceil(appData.budgetMonth / appData.period);
-                                
+
                             },
 
     getTargetMonth:         function(){
