@@ -203,21 +203,20 @@ let     startBtn = document.getElementById('start'),
         //Поля для ввода возможных доходов (additional_income-item) при помощи querySelectorAll
         inputsAdditionalIncome = document.querySelectorAll('.additional_income-item'),
 
-        //Каждый элемент в правой части программы через класс, которые имеют в имени класса "-value"
-        outputExpensesResults = document.getElementsByClassName('result-total'),
+        //Дневной бюджет
+        budgetDayOutput = document.getElementsByClassName('budget_day-value'),   
+        //Расход за месяц
+        expensesMonthOutput = document.getElementsByClassName('expenses_month-value'),    
+        //Возможные доходы
+        additionalIncomeOutput = document.getElementsByClassName('additional_income-value'),    
+        //Возможные расходы
+        additionalExpensesOutput = document.getElementsByClassName('additional_expenses-value'),    
+        //Накопления за период
+        incomePeriodOutput = document.getElementsByClassName('income_period-value'),    
+        //Срок достижения цели в месяцах
+        targetMonthOutpu = document.getElementsByClassName('target_month-value');    
 
-        expensesResults = function () {
 
-            for (let i = 1; i < outputExpensesResults.length; i++) {
-                let result;
-                result = document.getElementsByClassName('result-total')[i];
-                console.log(result);
-            }
-        };
-        expensesResults();
-
-
-        // Оставшиеся поля через querySelector каждый в отдельную переменную:
         // Месячный доход *
 let     salaryAmountInput = document.querySelector('.salary-amount'),
 
