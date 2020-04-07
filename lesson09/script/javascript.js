@@ -204,17 +204,17 @@ let     startBtn = document.getElementById('start'),
         inputsAdditionalIncome = document.querySelectorAll('.additional_income-item'),
 
         //Дневной бюджет
-        budgetDayOutput = document.getElementsByClassName('budget_day-value'),   
+        budgetDayOutput = document.getElementsByClassName('result-total')[1],   
         //Расход за месяц
-        expensesMonthOutput = document.getElementsByClassName('expenses_month-value'),    
+        expensesMonthOutput = document.getElementsByClassName('result-total')[2],    
         //Возможные доходы
-        additionalIncomeOutput = document.getElementsByClassName('additional_income-value'),    
+        additionalIncomeOutput = document.getElementsByClassName('result-total')[3],    
         //Возможные расходы
-        additionalExpensesOutput = document.getElementsByClassName('additional_expenses-value'),    
+        additionalExpensesOutput = document.getElementsByClassName('result-total')[4],    
         //Накопления за период
-        incomePeriodOutput = document.getElementsByClassName('income_period-value'),    
+        incomePeriodOutput = document.getElementsByClassName('result-total')[5],    
         //Срок достижения цели в месяцах
-        targetMonthOutpu = document.getElementsByClassName('target_month-value');    
+        targetMonthOutput = document.getElementsByClassName('result-total')[6];
 
 
         // Месячный доход *
