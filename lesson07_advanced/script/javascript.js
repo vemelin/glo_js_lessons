@@ -1,29 +1,34 @@
 'use sctrict';
 
-let weekDaysArray = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+let weekDaysArray = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
 
-let months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", 
-            "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+let months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 
 let myDate = new Date();
+let currentDay = new Date().getDay() - 1;
 
 for (let i = 0; i < weekDaysArray.length; i++) {
-  
-    
-    let currentDay = new Date().getDay() - 1;
+        
+        if (i == currentDay) {
 
-    if (weekDaysArray[i] == 'Суббота' || weekDaysArray[i] == 'Воскресенье') {
+                if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
 
-            document.write(`<p><i>${weekDaysArray[i]}</i></p>`);
+                        document.write(`<p><b><i>${weekDaysArray[i]}</i></b></p>`);
+                        
+                } else {
 
-    } else if (i === myDate.getDay()) {
+                        document.write(`<p> <b>  ${weekDaysArray[i]} </b> - <i> (Для справки сегодня ${myDate.getDate() + ' ' + months[myDate.getMonth()]} )</i></p>`);
 
-            document.write(`<p> <b>  ${weekDaysArray[myDate.getDay()]} </b> - <i> (Для справки сегодня ${myDate.getDate() + ' ' + months[myDate.getMonth()]} )</i></p>`);
+                }
 
-    } else {
+        } else if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
+                
+                document.write(`<p><i>${weekDaysArray[i]}</i></p>`);
 
-            document.write(`<p> ${weekDaysArray[i]} </p>`);
+        } else {
+                
+                document.write(`<p>${weekDaysArray[i]}</p>`);
 
-    }
+        }
 
 }
