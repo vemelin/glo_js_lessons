@@ -1,101 +1,152 @@
 'use sctrict';
 
-// Необходимо выполнить в отдельном js файле, подключенному к отдельной html странице
-
-// 1) Выведите на страницу текущую дату и время в 2-х форматах: 
-
-//     a) 'Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды'  (1 БАЛЛ)
-
-//     б) '04.02.2020 - 21:05:33' (1 БАЛЛ)
-
 // 2) Для вывода в формате (а) напишите функцию, которая будет менять менять склонение слов в 
 //    зависимости от числа, "час, часов, часа"
 
-// 3) Для вывода в формате (б) напишите функцию, которая будет добавлять 0 перед значениями 
-//    которые состоят из одной цифры (из 9:5:3  1.6.2019 сделает 09:05:03 01.06.2019)
-
-// 4) С помощью функции setInterval, реализуйте вывод даты и времени каждую секунду (1 БАЛЛ)
-
-// const dateObj = new Date('02-22-2020');
-
-// const dtf = new Intl.DateTimeFormat('ru', { 
-//         year: 'numeric', 
-//         month: 'short', 
-//         day: '2-digit' });
-
-// const [
-//         { value: date },,
-//         { value: month },,
-//         { value: year }
-//     ] = dtf.formatToParts(dateObj);
-
-// console.log(`Сегодня - ${date}-${month}-${year}`);
-
-// const dateObj = new Date('02-22-2020');
-
-// const dtf = new Intl.DateTimeFormat('ru', { 
-//         day: 'numeric',
-//         date: '2-digit',
-//         month: 'mmmm dS',
-//         year: 'yyyy', 
-//         time: 'h:MM:ss TT' });
-
-// const [
-//         { value: day },,
-//         { value: date },,
-//         { value: month },,
-//         { value: year },,
-//         { value: time }
-//     ] = dtf.formatToParts(dateObj);
-
-// console.log(`Сегодня - ${day} - ${date}-${month}-${year}-${time}`);
-
-//'Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды'  (1 БАЛЛ)
-let days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
-let months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", 
-            "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-
-           
-             
 let myDate = new Date();
-let fullDate = 'Сегодня '  + days[myDate.getDay()] + ', ' + myDate.getDate() + " " + myDate.getMonth() + 
-                " " + myDate.getFullYear();
 
-document.write(fullDate);
+let weekParse = {
+    day:            ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+    month:          ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    timeResults:    0,
 
-// var dateFormat = Date('dddd, mmmm dS, yyyy, h:MM:ss TT');
-// console.log(dateFormat);
+    disposeHours:   function (n) {
 
-// document.write (date);
+                        n = Math.abs(n) % 100;
+                        
+                        let income = n % 10;
+                        let arr = [' час ', ' часа ', ' часов '];
 
+                        if (n > 10 && n < 20) { 
+                            return arr[1]; 
+                        } if (income > 5 && income < 1) { 
+                            return arr[2];
+                        } if (income === 1) { 
+                            return arr[0]; 
+                        }
 
+                        return arr[2];
 
+                    },
 
+    disposeMin:   function (n) {
 
-// let weekDaysArray = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+                        n = Math.abs(n) % 100;
+                        
+                        let income = n % 10;
+                        let arr = ['минута', 'минуты', 'минут'];
 
-// let months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", 
-//             "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+                        if (n > 10 && n < 20) { 
+                            return arr[1]; 
+                        } if (income > 5 && income < 1) { 
+                            return arr[2];
+                        } if (income === 1) { 
+                            return arr[0]; 
+                        }
 
-// let myDate = new Date();
+                        return arr[2];
 
-// for (let i = 0; i < weekDaysArray.length; i++) {
-  
-    
-//     let currentDay = new Date().getDay() - 1;
+                    },
 
-//     if (weekDaysArray[i] == 'Суббота' || weekDaysArray[i] == 'Воскресенье') {
+    docWrite:       function () {
 
-//             document.write(`<p><i>${weekDaysArray[i]}</i></p>`);
+ 
+                        function format(value)
+                        {
+                            if (value < 10)
+                            {
+                                value='0'+value;
+                            }
+                            return value;
+                        }
+                        
+                        
+                        function dateTime()
+                        {
+                            let currentDateTime = new Date(),
+                                year = currentDateTime.getFullYear(),
+                                hours = format(currentDateTime.getHours()),
+                                minutes = format(currentDateTime.getMinutes()),
+                                seconds = format(currentDateTime.getSeconds());
+                            
+                        
+                            return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours) + ' ' + minutes + ' ' + weekParse.disposeMin(minutes) + ' ' +  seconds + ' секунды';
+                        }
+                        
+                        setInterval(function () {
+                            document.getElementById('timer').innerHTML = dateTime();
+                        }, 1000);
 
-//     } else if (i === myDate.getDay()) {
+                    },
 
-//             document.write(`<p> <b>  ${weekDaysArray[myDate.getDay()]} </b> - <i> (Для справки сегодня ${myDate.getDate() + ' ' + months[myDate.getMonth()]} )</i></p>`);
+    timeViewer:     function () {
 
-//     } else {
+                    let h, m, s, d, date, month, year;
 
-//             document.write(`<p> ${weekDaysArray[i]} </p>`);
+                        h = myDate.getHours().toString();
+                        m = myDate.getMinutes().toString();
+                        s = myDate.getSeconds().toString();
+                        d = myDate.getDay().toString();
+                        date = myDate.getDate().toString();
+                        month = myDate.getMonth().toString();
+                        year = myDate.getFullYear();
 
-//     }
+                        if (h.length < 2) {
+                            h = "0" + h;
+                        }
+                        if (m.length < 2) {
+                            m = "0" + m;
+                        }
+                        if (s.length < 2) {
+                            s = "0" + s;
+                        }
+                        if (date.length < 2) {
+                            date = "0" + date;
+                        }
+                        if (month.length < 2) {
+                            month = "0" + month;
+                        }
 
-// }
+                        // weekParse.timeResults = h + weekParse.disposeHours(h) + ' ' + m + ' ' + weekParse.disposeMin(m) + ' ' +  s + ' секунды';
+                        //weekParse.numericTime = '<div id="time">' + date + '.' + month + '.' + year + ' — ' + h + ':' + m + ':' + s + '</div>';
+
+                    },
+
+    timePreviewV1:  function () {
+
+                        function format(value)
+                        {
+                            if (value < 10)
+                            {
+                                value='0'+value;
+                            }
+                            return value;
+                        }
+                        
+                        
+                        function dateTime()
+                        {
+                            var currentDateTime = new Date();
+                            var day = format(currentDateTime.getDate());
+                            var month = format(currentDateTime.getMonth()+1);
+                            var year = currentDateTime.getFullYear();
+                            var hours = format(currentDateTime.getHours());
+                            var minutes = format(currentDateTime.getMinutes());
+                            var seconds = format(currentDateTime.getSeconds());
+                        
+                            return day+"."+month+"."+year+" — "+hours+":"+minutes+":"+seconds;
+                        }
+                        
+                        setInterval(function () {
+                            document.getElementById('time').innerHTML = dateTime();
+                        }, 1000);
+    }
+
+};
+
+// Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды'  (1 БАЛЛ)
+// weekParse.setInterval();
+weekParse.timeViewer();
+weekParse.docWrite();
+
+weekParse.timePreviewV1();
