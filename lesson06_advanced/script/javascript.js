@@ -1,20 +1,14 @@
-// 'use sctrict';
+'use sctrict';
 
 const isNum = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-// const getRandomNum = function (min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max + min + 1)) + min;
-// };
-
 const getCounter = function () {
     let counter = 0;
     return function () {
         return ++counter;
-    }
+    };
 };
 
 const gameRandom = function (attemps) {
@@ -26,8 +20,19 @@ const gameRandom = function (attemps) {
     
     return (function checkNumber () {
         
-        const count = counter();
-        const userNumber = prompt('Попробуй угадать число?', count);
+        let count = counter(), userNumber;
+
+        do {
+
+            userNumber = prompt('Попробуй угадать число? Вводите только цифры', count); 
+
+            if (userNumber === null) {
+                alert ('Пока друг');
+                break;
+            }
+            
+        } while (!isNum(userNumber));
+
         console.log(count);
         
         let inversResult = 10 - count;
@@ -53,7 +58,7 @@ const gameRandom = function (attemps) {
     
                 repeat = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
                 
-                (repeat) ? gameRandom(attemps) : alert ('Пока друг');                
+                (repeat) ? gameRandom(attemps) : alert ('Пока друг');     
 
             } else {
 
@@ -67,15 +72,11 @@ const gameRandom = function (attemps) {
             alert ('Введите число!');
             checkNumber();
 
-        } else {
-
-            alert ('Пока друг');
-            
         }
 
     }());
     
-}
+};
 //Function to start game;
 gameRandom(10);
 
