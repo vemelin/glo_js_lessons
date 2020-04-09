@@ -6,15 +6,14 @@ const   ul = document.createElement('ul'),
         
         ul.classList.add('list');
 
-let     weekDaysArray = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+let     weekDaysArray = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 let     month = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июль', 'Август', 'Сентябрь', 'Октябрь',' Ноябрь', 'Декабрь'];
 
 let myDate = new Date();
-let currentDay = new Date().getDay() - 1;
 
 function createLi (textName) {
         
-        let li, text, sort;
+        let li, sort;
         
         sort = document.querySelector('.list');
         li = document.createElement('li');
@@ -22,29 +21,60 @@ function createLi (textName) {
         sort.append(li);
         li.style.lineHeight = '1.5';
         li.style.listStyle = 'none';
+
 };
+
+console.log(myDate.getDay());
 
 for (let i = 0; i < weekDaysArray.length; i++) {
 
-        if (i === currentDay) {
+        // if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
+
+        //         createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
+
+        // } else if (weekDaysArray[i] === myDate.getDay()) {
+                
+        //         createLi(`<b> ⤏ &nbsp;${weekDaysArray[i]} </b> <i> — Для справки сегодня ${myDate.getDate() + ' ' + month[myDate.getMonth()]}</i>`);
+
+        // } else {
+
+        //         createLi(`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]}`);
+
+        // }
+
+        if (i == myDate.getDay()) {
 
                 if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
 
-                        createLi(`<i> ⤏ ${weekDaysArray[i]} </i>`);
+                        createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
                         
                 } else {
 
-                        createLi(`<b> ⤏ ${weekDaysArray[i]} </b> <i> — Для справки сегодня ${myDate.getDate() + ' ' + month[myDate.getMonth()]}</i>`);
+                        createLi(`<b> ⤏ &nbsp;${weekDaysArray[i]} </b> <i> — Для справки сегодня ${myDate.getDate() + ' ' + month[myDate.getMonth()]}</i>`);
 
                 }
 
         } else if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
                 
-                createLi(`<i> ⤏ ${weekDaysArray[i]} </i>`);
+                createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
+
+                if (weekDaysArray[i] === 'Воскресенье'){
+                        ///createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
+                }
                 
         } else {
                 
-                createLi(`⤏ ${weekDaysArray[i]}`);
+                createLi(`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]}`);
         }
 
+        
 }
+
+function moveSandayToEndList () {
+
+        let     collection = document.querySelectorAll('ul'),
+                sort = document.querySelectorAll('li');
+                collection[0].appendChild(sort[0]);
+};
+
+moveSandayToEndList();
