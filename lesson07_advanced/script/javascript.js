@@ -57,10 +57,6 @@ for (let i = 0; i < weekDaysArray.length; i++) {
         } else if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
                 
                 createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
-
-                if (weekDaysArray[i] === 'Воскресенье'){
-                        ///createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
-                }
                 
         } else {
                 
