@@ -53,14 +53,14 @@ for (let i = 0; i < weekDaysArray.length; i++) {
 }
 
 // Move Suday, first child element to the end
-function moveSandayToEndList () {
+function moveSundayToEndList () {
 
         let     collection = document.querySelectorAll('ul'),
                 sort = document.querySelectorAll('li');
                 collection[0].appendChild(sort[0]);
 };
 
-moveSandayToEndList();
+moveSundayToEndList();
 
 
 
