@@ -32,12 +32,13 @@ const   sortSecondBook = document.querySelectorAll('ul');
         sortSecondBook[1].append(sort1[0]);
         sortSecondBook[1].append(sort1[1]);
         sortSecondBook[1].append(sort1[3]);
-        sortSecondBook[1].append(sort1[3]);
         sortSecondBook[1].append(sort1[4]);
+        sortSecondBook[1].append(sort1[1]);
         sortSecondBook[1].append(sort1[0]);
-        sortSecondBook[1].append(sort1[3]);
-        sortSecondBook[1].append(sort1[2]);
         sortSecondBook[1].append(sort1[0]);
+        sortSecondBook[1].append(sort1[0]);
+        sortSecondBook[1].append(sort1[0]);
+        sortSecondBook[1].append(sort1[7]);
         sortSecondBook[1].append(sort1[0]);
 
 // Sort elements inside 5th book
@@ -50,9 +51,9 @@ const   sortFifthBook = document.querySelectorAll('ul');
         sortFifthBook[4].append(sort2[7]);
         sortFifthBook[4].append(sort2[1]);
         sortFifthBook[4].append(sort2[1]);
+        sortFifthBook[4].append(sort2[0]);
         sortFifthBook[4].append(sort2[1]);
-        sortFifthBook[4].append(sort2[3]);
-        sortFifthBook[4].append(sort2[3]);
+        sortFifthBook[4].append(sort2[1]);
         sortFifthBook[4].append(sort2[0]);
         sortFifthBook[4].append(sort2[0]);
         sortFifthBook[4].append(sort2[0]);
