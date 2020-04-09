@@ -11,6 +11,7 @@ let     month = ['Января', 'Февраля', 'Марта', 'Апреля',
 
 let myDate = new Date();
 
+// Create list
 function createLi (textName) {
         
         let li, sort;
@@ -24,23 +25,8 @@ function createLi (textName) {
 
 };
 
-console.log(myDate.getDay());
-
+// Iteration cicle of creating the Day list and conditions to show the currend day
 for (let i = 0; i < weekDaysArray.length; i++) {
-
-        // if (weekDaysArray[i] === 'Суббота' || weekDaysArray[i] === 'Воскресенье') {
-
-        //         createLi(`<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]} </i>`);
-
-        // } else if (weekDaysArray[i] === myDate.getDay()) {
-                
-        //         createLi(`<b> ⤏ &nbsp;${weekDaysArray[i]} </b> <i> — Для справки сегодня ${myDate.getDate() + ' ' + month[myDate.getMonth()]}</i>`);
-
-        // } else {
-
-        //         createLi(`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${weekDaysArray[i]}`);
-
-        // }
 
         if (i == myDate.getDay()) {
 
@@ -66,6 +52,7 @@ for (let i = 0; i < weekDaysArray.length; i++) {
         
 }
 
+// Move Suday, first child element to the end
 function moveSandayToEndList () {
 
         let     collection = document.querySelectorAll('ul'),
