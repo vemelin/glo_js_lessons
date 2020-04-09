@@ -26,7 +26,7 @@ const   bannerRemove = document.querySelectorAll('.adv');
 // Sort elements inside 2nd bpok
 const   sortSecondBook = document.querySelectorAll('ul');
         sortSecondBook[1].classList.add('sort1');
-        sort1 = sortSecondBook[1].children;
+let     sort1 = sortSecondBook[1].children;
 
         sortSecondBook[1].append(sort1[0]);
         sortSecondBook[1].append(sort1[0]);
@@ -44,7 +44,7 @@ const   sortSecondBook = document.querySelectorAll('ul');
 // Sort elements inside 5th book
 const   sortFifthBook = document.querySelectorAll('ul');
         sortFifthBook[4].classList.add('sort2');
-        sort2 = sortFifthBook[4].children;
+let     sort2 = sortFifthBook[4].children;
 
         sortFifthBook[4].append(sort2[0]);
         sortFifthBook[4].append(sort2[0]);
@@ -64,3 +64,9 @@ const   addElement = document.querySelectorAll('ul'),
 
         addElement[5].append(newListItem ); 
         newListItem .textContent = 'Глава 8: За пределами ES6';
+
+        const   sortSixthBook = document.querySelectorAll('ul');
+                sortSixthBook[5].classList.add('sort3');
+        let     sort3 = sortSixthBook[5].children;
+        
+        sortSixthBook[5].append(sort3[9]);
