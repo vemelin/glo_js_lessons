@@ -58,11 +58,9 @@ const   sortFifthBook = document.querySelectorAll('ul');
         sortFifthBook[4].append(sort2[0]);
         sortFifthBook[4].append(sort2[0]);
 
-        console.log(sortFifthBook);
-
 // Add new list item
 const   addElement = document.querySelectorAll('ul'),
         newListItem = document.createElement('li');
 
-        addElement[2].append(newListItem ); 
+        addElement[5].append(newListItem ); 
         newListItem .textContent = 'Глава 8: За пределами ES6';
