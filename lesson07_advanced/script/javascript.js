@@ -61,3 +61,26 @@ function moveSandayToEndList () {
 };
 
 moveSandayToEndList();
+
+
+
+function addNewItemToList () {
+  
+        let li, sort;
+        let collection = document.querySelectorAll('ul');
+        sort = document.querySelector('.list1');
+        li = document.createElement('li');
+        let inputValue = document.getElementById('textName').value;
+        li.textContent = inputValue;
+        sort.append(li);
+        document.getElementById('textName').value = '';
+
+        if (collection[0].lastChild.innerHTML === ""){
+                li.textContent = `Вы добавили пустую строку`;
+                sort.append(li);
+        } else {
+                li.textContent = inputValue;
+                sort.append(li);
+        }
+
+      }
