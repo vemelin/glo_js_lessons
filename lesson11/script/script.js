@@ -1,17 +1,13 @@
 'use sctrict';
 
-function one () {
-        console.log('one');
-        two();
-}
+let obj = {
+        x: 10,
+        y: 15,
+        test: newTest,
+};
 
-function two () {
-        console.log('two');
-        three();
-}
+function newTest() {
+        console.log('this: ', this);
+};
 
-function three () {
-        console.log('three');
-}
-
-one ();
+obj.test();

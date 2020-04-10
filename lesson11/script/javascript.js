@@ -189,6 +189,16 @@ let appData = {
                                     let sliderNumber = document.querySelector('.period-select').value;
                                     let updateSliderText = document.querySelector('.period-amount');
                                         updateSliderText.innerHTML = sliderNumber;
+                                        
+                                    //updateInputIncomeSummary = sliderNumber;
+                                    let getCurrentNumber = document.querySelector('.income_period-value').value;
+                                    let liveUpdateIncomeNumber = sliderNumber * getCurrentNumber;                            
+                                    // let updateInputText = document.querySelector('.income_period-value');
+
+                                        incomePeriodValue.value = liveUpdateIncomeNumber;
+                                        //updateInputText.innerHTML = liveUpdateIncomeNumber;
+
+                                        console.log(liveUpdateIncomeNumber);
     },
 
     getInfoDeposit:             function () {
@@ -199,6 +209,7 @@ let appData = {
 
     calculateSavedMoney:        function () {
                                     return appData.budgetMonth * periodSelect.value;
+
     }
 };
 
