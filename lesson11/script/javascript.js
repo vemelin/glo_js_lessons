@@ -61,14 +61,6 @@ let appData = {
                                     appData.getBudget();   
 
                                     appData.showResult();
-
-                                    console.log('appData.budget: ' + appData.budget);
-                                    console.log('appData.incomeMonth: ' + appData.incomeMonth);
-                                    console.log('appData.expensesMonth: ' + appData.expensesMonth);
-                                    
-                                    // appData.getTargetMonth();
-                                    // appData.getStatusIncome();
-                                    // appData.getInfoDeposit();
                                     
                                 },
 
@@ -134,12 +126,6 @@ let appData = {
                                         if (incomeTitle !== '' && incomeAmount !== '') {
                                             appData.expenses[incomeTitle] = incomeAmount;
                                         }
-
-                                        // for (let key in appData.income) {
-
-                                        //     appData.incomeMonth += +appData.income[key];
-                                        // }
-                                    
                                         
                                     });
 
@@ -208,23 +194,7 @@ let appData = {
     getInfoDeposit:             function () {
 
                                     appData.deposit = confirm('Есть ли у вас депозит в банке?');
-                                    
-                                    // if (appData.deposit){
-                                        
-                                    //     do {
-                                    //         appData.percentDeposit = prompt('Какой % годового депозита', '10');
-                                    //     } while (!isNumber(appData.percentDeposit) || appData.percentDeposit === '' ||appData.percentDeposit === null);
-                                    
-                                    //     //Add New value % for percentDeposit property
-                                    //     appData.percentDeposit = +appData.percentDeposit;
-                                        
-                                    //     do {
-                                    //         appData.moneyDeposit = prompt('Какая сумма заложена?', 5000);
-                                    //     } while (!isNumber(appData.moneyDeposit) || appData.moneyDeposit === '' || appData.moneyDeposit === null);
-                                    
-                                    //     //Add New value for moneyDeposit property
-                                    //     appData.moneyDeposit = +appData.moneyDeposit;
-                                    // }
+
                                 },
 
     calculateSavedMoney:        function () {
@@ -237,7 +207,3 @@ start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('click', appData.updateSliderRange);
-
-console.log(periodAmountText);
-// console.log(appData.getTargetMonth());
-// console.log(targetMonthValue);
