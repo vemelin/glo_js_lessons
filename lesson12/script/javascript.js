@@ -45,7 +45,9 @@ let appData = {
     moneyDeposit:               0,
 
     start:                      function () {
-        
+                                    
+
+
                                     if (!isNum(salaryAmount.value) || salaryAmount.value.trim() === '' || salaryAmount.value === null) {
                                         
                                         return;
@@ -182,6 +184,8 @@ let appData = {
     getTargetMonth:             function () {
 
                                     return targetAmount.value / appData.budgetMonth;
+                                    console.log(getTargetMonth)
+                                    console.log(appData.budgetMonth)
                                     
                                 },
 
@@ -209,6 +213,16 @@ let appData = {
 },
 
 };
+
+// 1st link to the object
+function newStart () {
+    console.log('this: ', this);
+}
+newStart.apply(appData);
+
+// 2nd link to the object
+let newStartFunction = newStart.bind(appData);
+newStartFunction();
 
 // Start programm
 start.addEventListener('click', appData.start);
