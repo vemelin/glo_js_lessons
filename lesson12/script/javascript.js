@@ -329,7 +329,4 @@ incomePlus.addEventListener('click', appData.addIncomeBlock);
 
 
 // Reset fields
-// let resetButton = appData.resetAll.bind(appData);
-// cancelButton.addEventListener('click', resetButton);
-
 cancelButton.addEventListener('click', appData.resetFields.bind(appData));
