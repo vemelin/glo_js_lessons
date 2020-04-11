@@ -35,6 +35,8 @@ let start = document.getElementById('start'),
         leftFields = getLeftFields.querySelectorAll("input[type=text]"),
         rightInputField = document.querySelector('.result');
 
+console.log();
+
 let appData = { 
     budget:                     0,
     budgetDay:                  0,
@@ -81,6 +83,8 @@ let appData = {
                                     additionalIncomeValue.value = this.addIncome.join(', ');
                                     targetMonthValue.value = Math.ceil(this.getTargetMonth());
                                     incomePeriodValue.value = this.calculateSavedMoney();
+
+                                    periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
  
                                 },
 
@@ -215,14 +219,13 @@ let appData = {
     },
     
     updateSliderRange:          function () {
-
+                                    
                                     let sliderNumber = document.querySelector('.period-select').value;
                                     let updateSliderText = document.querySelector('.period-amount');
                                         updateSliderText.innerHTML = sliderNumber;
                                         
                                     //updateInputIncomeSummary = sliderNumber;
                                     let getCurrentNumber = this.budgetMonth;
-                                    console.log(getCurrentNumber);
                                     let liveUpdateIncomeNumber = sliderNumber * getCurrentNumber;
                                         incomePeriodValue.value = liveUpdateIncomeNumber;
                                         
@@ -246,16 +249,18 @@ let appData = {
                                     cancelButton.style.display = 'inline';
                                     incomePlus.removeEventListener('click', this.addIncomeBlock);
                                     expensesPlus.removeEventListener('click', this.addExpensesBlock);
+                                    let inputRang = document.querySelector('.period-select');
+                                    inputRang.disabled = true;
 
                                 },
 
     resetFields:                function () {
 
                                          // Get & Create variables of left input Fields
-                                        let getLeftFields = document.querySelector('.data'),
-                                            leftFields = getLeftFields.querySelectorAll('input[type=text]'),
+                                        let fields = document.querySelector('.data'),
+                                            leftInputField = document.querySelector('.data'),
                                             rightInputField = document.querySelector('.result'),
-                                            updateSliderText = document.querySelector('.period-amount');
+                                            periodAmountText = document.querySelector('.period-amount');
 
                                             // Reset fields to zero
                                             leftFields.forEach(function(item) {
@@ -265,21 +270,38 @@ let appData = {
 
                                             });
                                         
-                                            leftFields = rightInputField.querySelectorAll('input[type=text]');
+                                            fields = leftInputField.querySelectorAll("input[type=text]");
 
-                                            leftFields.forEach(function(item) {
+                                            fields.forEach(function(item) {
 
                                                 item.value = '';
                                                 item.disabled = false;
                                             
                                             });
                                     
-                                            periodSelect.value = '1';
-                                            updateSliderText.innerHTML = '1';
+                                            fields = rightInputField.querySelectorAll("input[type=text]");
+
+                                            fields.forEach(function(item, index) {
+
+                                                item.setAttribute('disabled', '');
+                                            
+                                            });
+
                                             cancelButton.style.display = 'none';
                                             start.style.display = 'inline';
+
                                             expensesPlus.style.display = 'inline';
+                                            incomePlus.style.display = 'inline';
+                                            
                                             depositCheck.checked = false;
+
+                                            //periodSelect.disabled = true;
+                                            periodSelect.value = 1;
+                                            periodAmountText.textContent = periodSelect.value;
+
+                                            // Enable Range Slider
+                                            let inputRang = document.querySelector('.period-select');
+                                            inputRang.disabled = false;
 
                                             this.budget = 0;
                                             this.budgetDay = 0;
@@ -319,14 +341,15 @@ let appData = {
 
 };
 
-// Start programm
 
-//start.addEventListener('click', appData.start);
+//Start button
 start.addEventListener('click', appData.start.bind(appData));
+// Cancel button
+cancelButton.addEventListener('click', appData.resetFields.bind(appData));
+
+//Time Range listener
 periodSelect.addEventListener('input', appData.updateSliderRange.bind(appData));
+
+//Plus buttons
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-
-
-// Reset fields
-cancelButton.addEventListener('click', appData.resetFields.bind(appData));
