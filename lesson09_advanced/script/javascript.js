@@ -1,152 +1,101 @@
 'use sctrict';
 
-// 2) Для вывода в формате (а) напишите функцию, которая будет менять менять склонение слов в 
-//    зависимости от числа, "час, часов, часа"
-
 let myDate = new Date();
 
 let weekParse = {
+
     day:            ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
     month:          ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+    minutes:        [' минута ', ' минуты ', ' минут '],
+    hours:          [' час ', ' часа ', ' часов '],
+    seconds:        [' секунда ', ' секунды ', ' секунд '],
     timeResults:    0,
 
-    disposeHours:   function (n) {
+    disposeHours: function (checkData, arrIn) {
+                    
+            if (checkData === 1 || checkData === 21) {
+                return arrIn[0];                    
+            } else if (checkData > 1 && checkData< 5 || checkData > 21 && checkData <= 24) {                    
+                return  arrIn[1];                    
+            } else if (checkData > 4 && checkData < 21) {                    
+                return arrIn[2];                    
+            }
+        },
 
-                        n = Math.abs(n) % 100;
+    disposeMS: function (v, arrIn) {
+
+        if (v === 1 || v === 21 || v === 31 || v === 41 || v === 51) {
+            return arrIn[0];
+        } else if (v > 1 && v < 5 || v > 21 && v <= 24 || v > 31 && v <= 34 || v > 41 && v <= 44 || v > 51 && v <= 54) {
+            return arrIn[1];
+        } else if (v >= 5 && v < 21 || v >= 25 && v < 31 || v >= 35 && v < 41 || v >= 45 && v < 51 || v >= 55) {
+            return arrIn[2];
+        }
+    },
+
+    docWrite:  function () {
+
+        function format(value) {
+            if (value < 10) {
+                value='0'+value;
+            } return value;
+        }
+                                   
+        function dateTime() {
+            let currentDateTime = new Date(),
+                year = currentDateTime.getFullYear(),
+                hours = format(currentDateTime.getHours()),
+                minutes = format(currentDateTime.getMinutes()),
+                seconds = format(currentDateTime.getSeconds());
+
+                return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+        }
                         
-                        let income = n % 10;
-                        let arr = [' час ', ' часа ', ' часов '];
-
-                        if (n > 10 && n < 20) { 
-                            return arr[1]; 
-                        } if (income > 5 && income < 1) { 
-                            return arr[2];
-                        } if (income === 1) { 
-                            return arr[0]; 
-                        }
-
-                        return arr[2];
-
-                    },
-
-    disposeMin:   function (n) {
-
-                        n = Math.abs(n) % 100;
-                        
-                        let income = n % 10;
-                        let arr = ['минута', 'минуты', 'минут'];
-
-                        if (n > 10 && n < 20) { 
-                            return arr[1]; 
-                        } if (income > 5 && income < 1) { 
-                            return arr[2];
-                        } if (income === 1) { 
-                            return arr[0]; 
-                        }
-
-                        return arr[2];
-
-                    },
-
-    docWrite:       function () {
-
- 
-                        function format(value)
-                        {
-                            if (value < 10)
-                            {
-                                value='0'+value;
-                            }
-                            return value;
-                        }
-                        
-                        
-                        function dateTime()
-                        {
-                            let currentDateTime = new Date(),
-                                year = currentDateTime.getFullYear(),
-                                hours = format(currentDateTime.getHours()),
-                                minutes = format(currentDateTime.getMinutes()),
-                                seconds = format(currentDateTime.getSeconds());
-                            
-                        
-                            return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours) + ' ' + minutes + ' ' + weekParse.disposeMin(minutes) + ' ' +  seconds + ' секунды';
-                        }
-                        
-                        setInterval(function () {
-                            document.getElementById('timer').innerHTML = dateTime();
-                        }, 1000);
-
-                    },
+        setInterval(function () { document.querySelector('.timer').innerHTML = dateTime(); }, 1000);
+    },
 
     timeViewer:     function () {
 
-                    let h, m, s, d, date, month, year;
+        let h = myDate.getHours().toString(),
+            m = myDate.getMinutes().toString(),
+            s = myDate.getSeconds().toString(),
+            d = myDate.getDay().toString(),
+            date = myDate.getDate().toString(),
+            month = myDate.getMonth().toString(),
+            year = myDate.getFullYear();
 
-                        h = myDate.getHours().toString();
-                        m = myDate.getMinutes().toString();
-                        s = myDate.getSeconds().toString();
-                        d = myDate.getDay().toString();
-                        date = myDate.getDate().toString();
-                        month = myDate.getMonth().toString();
-                        year = myDate.getFullYear();
-
-                        if (h.length < 2) {
-                            h = "0" + h;
-                        }
-                        if (m.length < 2) {
-                            m = "0" + m;
-                        }
-                        if (s.length < 2) {
-                            s = "0" + s;
-                        }
-                        if (date.length < 2) {
-                            date = "0" + date;
-                        }
-                        if (month.length < 2) {
-                            month = "0" + month;
-                        }
-
-                        // weekParse.timeResults = h + weekParse.disposeHours(h) + ' ' + m + ' ' + weekParse.disposeMin(m) + ' ' +  s + ' секунды';
-                        //weekParse.numericTime = '<div id="time">' + date + '.' + month + '.' + year + ' — ' + h + ':' + m + ':' + s + '</div>';
-
-                    },
+        if (h.length < 2) { h = "0" + h; }
+        if (m.length < 2) { m = "0" + m; }
+        if (s.length < 2) { s = "0" + s; }
+        if (date.length < 2) { date = "0" + date; }
+        if (month.length < 2) { month = "0" + month; }
+    },
 
     timePreviewV1:  function () {
 
-                        function format(value)
-                        {
-                            if (value < 10)
-                            {
-                                value='0'+value;
-                            }
-                            return value;
-                        }
+        function format(value) {
+            if (value < 10) {
+                value='0'+value;
+            } return value;
+        }
                         
-                        
-                        function dateTime()
-                        {
-                            var currentDateTime = new Date();
-                            var day = format(currentDateTime.getDate());
-                            var month = format(currentDateTime.getMonth()+1);
-                            var year = currentDateTime.getFullYear();
-                            var hours = format(currentDateTime.getHours());
-                            var minutes = format(currentDateTime.getMinutes());
-                            var seconds = format(currentDateTime.getSeconds());
-                        
-                            return day+"."+month+"."+year+" — "+hours+":"+minutes+":"+seconds;
-                        }
-                        
-                        setInterval(function () {
-                            document.getElementById('time').innerHTML = dateTime();
-                        }, 1000);
+        function dateTime () {
+            let currentDateTime = new Date(),
+                day = format(currentDateTime.getDate()),
+                month = format(currentDateTime.getMonth()+1),
+                year = currentDateTime.getFullYear(),
+                hours = format(currentDateTime.getHours()),
+                minutes = format(currentDateTime.getMinutes()),
+                seconds = format(currentDateTime.getSeconds());
+        
+                return day+"."+month+"."+year+" — "+hours+":"+minutes+":"+seconds;
+        }
+        
+        setInterval(function (){document.querySelector('.time').innerHTML = dateTime();}, 1000);
     }
 
 };
 
-// Сегодня Вторник, 4 февраля 2020 года, 21 час 5 минут 33 секунды'  (1 БАЛЛ)
-// weekParse.setInterval();
 weekParse.timeViewer();
 weekParse.docWrite();
-
 weekParse.timePreviewV1();
