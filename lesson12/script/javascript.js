@@ -31,7 +31,16 @@ let start = document.getElementById('start'),
         leftFields = getLeftFields.querySelectorAll("input[type=text]"),
         rightInputField = document.querySelector('.result');
 
-console.log();
+//Disable Start button and check is it empty
+start.setAttribute('disabled', true);
+salaryAmount.addEventListener('input', () => {
+    
+    if (salaryAmount.value.trim() !== ''){
+      start.disabled = false;
+    } else {
+      start.disabled = true;
+    }
+  });
 
 let appData = { 
     budget:                     0,
@@ -77,7 +86,7 @@ let appData = {
                                     targetMonthValue.value = Math.ceil(this.getTargetMonth());
                                     incomePeriodValue.value = this.calculateSavedMoney();
 
-                                    periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
+                                    //periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
  
                                 },
 
@@ -222,7 +231,6 @@ let appData = {
                                     for (let key in this.expenses) {
                                         this.expensesMonth += +this.expenses[key];
                                     }
-                                    // return this.expensesMonth;
 
                                 },
 
@@ -240,7 +248,9 @@ let appData = {
                                 },
 
     calculateSavedMoney:        function () {
+
                                     return this.budgetMonth * periodSelect.value;
+                                    
 
     },
     
@@ -302,20 +312,24 @@ let appData = {
 
                                             cancelButton.style.display = 'none';
                                             start.style.display = 'inline';
+                                            
 
                                             expensesPlus.style.display = 'inline';
                                             incomePlus.style.display = 'inline';
                                             
                                             depositCheck.checked = false;
 
-                                            //periodSelect.disabled = true;
+                                            //periodSelect equal to 1
                                             periodSelect.value = 1;
                                             periodAmountText.textContent = periodSelect.value;
 
                                             // Enable Range Slider
                                             let inputRang = document.querySelector('.period-select');
+
+                                            //periodSelect.disabled
                                             inputRang.disabled = false;
 
+                                            //Reset to zero all variables of object appData
                                             this.budget = 0;
                                             this.budgetDay = 0;
                                             this.budgetMonth = 0;
@@ -348,10 +362,11 @@ let appData = {
                                                 elements[i].parentNode.removeChild(elements[i]);
 
                                             }
+
+                                            start.setAttribute('disabled', true);
                                     
                                 }
         
-
 };
 
 //Start button
@@ -366,4 +381,5 @@ periodSelect.addEventListener('input', appData.updateSliderRange.bind(appData));
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 
+//Form field validation
 appData.fieldValidation();
