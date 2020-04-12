@@ -51,7 +51,7 @@ let weekParse = {
                 return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
         }
                         
-        setInterval(function () { document.querySelector('.timer').innerHTML = dateTime(); }, 1000);
+        setInterval(function () { document.querySelector('.firstTimer').innerHTML = dateTime(); }, 1000);
     },
 
     timeViewer:     function () {
@@ -64,11 +64,11 @@ let weekParse = {
             month = myDate.getMonth().toString(),
             year = myDate.getFullYear();
 
-        if (h.length < 2) { h = "0" + h; }
-        if (m.length < 2) { m = "0" + m; }
-        if (s.length < 2) { s = "0" + s; }
-        if (date.length < 2) { date = "0" + date; }
-        if (month.length < 2) { month = "0" + month; }
+            if (h.length < 2) {h = "0" + h;}
+            if (m.length < 2) {m = "0" + m;}
+            if (s.length < 2) {s = "0" + s;}
+            if (date.length < 2) {date = "0" + date;}
+            if (month.length < 2) {month = "0" + month;}
     },
 
     timePreviewV1:  function () {
@@ -91,7 +91,7 @@ let weekParse = {
                 return day+"."+month+"."+year+" — "+hours+":"+minutes+":"+seconds;
         }
         
-        setInterval(function (){document.querySelector('.time').innerHTML = dateTime();}, 1000);
+        setInterval(function (){document.querySelector('.secondTimer').innerHTML = dateTime();}, 1000);
     }
 
 };
