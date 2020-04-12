@@ -19,6 +19,8 @@ let weekParse = {
                 return  arrIn[1];                    
             } else if (checkData > 4 && checkData < 21) {                    
                 return arrIn[2];                    
+            } else if (checkData >= 0) {                    
+                return arrIn[2];                    
             }
         },
 
@@ -29,6 +31,8 @@ let weekParse = {
         } else if (v > 1 && v < 5 || v > 21 && v <= 24 || v > 31 && v <= 34 || v > 41 && v <= 44 || v > 51 && v <= 54) {
             return arrIn[1];
         } else if (v >= 5 && v < 21 || v >= 25 && v < 31 || v >= 35 && v < 41 || v >= 45 && v < 51 || v >= 55) {
+            return arrIn[2];
+        } else if (v >= 0) {
             return arrIn[2];
         }
     },
@@ -47,11 +51,9 @@ let weekParse = {
                 hours = format(currentDateTime.getHours()),
                 minutes = format(currentDateTime.getMinutes()),
                 seconds = format(currentDateTime.getSeconds());
-                if (hours === '00') {
-                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(weekParse.hours[2], weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
-                } else {
-                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
-                }
+                
+                return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+
         }
                         
         setInterval(function () { document.querySelector('.firstTimer').innerHTML = dateTime(); }, 1000);
