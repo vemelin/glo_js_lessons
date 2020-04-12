@@ -13,16 +13,16 @@ let weekParse = {
 
     disposeHours: function (checkData, arrIn) {
                     
-            if (checkData === 1 || checkData === 21) {
-                return arrIn[0];                    
-            } else if (checkData > 1 && checkData< 5 || checkData > 21 && checkData <= 24) {                    
-                return  arrIn[1];                    
-            } else if (checkData > 4 && checkData < 21) {                    
-                return arrIn[2];                    
-            } else if (checkData >= 0) {                    
-                return arrIn[2];                    
-            }
-        },
+        if (checkData === 1 || checkData === 21) {
+            return arrIn[0];                    
+        } else if (checkData > 1 && checkData< 5 || checkData > 21 && checkData <= 24) {                    
+            return  arrIn[1];                    
+        } else if (checkData > 4 && checkData < 21) {                    
+            return arrIn[2];                    
+        } else if (checkData >= 0) {                    
+            return arrIn[2];                    
+        }
+    },
 
     disposeMS: function (v, arrIn) {
 
@@ -32,20 +32,17 @@ let weekParse = {
             return arrIn[1];
         } else if (v >= 5 && v < 21 || v >= 25 && v < 31 || v >= 35 && v < 41 || v >= 45 && v < 51 || v >= 55) {
             return arrIn[2];
-        } else if (v >= 0) {
-            return arrIn[2];
-        }
+        } else if (v >= 0) {return arrIn[2];}
     },
 
     docWrite:  function () {
 
-        function format(value) {
-            if (value < 10) {
-                value='0' + value;
-            } return value;
+        function format(value) { 
+            if (value < 10) {value = '0' + value;} return value;
         }
                                    
         function dateTime() {
+            
             let currentDateTime = new Date(),
                 year = currentDateTime.getFullYear(),
                 hours = format(currentDateTime.getHours()),
@@ -54,12 +51,10 @@ let weekParse = {
                 
                 return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
 
-        }
-                        
-        setInterval(function () { document.querySelector('.firstTimer').innerHTML = dateTime(); }, 1000);
+        } setInterval(function () { document.querySelector('.firstTimer').innerHTML = dateTime(); }, 1000);
     },
 
-    timeViewer:     function () {
+    firstTimePattern:     function () {
 
         let h = myDate.getHours().toString(),
             m = myDate.getMinutes().toString(),
@@ -69,19 +64,17 @@ let weekParse = {
             month = myDate.getMonth().toString(),
             year = myDate.getFullYear();
 
-        if (h.length < 2) { h = "0" + h; }
-        if (m.length < 2) { m = "0" + m; }
-        if (s.length < 2) { s = "0" + s; }
-        if (date.length < 2) { date = "0" + date; }
-        if (month.length < 2) { month = "0" + month; }
+            if (h.length < 2) { h = "0" + h; }
+            if (m.length < 2) { m = "0" + m; }
+            if (s.length < 2) { s = "0" + s; }
+            if (date.length < 2) { date = "0" + date; }
+            if (month.length < 2) { month = "0" + month; }
     },
 
-    timePreviewV1:  function () {
+    secondTimePattern:  function () {
 
         function format(value) {
-            if (value < 10) {
-                value='0'+value;
-            } return value;
+            if (value < 10) { value = '0' + value;} return value;
         }
                         
         function dateTime () {
@@ -101,6 +94,6 @@ let weekParse = {
 
 };
 
-weekParse.timeViewer();
+weekParse.firstTimePattern();
+weekParse.secondTimePattern();
 weekParse.docWrite();
-weekParse.timePreviewV1();
