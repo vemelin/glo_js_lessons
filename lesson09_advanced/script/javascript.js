@@ -37,18 +37,23 @@ let weekParse = {
 
         function format(value) {
             if (value < 10) {
-                value='0'+value;
+                value='0' + value;
             } return value;
         }
                                    
         function dateTime() {
+            
             let currentDateTime = new Date(),
                 year = currentDateTime.getFullYear(),
                 hours = format(currentDateTime.getHours()),
                 minutes = format(currentDateTime.getMinutes()),
                 seconds = format(currentDateTime.getSeconds());
 
-                return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+                if (hours === '00') {
+                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(10, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+                } else {
+                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+                }
         }
                         
         setInterval(function () { document.querySelector('.firstTimer').innerHTML = dateTime(); }, 1000);
@@ -64,11 +69,11 @@ let weekParse = {
             month = myDate.getMonth().toString(),
             year = myDate.getFullYear();
 
-            if (h.length < 2) {h = "0" + h;}
-            if (m.length < 2) {m = "0" + m;}
-            if (s.length < 2) {s = "0" + s;}
-            if (date.length < 2) {date = "0" + date;}
-            if (month.length < 2) {month = "0" + month;}
+        if (h.length < 2) { h = "0" + h; }
+        if (m.length < 2) { m = "0" + m; }
+        if (s.length < 2) { s = "0" + s; }
+        if (date.length < 2) { date = "0" + date; }
+        if (month.length < 2) { month = "0" + month; }
     },
 
     timePreviewV1:  function () {
