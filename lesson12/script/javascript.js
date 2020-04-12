@@ -1,9 +1,5 @@
 'use sctrict';
 
-let isNum = function(number){
-        return !isNaN(parseFloat(number)) && isFinite(number);
-    };
-
 let start = document.getElementById('start'),
     cancelButton = document.getElementById('cancel'),
     btnPlus = document.getElementsByTagName('button'),
@@ -52,12 +48,6 @@ let appData = {
     moneyDeposit:               0,
 
     start:                      function () {
-                                    
-
-                                    if (!isNum(salaryAmount.value) || salaryAmount.value.trim() === '' || salaryAmount.value === null) {
-                                        
-                                        return;
-                                    }
 
                                     this.budget = Math.ceil(+salaryAmount.value);
 
@@ -72,7 +62,6 @@ let appData = {
                                     // New methods Reset Fields & Form fields validation
                                     this.resetALl();
                                     //this.fieldValidation();
-
 
                                     this.showResult();
                                     
@@ -96,7 +85,6 @@ let appData = {
     
                                     let inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
                                         inputNumber = document.querySelectorAll('[placeholder="Сумма"]');
-                                        console.log('inputNumber: ', inputNumber);
                                   
                                     inputRuEnString.forEach(items => {
 
@@ -154,7 +142,7 @@ let appData = {
                                             this.expenses[itemExpenses] = cashExpenses;
                                         }
                                         
-                                    });
+                                    }, this);
 
                                 },
 
@@ -190,7 +178,7 @@ let appData = {
                                             this.expenses[incomeTitle] = incomeAmount;
                                         }
                                         
-                                    });
+                                    }, this);
 
                                     for (let key in this.income) {
                                         this.incomeMonth += this.income[key];
@@ -235,6 +223,7 @@ let appData = {
                                         this.expensesMonth += +this.expenses[key];
                                     }
                                     // return this.expensesMonth;
+
                                 },
 
     getBudget:                  function () {
