@@ -42,15 +42,13 @@ let weekParse = {
         }
                                    
         function dateTime() {
-            
             let currentDateTime = new Date(),
                 year = currentDateTime.getFullYear(),
                 hours = format(currentDateTime.getHours()),
                 minutes = format(currentDateTime.getMinutes()),
                 seconds = format(currentDateTime.getSeconds());
-
                 if (hours === '00') {
-                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(10, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
+                    return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(weekParse.hours[2], weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
                 } else {
                     return 'Сегодня ' + weekParse.day[myDate.getDay()] + ', ' + myDate.getDate() + ' ' + weekParse.month[myDate.getMonth()] + ' ' + year + ' года, ' + hours + weekParse.disposeHours(hours, weekParse.hours) + ' ' + minutes + ' ' + weekParse.disposeMS(minutes, weekParse.minutes) + ' ' +  seconds + weekParse.disposeMS(seconds, weekParse.seconds);
                 }
