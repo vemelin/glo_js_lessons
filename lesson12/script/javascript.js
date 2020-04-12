@@ -102,7 +102,7 @@ let appData = {
 
                                         items.addEventListener('input', ()=> {
 
-                                            items.value = items.value.replace(/[^A-zА-яёЁ]/,'');
+                                            items.value = items.value.replace(/[^A-zА-яёЁ ,.!]/,'');
 
                                         });
 
@@ -235,7 +235,6 @@ let appData = {
                                         this.expensesMonth += +this.expenses[key];
                                     }
                                     // return this.expensesMonth;
-
                                 },
 
     getBudget:                  function () {
