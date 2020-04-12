@@ -69,7 +69,11 @@ let appData = {
                                     this.getAddIncome();
                                     this.getBudget();   
 
+                                    // New methods Reset Fields & Form fields validation
                                     this.resetALl();
+                                    //this.fieldValidation();
+
+
                                     this.showResult();
                                     
                                 },
@@ -88,6 +92,36 @@ let appData = {
  
                                 },
 
+    fieldValidation:            function () {
+    
+                                    let inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
+                                        inputNumber = document.querySelectorAll('[placeholder="Сумма"]');
+                                        console.log('inputNumber: ', inputNumber);
+                                  
+                                    inputRuEnString.forEach(items => {
+
+                                        items.addEventListener('input', ()=> {
+
+                                            items.value = items.value.replace(/[^A-zА-яёЁ]/,'');
+
+                                        });
+
+                                    }, this);
+                                    
+                                    inputNumber.forEach(items => {
+
+                                        items.addEventListener('input', ()=> {
+
+                                            items.value = items.value.replace(/[^0-9]/,'');
+
+                                        });
+
+                                    }, this);
+
+                                return this;
+
+                                },
+
     addExpensesBlock:           function () {
 
                                     let cloneExpensesItems = expensesItems[0].cloneNode(true),
@@ -100,6 +134,8 @@ let appData = {
 
                                         expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
                                         expensesItems = document.querySelectorAll('.expenses-items');
+
+                                        appData.fieldValidation();
 
                                         if(expensesItems.length === 3) {
                                             expensesPlus.style.display = 'none';
@@ -118,7 +154,7 @@ let appData = {
                                             this.expenses[itemExpenses] = cashExpenses;
                                         }
                                         
-                                    }, this);
+                                    });
 
                                 },
 
@@ -134,6 +170,8 @@ let appData = {
 
                                         incomeItems[0].parentNode.insertBefore(cloneIncomeItems, incomePlus);
                                         incomeItems = document.querySelectorAll('.income-items');
+
+                                        appData.fieldValidation();
 
                                         if(incomeItems.length === 3) {
                                             incomePlus.style.display = 'none';
@@ -152,7 +190,7 @@ let appData = {
                                             this.expenses[incomeTitle] = incomeAmount;
                                         }
                                         
-                                    }, this);
+                                    });
 
                                     for (let key in this.income) {
                                         this.incomeMonth += this.income[key];
@@ -257,9 +295,7 @@ let appData = {
     resetFields:                function () {
 
                                          // Get & Create variables of left input Fields
-                                        let fields = document.querySelector('.data'),
-                                            leftInputField = document.querySelector('.data'),
-                                            rightInputField = document.querySelector('.result'),
+                                        let inputs = document.querySelectorAll('input'),
                                             periodAmountText = document.querySelector('.period-amount');
 
                                             // Reset fields to zero
@@ -269,22 +305,11 @@ let appData = {
                                                 item.disabled = false;
 
                                             });
-                                        
-                                            fields = leftInputField.querySelectorAll("input[type=text]");
 
-                                            fields.forEach(function(item) {
+                                            inputs.forEach(element => {
 
-                                                item.value = '';
-                                                item.disabled = false;
-                                            
-                                            });
-                                    
-                                            fields = rightInputField.querySelectorAll("input[type=text]");
+                                                element.value = '';    
 
-                                            fields.forEach(function(item, index) {
-
-                                                item.setAttribute('disabled', '');
-                                            
                                             });
 
                                             cancelButton.style.display = 'none';
@@ -341,7 +366,6 @@ let appData = {
 
 };
 
-
 //Start button
 start.addEventListener('click', appData.start.bind(appData));
 // Cancel button
@@ -353,3 +377,5 @@ periodSelect.addEventListener('input', appData.updateSliderRange.bind(appData));
 //Plus buttons
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
+
+appData.fieldValidation();
