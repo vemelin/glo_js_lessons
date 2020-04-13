@@ -37,8 +37,7 @@ salaryAmount.addEventListener('input', () => {
   (salaryAmount.value.trim() !== '') ? start.disabled = false : start.disabled = 'true';
 });
 
-let appData = { 
-
+let appData = {
   budget: 0,
   budgetDay: 0,
   budgetMonth: 0,
