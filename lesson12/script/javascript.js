@@ -67,7 +67,6 @@ let appData = {
     this.resetFields();
     this.showResult();
   },
-
   showResult: function() {
     budgetMonthValue.value = this.budgetMonth;
     budgetDayValue.value = this.budgetDay;
@@ -78,7 +77,6 @@ let appData = {
     incomePeriodValue.value = this.calculateSavedMoney();
     periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
   },
-  
   fieldValidation: function () {  
     let inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
         inputNumber = document.querySelectorAll('[placeholder="Сумма"]');
@@ -96,12 +94,11 @@ let appData = {
     });  
   return this;
   },
-
   addExpensesBlock: function () { 
     let cloneExpensesItems = expensesItems[0].cloneNode(true),
         clearTitleField = cloneExpensesItems.querySelector('.expenses-title'),
         cloneAmountField = cloneExpensesItems.querySelector('.expenses-amount'); 
-         
+
     // Clearing fields
     clearTitleField.value = '';
     cloneAmountField.value = '';  
@@ -113,7 +110,6 @@ let appData = {
     } 
     appData.fieldValidation(); 
   },
-
   getExpenses: function () {  
     expensesItems.forEach(function (item) {
       let itemExpenses = item.querySelector('.expenses-title').value;
