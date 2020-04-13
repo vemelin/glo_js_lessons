@@ -97,17 +97,16 @@ let appData = {
   return this;
   },
 
-  addExpensesBlock: function () {  
-      
+  addExpensesBlock: function () { 
     let cloneExpensesItems = expensesItems[0].cloneNode(true),
         clearTitleField = cloneExpensesItems.querySelector('.expenses-title'),
         cloneAmountField = cloneExpensesItems.querySelector('.expenses-amount'); 
          
-        // Clearing fields
-        clearTitleField.value = '';
-        cloneAmountField.value = '';  
-        expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
-        expensesItems = document.querySelectorAll('.expenses-items');  
+    // Clearing fields
+    clearTitleField.value = '';
+    cloneAmountField.value = '';  
+    expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
+    expensesItems = document.querySelectorAll('.expenses-items');  
 
     if(expensesItems.length === 3) {
         expensesPlus.style.display = 'none';
@@ -124,8 +123,7 @@ let appData = {
       }
     }, this);  
   },  
-  addIncomeBlock: function () {
-                                      
+  addIncomeBlock: function () {                   
     let cloneIncomeItems = incomeItems[0].cloneNode(true),
         clearTitleField = cloneIncomeItems.querySelector('.income-title'),
         cloneAmountField = cloneIncomeItems.querySelector('.income-amount');
