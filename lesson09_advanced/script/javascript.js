@@ -78,6 +78,7 @@ let weekParse = {
         }
                         
         function dateTime () {
+            
             let currentDateTime = new Date(),
                 day = format(currentDateTime.getDate()),
                 month = format(currentDateTime.getMonth()+1),
