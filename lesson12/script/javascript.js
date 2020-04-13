@@ -25,9 +25,8 @@ let  start = document.getElementById('start'),
      additionalExpensesItem = document.querySelector('.additional_expenses-item'),
      targetAmount = document.querySelector('.target-amount'),
      incomeItem = document.querySelectorAll('.income-items'),
-     periodAmountText = document.getElementsByClassName('period-amount');
- 
-let  getLeftFields = document.querySelector('.data'),
+     periodAmountText = document.getElementsByClassName('period-amount'),
+     getLeftFields = document.querySelector('.data'),
      leftFields = getLeftFields.querySelectorAll("input[type=text]"),
      rightInputField = document.querySelector('.result');
 
