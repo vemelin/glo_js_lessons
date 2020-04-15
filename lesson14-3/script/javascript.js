@@ -48,10 +48,10 @@ class MainProps {
 			elems.classList.add('nameById');
 		}
 		elems.style.cssText = `
-      height: ${this.height}px;
-      width: ${this.width}px;
-      background: ${this.bg};
-      font-size: ${this.fontSize}px;
+      height:${this.height}px;
+      width:${this.width}px;
+      background:${this.bg};
+      font-size:${this.fontSize}px;
       text-align: center;
       padding: 25px 10px 0 10px; 
       position: absolute;
