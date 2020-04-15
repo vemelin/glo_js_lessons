@@ -9,6 +9,35 @@ class MainProps {
 		this.bg = bg;
 		this.fontSize = fontSize;
 	}
+	moveBeArrowKeys(move)  {
+		const div = document.querySelector('.block');
+		let left = parseInt(div.style.left);
+		let top = parseInt(div.style.top);
+		if (!isNaN(div.style.left)) {
+			div.textContent = 'GO';
+			left = 0;
+		}
+		if (!isNaN(div.style.top)) {
+			top = 0;
+		}
+		if (move.keyCode === 37) {
+			left += -10;
+			div.style.left = left + 'px';
+			div.textContent = '⥢';
+		} else if (move.keyCode === 38) {
+			top += -10;
+			div.style.top = top + 'px';
+			div.textContent = '⥣';
+		} else if (move.keyCode === 39) {
+			left += +10;
+			div.style.left = left + 'px';
+			div.textContent = '⥤';
+		} else if (move.keyCode === 40) {
+			top += 10;
+			div.style.top = top + 'px';
+			div.textContent = '⥥';
+		}
+	}
 	renderElements() {
 		let elems;
 		if (this.selector[0] === '.') {
@@ -23,15 +52,23 @@ class MainProps {
       width: ${this.width}px;
       background: ${this.bg};
       font-size: ${this.fontSize}px;
+      text-align: center;
+      padding: 25px 10px 0 10px; 
+      position: absolute;
+      border-radius: 5px;
+      color: white;
     `;
-		elems.textContent = 'Param-pam-pam';
+		elems.textContent = 'GO';
 		body.append(elems);
+		document.addEventListener('keydown', this.moveBeArrowKeys);
 		console.log('Element ⥤', elems);
 	}
 }
 
-const results1 = new MainProps('.id', 70, 70, 'red', 18);
-results1.renderElements();
+document.addEventListener('DOMContentLoaded', () => {
+	const moveObjec = new MainProps('.id', 50, 70, 'black', 18);
+	moveObjec.renderElements();
+});
 
-const results2 = new MainProps('#id', 50, 50, 'yellow', 20);
-results2.renderElements();
+
+  
