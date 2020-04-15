@@ -9,7 +9,7 @@ class MainProps {
 		this.bg = bg;
 		this.fontSize = fontSize;
 	}
-	moveBeArrowKeys(move)  {
+	moveArrow(move)  {
 		const div = document.querySelector('.block');
 		let left = parseInt(div.style.left);
 		let top = parseInt(div.style.top);
@@ -60,7 +60,7 @@ class MainProps {
     `;
 		elems.textContent = 'GO';
 		body.append(elems);
-		document.addEventListener('keydown', this.moveBeArrowKeys);
+		document.addEventListener('keydown', this.moveArrow);
 		console.log('Element ⥤', elems);
 	}
 }
@@ -71,4 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-  
