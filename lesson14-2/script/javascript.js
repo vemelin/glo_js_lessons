@@ -59,7 +59,7 @@ const AppData = function() {
 
 AppData.prototype.start = function() {
 	if (salaryAmount.value === '') {
-		startBtn.disabled = true;
+		start.disabled = true;
 		return;
 	}
 	this.budget = Math.ceil(+salaryAmount.value);
