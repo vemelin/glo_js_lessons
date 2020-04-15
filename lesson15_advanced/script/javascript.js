@@ -125,19 +125,18 @@ class AppData {
 		}
 	}
 	addBenefits() {
-		this.addExpenses = [];
-		const addExpenses = additionalExpensesItem.value.split(',');
-		addExpenses.forEach(item => {
-			item = item.trim();
-			if (item !== '') {
-				this.addExpenses.push(item);
+		this.addIncome = [];
+		additionalIncomeItem.forEach(el => {
+			const itemResults = el.value.trim();
+			if (itemResults !== '') {
+				this.addIncome.push(itemResults);
 			}
 		});
 		this.addExpenses = [];
-		additionalIncomeItem.forEach(item => {
-			const itemValue = item.value.trim();
-			if (itemValue !== '') {
-				this.addIncome.push(itemValue);
+		const addExpenses = additionalExpensesItem.value.split(',');
+		addExpenses.forEach(item => {
+			if (item !== '') {
+				this.addExpenses.push(item);
 			}
 		});
 	}
