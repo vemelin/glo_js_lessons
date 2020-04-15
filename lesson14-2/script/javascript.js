@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
-/* eslint-disable no-undef */
 'use strict';
 
 let  start = document.getElementById('start'),
@@ -13,29 +11,20 @@ let  start = document.getElementById('start'),
 	budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
 	budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
 	expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0],
-	acumulateMonthValue = document.getElementsByClassName('acumulate_month-value')[0],
 	additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0],
 	additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0],
 	incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
 	targetMonthValue = document.getElementsByClassName('target_month-value')[0],
 	salaryAmount = document.querySelector('.salary-amount'),
-	incomeTitle = document.querySelector('.income-title'),
-	expensesTitle = document.querySelector('.expenses-title'),
 	expensesItems = document.querySelectorAll('.expenses-items'),
 	incomeItems = document.querySelectorAll('.income-items'),
-	additionalExpenses = document.querySelector('.additional_expenses'),
 	periodSelect = document.querySelector('.period-select'),
 	additionalExpensesItem = document.querySelector('.additional_expenses-item'),
 	targetAmount = document.querySelector('.target-amount'),
-	incomeItem = document.querySelectorAll('.income-items'),
-	periodAmountText = document.getElementsByClassName('period-amount'),
 	getLeftFields = document.querySelector('.data'),
-	leftFields = getLeftFields.querySelectorAll("input[type=text]"),
-	rightInputField = document.querySelector('.result');
+	leftFields = getLeftFields.querySelectorAll("input[type=text]");
 
-// start.setAttribute('disabled', true);
-
-function fieldValidation() {
+const fieldValidation = () => {
 	const inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
 		inputNumber = document.querySelectorAll('[placeholder="Сумма"]');
 
@@ -51,15 +40,7 @@ function fieldValidation() {
 		}, this);
 	});
 	return this;
-}
-
-function domElement(selector, height, width, bg, fontSize) {
-	this.selector = selector;
-	this.height = height;
-	this.width = width;
-	this.bg = bg;
-	this.fontSize = fontSize;
-}
+};
 
 const AppData = function() {
 	this.budget = 0;
@@ -77,6 +58,10 @@ const AppData = function() {
 };
 
 AppData.prototype.start = function() {
+	if (salaryAmount.value === '') {
+		startBtn.disabled = true;
+		return;
+	}
 	this.budget = Math.ceil(+salaryAmount.value);
 	this.getExpenses();
 	this.getIncome();
@@ -84,8 +69,6 @@ AppData.prototype.start = function() {
 	this.getAddExpenses();
 	this.getAddIncome();
 	this.getBudget();
-	// New methods Reset Fields & Form fields validation
-	// this.fieldValidation();
 	this.resetFields();
 	this.showResult();
 };
@@ -213,9 +196,8 @@ AppData.prototype.resetFields = function() {
 	const dataLeftInputs = document.querySelector('.data');
 	const getLeftFields = dataLeftInputs.querySelectorAll("input[type=text]");
 
-	getLeftFields.forEach((item, index) => {
+	getLeftFields.forEach(item => {
 		item.setAttribute('disabled', '');
-
 	});
 
 	start.style.display = 'none';
@@ -227,6 +209,7 @@ AppData.prototype.resetFields = function() {
 };
 
 AppData.prototype.resetAll = function() {
+	start.disabled = false;
 	// Get & Create variables of left input Fields
 	const inputs = document.querySelectorAll('input'),
 		periodAmountText = document.querySelector('.period-amount');
@@ -283,7 +266,7 @@ AppData.prototype.resetAll = function() {
 };
 
 AppData.prototype.eventsListeners = function() {
-	  fieldValidation();
+	fieldValidation();
 	start.addEventListener('click', this.start.bind(this));
 	cancelButton.addEventListener('click', this.resetAll.bind(this));
 	periodSelect.addEventListener('input', this.updateSliderRange.bind(this));
