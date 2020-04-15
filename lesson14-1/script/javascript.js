@@ -19,11 +19,11 @@ class MainProps {
 			elems.classList.add('nameById');
 		}
 		elems.style.cssText = `
-    height: ${this.height}px;
-    width: ${this.width}px;
-    background: ${this.bg};
-    font-size: ${this.fontSize}px;
-  `;
+      height: ${this.height}px;
+      width: ${this.width}px;
+      background: ${this.bg};
+      font-size: ${this.fontSize}px;
+    `;
 		elems.textContent = 'Param-pam-pam';
 		body.append(elems);
 		console.log('Element ⥤', elems);
