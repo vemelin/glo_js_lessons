@@ -74,7 +74,6 @@ const AppData = function() {
 	this.deposit = false;
 	this.percentDeposit = 0;
 	this.moneyDeposit = 0;
-
 };
 
 AppData.prototype.start = function() {
@@ -220,7 +219,6 @@ AppData.prototype.resetFields = function() {
 	});
 
 	start.style.display = 'none';
-
 	cancelButton.style.display = 'inline';
 	incomePlus.removeEventListener('click', this.addIncomeBlock);
 	expensesPlus.removeEventListener('click', this.addExpensesBlock);
@@ -298,9 +296,7 @@ AppData.prototype.eventsListeners = function() {
 		} else {
 			start.disabled = true;
 		}
-
 	});
-
 };
 
 const appData = new AppData();
