@@ -99,13 +99,13 @@ class AppData {
 		fieldValidation();
 	}
 	getExpenses() {
-		expensesItems.forEach(function(item) {
+		expensesItems.forEach(item => {
 			const itemExpenses = item.querySelector('.expenses-title').value;
 			const cashExpenses = item.querySelector('.expenses-amount').value;
 			if (itemExpenses !== '' && cashExpenses !== '') {
 				this.expenses[itemExpenses] = cashExpenses;
 			}
-		}, this);
+		});
 	}
 	addIncomeBlock() {
 		const cloneIncomeItems = incomeItems[0].cloneNode(true),
@@ -126,13 +126,13 @@ class AppData {
 	}
 
 	getIncome() {
-		incomeItems.forEach(function(item) {
+		incomeItems.forEach(item => {
 			const incomeTitle = item.querySelector('.income-title').value;
 			const incomeAmount = item.querySelector('.income-amount').value;
 			if (incomeTitle !== '' && incomeAmount !== '') {
 				this.expenses[incomeTitle] = incomeAmount;
 			}
-		}, this);
+		});
 
 		for (const key in this.income) {
 			this.incomeMonth += this.income[key];
@@ -140,20 +140,20 @@ class AppData {
 	}
 	getAddExpenses() {
 		const addExpenses = additionalExpensesItem.value.split(',');
-		addExpenses.forEach(function(item) {
+		addExpenses.forEach(item => {
 			item = item.trim();
 			if (item !== '') {
 				this.addExpenses.push(item);
 			}
-		}, this);
+		});
 	}
 	getAddIncome() {
-		additionalIncomeItem.forEach(function(item) {
+		additionalIncomeItem.forEach(item => {
 			const itemValue = item.value.trim();
 			if (itemValue !== '') {
 				this.addIncome.push(itemValue);
 			}
-		}, this);
+		});
 	}
 	getExpensesMonth() {
 		for (const key in this.expenses) {
