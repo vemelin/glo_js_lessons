@@ -1,6 +1,10 @@
 /* eslint-disable prefer-const */
 'use strict';
 
+// if (isNaN(depositPercent.value) || depositPercent.value.trim() === '' || depositPercent.value <= 0 || depositPercent.value > 100) {
+//   return alert('Введите корректное значение в поле проценты');
+// }
+
 // let Name = () => {};
 // function Name() {};
 

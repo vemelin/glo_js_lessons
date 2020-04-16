@@ -26,24 +26,6 @@ const  start = document.getElementById('start'),
 	depositAmount = document.querySelector('.deposit-amount'),
 	depositPercent = document.querySelector('.deposit-percent');
 
-const fieldValidation = () => {
-	const inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
-		inputNumber = document.querySelectorAll('[placeholder="Сумма"]');
-
-	inputRuEnString.forEach(items => {
-		items.addEventListener('input', () => {
-			items.value = items.value.replace(/[^A-zА-яёЁ ,.!]/, '');
-		}, this);
-	});
-
-	inputNumber.forEach(items => {
-		items.addEventListener('input', () => {
-			items.value = items.value.replace(/[^0-9]/, '');
-		}, this);
-	});
-	return this;
-};
-
 class AppData {
 	constructor() {
 		this.budget = 0;
@@ -64,9 +46,6 @@ class AppData {
 			start.disabled = true;
 			return;
 		}
-		if (isNaN(depositPercent.value) || depositPercent.value.trim() === '' || depositPercent.value > 100 || depositPercent.value <= 0) {
-			return alert('Введите корректное значение в поле проценты');
-		}
 		this.budget = Math.ceil(+salaryAmount.value);
 		this.getBenefits();
 		this.getExpensesMonth();
@@ -74,6 +53,7 @@ class AppData {
 		this.getInfoDeposit();
 		this.getBudget();
 		this.resetFields();
+		this.fieldValidation();
 		this.showResult();
 	}
 	showResult() {
@@ -86,6 +66,24 @@ class AppData {
 		incomePeriodValue.value = this.calculateSavedMoney();
 		periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
 	}
+
+	fieldValidation() {
+		const inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
+			inputNumber = document.querySelectorAll('[placeholder="Сумма"], [placeholder="Процент"]');
+
+		inputRuEnString.forEach(items => {
+			items.addEventListener('input', () => {
+				items.value = items.value.replace(/[^A-zА-яёЁ ,.!]/, '');
+			});
+		});
+
+		inputNumber.forEach(items => {
+			items.addEventListener('input', () => {
+				items.value = items.value.replace(/[^0-9]/, '');
+			});
+		});
+	}
+
 	createBlocks() {
 		let title = '', amount = '', cloneIncomeItem = '', items = '', btn = '', expenses = '';
 
@@ -111,10 +109,8 @@ class AppData {
 		items = document.querySelectorAll(expenses);
 
 		if (items.length === 3) {
-			btn.style.display = 'none';
-		}
-
-		fieldValidation();
+      btn.style.display = 'none';
+    }
 	}
 	getBenefits() {
 		const count = item => {
@@ -189,7 +185,7 @@ class AppData {
 		incomePlus.removeEventListener('click', this.createBlocks);
 		expensesPlus.removeEventListener('click', this.createBlocks);
 		const inputRang = document.querySelector('.period-select');
-    inputRang.disabled = true;
+		inputRang.disabled = true;
 	}
 	resetAll() {
 		start.disabled = false;
@@ -204,8 +200,8 @@ class AppData {
 		expensesPlus.style.display = 'inline';
 		incomePlus.style.display = 'inline';
 		depositPercent.style.display = 'none';
-    depositBank.disabled = false;
-    const selectOption = document.querySelectorAll('option');
+		depositBank.disabled = false;
+		const selectOption = document.querySelectorAll('option');
 		selectOption[0].selected = true;
 
 		// depositCheck.style.display = 'none';
@@ -255,9 +251,21 @@ class AppData {
 	}
 	getInfoDeposit() {
 		if (this.deposit) {
-			this.percentDeposit = depositPercent.value;
+			this.percentDeposit = +depositPercent.value;
 			this.moneyDeposit = depositAmount.value;
+			console.log(typeof(this.percentDeposit));
+			console.log(this.percentDeposit);
+			while (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100)  {
+				alert('Введите корректное значение в поле проценты'); break;
+			}
+			// if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
+			// 	return alert('Введите корректное значение в поле проценты');
+			// }
+			// do {
+			// 	alert('Введите корректное значение в поле проценты'); break;
+			// } while (depositPercent.value > 0 || depositPercent.value < 100);
 		}
+		this.fieldValidation();
 	}
 	changePercent() {
 		const valueSelect = this.value;
@@ -286,7 +294,7 @@ class AppData {
 	}
 
 	eventsListeners() {
-		fieldValidation();
+		this.fieldValidation();
 		start.addEventListener('click', this.start.bind(this));
 		cancelButton.addEventListener('click', this.resetAll.bind(this));
 		periodSelect.addEventListener('input', this.updateSliderRange.bind(this));
