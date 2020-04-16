@@ -69,45 +69,45 @@
 // obj4.ride();
 // console.log(obj4);
 
-const map = new Map([
-	[1984, 'vasya'],
-	['He', 'is 35 years old'],
-]);
+// const map = new Map([
+// 	[1984, 'vasya'],
+// 	['He', 'is 35 years old'],
+// ]);
 
-map.set('car', { brand: 'mazda', moderl: '3' })
-	.set(777, 'asdfadsf')
-	.set(null, 'asdfasdf')
-	.set(NaN, 'asdfasdf')
-	.set(undefined, 'asdfasdf');
+// map.set('car', { brand: 'mazda', moderl: '3' })
+// 	.set(777, 'asdfadsf')
+// 	.set(null, 'asdfasdf')
+// 	.set(NaN, 'asdfasdf')
+// 	.set(undefined, 'asdfasdf');
 
-const obj = {
-	name: 'Max',
-	age: 30,
-};
+// const obj = {
+// 	name: 'Max',
+// 	age: 30,
+// };
 
 
-const func = () => {
-	console.log('go vasya');
-};
+// const func = () => {
+// 	console.log('go vasya');
+// };
 
-map.set(obj, 123)
-	.set(func, 'you');
+// map.set(obj, 123)
+// 	.set(func, 'you');
 
 
 // console.log(map.get(func));
 // console.log(map.has(NaN));
 //console.log(map.size);
 
-const collectMap = new Map([
-	['Hello', 'world!'],
-	['year', 2020]
-]);
+// const collectMap = new Map([
+// 	['Hello', 'world!'],
+// 	['year', 2020]
+// ]);
 
-collectMap.delete('year');
+// collectMap.delete('year');
 
-const arr = Array.from(map);
+// const arr = Array.from(map);
 
-console.log(arr);
+// console.log(arr);
 
 // map.forEach((value, key) => {
 // 	console.log(`${value}: ${key}`);
@@ -119,17 +119,37 @@ console.log(arr);
 // }
 
 
-const vehicle = new Set();
+// const vehicle = new Set();
 
 // vehicle.add('test 1');
 // vehicle.add('test 2');
 // vehicle.add('test 3');
 // vehicle.add(['test 4', 'value 4']);
 
-vehicle.add('test 1')
-.add('test 2')
-.add('test 3')
-.add('test 4', 'value 4');
+// vehicle.add('test 1')
+// 	.add('test 2')
+// 	.add('test 3')
+// 	.add('test 4', 'value 4');
 
-console.log(vehicle);
-console.log(vehicle.size);
+// console.log(vehicle);
+// console.log(vehicle.size);
+
+// Напишите расширения метода прототипа:
+// 1) Два класса, First и Second, Second наследует от First .
+// 2) В First есть метод hello - он печатает в консоль "Привет я метод родителя!".
+// 3) Нужно написать в Second метод hello, чтоб он сначала вызывал метод hello из First, а потом сразу печатал в консоль "А я наследуемый метод!"
+// 4) Проверить, чтобы все работало без ошибок в консоли
+// 5) Запушить задание в репозиторий на github или реализовать на доске CodePen и прикрепить ссылку
+
+// const FirstClass = {
+// 	hello() {
+// 		console.log('Привет я метод родителя!');
+// 	}
+// };
+
+// const SecondClass = { ...FirstClass, hello() { console.log('А я наследуемый метод!'); } };
+
+// FirstClass.hello();
+// SecondClass.hello();
+
+// const obj4 = {...obj1, ...obj2, ship, ride(){console.log('go ride')}};
