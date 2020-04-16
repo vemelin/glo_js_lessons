@@ -1,12 +1,15 @@
 'use strict';
 
-const FirstClass = {
-	hello() {
+class First {
+	static hello() {
 		console.log('Привет я метод родителя!');
 	}
-};
+}
+class Second extends First {
+	static hello() {
+		super.hello();
+		console.log('А я наследуемый метод!');
+	}
+}
 
-const SecondClass = { ...FirstClass, hello() { console.log('А я наследуемый метод!'); } };
-
-FirstClass.hello();
-SecondClass.hello();
+Second.hello();
