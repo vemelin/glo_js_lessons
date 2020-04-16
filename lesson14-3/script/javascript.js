@@ -36,7 +36,9 @@ class MainProps {
 			top += 10;
 			div.style.top = top + 'px';
 			div.textContent = '⥥';
-		}
+		} setTimeout(() => {
+			div.textContent = 'GO';
+		}, 5000);
 	}
 	renderElements() {
 		let elems;
