@@ -69,7 +69,8 @@ class AppData {
 
 	fieldValidation() {
 		const inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
-			inputNumber = document.querySelectorAll('[placeholder="Сумма"], [placeholder="Процент"]');
+      inputNumber = document.querySelectorAll('[placeholder="Сумма"], [placeholder="Процент"]');
+      console.log(inputNumber);
 
 		inputRuEnString.forEach(items => {
 			items.addEventListener('input', () => {
