@@ -1,6 +1,31 @@
 /* eslint-disable prefer-const */
 'use strict';
 
+class First {
+	constructor() {}
+
+	// 2) В FIRST ЕСТЬ МЕТОД HELLO - ОН ПЕЧАТАЕТ В КОНСОЛЬ "
+	// ПРИВЕТ Я МЕТОД РОДИТЕЛЯ!".
+	hello() {
+		console.log(('Привет я метод родителя!'));
+	}
+
+}
+
+class Second extends First {
+	constructor() {}
+
+	// 3) НУЖНО НАПИСАТЬ В SECOND МЕТОД HELLO, ЧТОБ ОН
+	// СНАЧАЛА ВЫЗЫВАЛ МЕТОД HELLO ИЗ FIRST, А ПОТОМ СРАЗУ ПЕЧАТАЛ
+	// В КОНСОЛЬ "А Я НАСЛЕДУЕМЫЙ МЕТОД!"
+	hello() {
+		super.hello();
+		console.log(('А я наследуемый метод!'));
+	}
+}
+
+Second.hello();
+
 // let Name = () => {};
 // function Name() {};
 
