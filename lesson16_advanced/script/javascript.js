@@ -270,88 +270,11 @@ class AppData {
 		cancelButton.style.display = 'none';
 		depositBank.disabled = false;
 		localStorage.clear();
-		// this.setCoockie(-1);
-
-		// 	start.disabled = false;
-		// 	// Get & Create variables of left input Fields
-		// 	const inputs = document.querySelectorAll('input'),
-		// 		periodAmountText = document.querySelector('.period-amount');
-		// 	// Reset fields to zero
-		// 	leftFields.forEach(item => { item.value = ''; item.disabled = false; });
-		// 	inputs.forEach(element => { element.value = ''; });
-		// 	cancelButton.style.display = 'none';
-		// 	start.style.display = 'inline';
-		// 	expensesPlus.style.display = 'inline';
-		// 	incomePlus.style.display = 'inline';
-		// 	depositPercent.style.display = 'none';
-		// 	depositBank.disabled = false;
-		// 	const selectOption = document.querySelectorAll('option');
-		// 	selectOption[0].selected = true;
-
-		// 	// depositCheck.style.display = 'none';
-		// 	depositCheck.disabled = false;
-		// 	depositCheck.checked = false;
-		// 	depositBank.style.display = 'none';
-		// 	depositAmount.style.display = 'none';
-		// 	//periodSelect equal to 1
-		// 	periodSelect.value = 1;
-		// 	periodAmountText.textContent = periodSelect.value;
-		// 	// Enable Range Slider
-		// 	const inputRang = document.querySelector('.period-select');
-		// 	//periodSelect.disabled
-		// 	inputRang.disabled = false;
-
-		// 	//Reset to zero all keys data of appData object
-		// 	this.budget = 0;
-		// 	this.budgetDay = 0;
-		// 	this.budgetMonth = 0;
-		// 	this.income = {};
-		// 	this.incomeMonth = 0;
-		// 	this.addIncome = [];
-		// 	this.expenses = {};
-		// 	this.expensesMonth = 0;
-		// 	this.addExpenses = [];
-		// 	this.deposit = false;
-		// 	this.percentDeposit = 0;
-		// 	this.moneyDeposit = 0;
-
-		// 	//Reset to zero all keys data of appData object
-		// 	incomePlus.addEventListener('click', this.createBlocks);
-		// 	expensesPlus.addEventListener('click', this.createBlocks);
-		// 	periodSelect.removeEventListener('mousemove', this.getIncomePeriodValue);
-
-		// 	let elements = document.querySelectorAll('.income-items');
-
-		// 	for (let i = 1; i < elements.length; i++) {
-		// 		elements[i].parentNode.removeChild(elements[i]);
-		// 	}
-
-		// 	elements = document.querySelectorAll('.expenses-items');
-		// 	for (let i = 1; i < elements.length; i++) {
-		// 		elements[i].parentNode.removeChild(elements[i]);
-		// 	}
-
-		// 	start.setAttribute('disabled', false);
-
-	// 	//Clear storarage
-	// 	localStorage.clear();
-	// 	this.setCoockie(-1);
 	}
 	getInfoDeposit() {
 		if (this.deposit) {
 			this.percentDeposit = +depositPercent.value;
 			this.moneyDeposit = depositAmount.value;
-			console.log(typeof(this.percentDeposit));
-			console.log(this.percentDeposit);
-			while (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100)  {
-				alert('Введите корректное значение в поле проценты'); break;
-			}
-			// // if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
-			// // 	return alert('Введите корректное значение в поле проценты');
-			// // }
-			// // do {
-			// // 	alert('Введите корректное значение в поле проценты'); break;
-			// // } while (depositPercent.value > 0 || depositPercent.value < 100);
 		}
 		this.fieldValidation();
 	}
@@ -396,27 +319,14 @@ class AppData {
 			}
 		});
 		depositPercent.addEventListener('input', () => {
-			if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
+			if (isNaN(depositPercent.value) || depositPercent.value < 0 || depositPercent.value > 100) {
 				alert('Введите корректное значение в поле проценты');
 				return document.querySelector('.deposit-percent').value = '';
 			}
 		});
 
-
 		depositCheck.addEventListener('change', this.dpeositHandler.bind(this));
 		// setInterval(this.checkCookie, 1000);
-
-		console.log(typeof(this.percentDeposit));
-		console.log(this.percentDeposit);
-		// while (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100)  {
-		//   alert('Введите корректное значение в поле проценты'); break;
-		// }
-		// if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
-		// 	return alert('Введите корректное значение в поле проценты');
-		// }
-		// do {
-		// 	alert('Введите корректное значение в поле проценты'); break;
-		// } while (depositPercent.value > 0 || depositPercent.value < 100);
 
 		document.addEventListener('DOMContentLoaded', () => {
 			this.showResult();
@@ -426,7 +336,6 @@ class AppData {
 				cancelButton.style.display = 'block';
 			}
 		});
-
 	}
 }
 
