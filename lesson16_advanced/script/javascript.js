@@ -57,7 +57,7 @@ class AppData {
 		this.resetFields();
 		this.fieldValidation();
 		this.localStorage();
-		this.setCoockie(3600);
+		// this.setCoockie(3600);
 		this.showResult();
 	}
 	showResult() {
@@ -78,30 +78,34 @@ class AppData {
 		localStorage.setItem('additionalIncomeValue', this.addIncome.join(', '));
 		localStorage.setItem('targetMonthValue', this.getTargetMonth());
 		localStorage.setItem('incomePeriodValue', this.calculateSavedMoney());
-	}
-	setCoockie(time) {
-		document.cookie = `isLoad=true; max-age=${time}`;
-		document.cookie = `budgetMonthValue= ${this.budgetMonth}; max-age=${time}`;
-		document.cookie = `budgetDayValue= ${this.budgetDay}; max-age=${time}`;
-		document.cookie = `expensesMonthValue= ${this.expensesMonth}; max-age=${time}`;
-		document.cookie = `additionalExpensesValue= ${this.addExpenses.join(', ')}; max-age=${time}`;
-		document.cookie = `additionalIncomeValue= ${this.addIncome.join(', ')}; max-age=${time}`;
-		document.cookie = `targetMonthValue= ${this.getTargetMonth()}; max-age=${time}`;
-		document.cookie = `incomePeriodValue= ${this.calculateSavedMoney()}; max-age=${time}`;
-	}
-	getCookie(name) {
-		const matches = document.cookie.match(new RegExp(
-			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-		));
-		return matches ? decodeURIComponent(matches[1]) : undefined;
-	}
-	checkCookie() {
 		for (let i = 0; i < localStorage.length; i++) {
-			if (localStorage.getItem(localStorage.key(i)) !== this.getCookie(localStorage.key(i))) {
-				this.resetAll();
-			}
+			document.cookie = `${localStorage.key(i)}=${localStorage.getItem(localStorage.key(i))}; max-age=10800`;
 		}
+		document.cookie = 'isLoad=true; max-age=10800';
 	}
+	// setCoockie(time) {
+	// 	document.cookie = `isLoad=true; max-age=${time}`;
+	// 	document.cookie = `budgetMonthValue= ${this.budgetMonth}; max-age=${time}`;
+	// 	document.cookie = `budgetDayValue= ${this.budgetDay}; max-age=${time}`;
+	// 	document.cookie = `expensesMonthValue= ${this.expensesMonth}; max-age=${time}`;
+	// 	document.cookie = `additionalExpensesValue= ${this.addExpenses.join(', ')}; max-age=${time}`;
+	// 	document.cookie = `additionalIncomeValue= ${this.addIncome.join(', ')}; max-age=${time}`;
+	// 	document.cookie = `targetMonthValue= ${this.getTargetMonth()}; max-age=${time}`;
+	// 	document.cookie = `incomePeriodValue= ${this.calculateSavedMoney()}; max-age=${time}`;
+	// }
+	// getCookie(name) {
+	// 	const matches = document.cookie.match(new RegExp(
+	// 		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	// 	));
+	// 	return matches ? decodeURIComponent(matches[1]) : undefined;
+	// }
+	// checkCookie() {
+	// 	for (let i = 0; i < localStorage.length; i++) {
+	// 		if (localStorage.getItem(localStorage.key(i)) !== this.getCookie(localStorage.key(i))) {
+	// 			this.resetAll();
+	// 		}
+	// 	}
+	// }
 	blockInput() {
 		leftFields.forEach(item => {
 			item.readOnly = true;
@@ -229,7 +233,6 @@ class AppData {
 		inputRang.disabled = true;
 	}
 	resetAll() {
-
 		allInputs.forEach(item => {
 			item.value = '';
 		});
@@ -267,7 +270,7 @@ class AppData {
 		cancelButton.style.display = 'none';
 		depositBank.disabled = false;
 		localStorage.clear();
-		this.setCoockie(-1);
+		// this.setCoockie(-1);
 
 		// 	start.disabled = false;
 		// 	// Get & Create variables of left input Fields
@@ -343,12 +346,12 @@ class AppData {
 			while (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100)  {
 				alert('Введите корректное значение в поле проценты'); break;
 			}
-			// if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
-			// 	return alert('Введите корректное значение в поле проценты');
-			// }
-			// do {
-			// 	alert('Введите корректное значение в поле проценты'); break;
-			// } while (depositPercent.value > 0 || depositPercent.value < 100);
+			// // if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
+			// // 	return alert('Введите корректное значение в поле проценты');
+			// // }
+			// // do {
+			// // 	alert('Введите корректное значение в поле проценты'); break;
+			// // } while (depositPercent.value > 0 || depositPercent.value < 100);
 		}
 		this.fieldValidation();
 	}
@@ -377,7 +380,6 @@ class AppData {
 			depositBank.removeEventListener('change', () => { this.changePercent; });
 		}
 	}
-
 	eventsListeners() {
 		this.fieldValidation();
 		start.addEventListener('click', this.start.bind(this));
@@ -393,8 +395,28 @@ class AppData {
 				start.disabled = true;
 			}
 		});
+		depositPercent.addEventListener('input', () => {
+			if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
+				alert('Введите корректное значение в поле проценты');
+				return document.querySelector('.deposit-percent').value = '';
+			}
+		});
+
 
 		depositCheck.addEventListener('change', this.dpeositHandler.bind(this));
+		// setInterval(this.checkCookie, 1000);
+
+		console.log(typeof(this.percentDeposit));
+		console.log(this.percentDeposit);
+		// while (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100)  {
+		//   alert('Введите корректное значение в поле проценты'); break;
+		// }
+		// if (isNaN(depositPercent.value) || depositPercent.value <= 0 || depositPercent.value > 100) {
+		// 	return alert('Введите корректное значение в поле проценты');
+		// }
+		// do {
+		// 	alert('Введите корректное значение в поле проценты'); break;
+		// } while (depositPercent.value > 0 || depositPercent.value < 100);
 
 		document.addEventListener('DOMContentLoaded', () => {
 			this.showResult();
@@ -409,5 +431,4 @@ class AppData {
 }
 
 const appData = new AppData();
-setInterval(appData.checkCookie, 1000);
 appData.eventsListeners();
