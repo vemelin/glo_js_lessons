@@ -89,15 +89,15 @@ class AppData {
 		document.cookie = `targetMonthValue= ${this.getTargetMonth()}; max-age=${time}`;
 		document.cookie = `incomePeriodValue= ${this.calculateSavedMoney()}; max-age=${time}`;
 	}
+	getCookie(name) {
+		const matches = document.cookie.match(new RegExp(
+			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+		));
+		return matches ? decodeURIComponent(matches[1]) : undefined;
+	}
 	checkCookie() {
-		const getCookie = name => {
-			const matches = document.cookie.match(new RegExp(
-				"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-			));
-			return matches ? decodeURIComponent(matches[1]) : undefined;
-		};
 		for (let i = 0; i < localStorage.length; i++) {
-			if (localStorage.getItem(localStorage.key(i)) !== getCookie(localStorage.key(i))) {
+			if (localStorage.getItem(localStorage.key(i)) !== this.getCookie(localStorage.key(i))) {
 				this.resetAll();
 			}
 		}
