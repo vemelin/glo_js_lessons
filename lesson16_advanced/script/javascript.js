@@ -19,7 +19,9 @@ const  start = document.getElementById('start'),
 	additionalExpensesItem = document.querySelector('.additional_expenses-item'),
 	targetAmount = document.querySelector('.target-amount'),
 	getLeftFields = document.querySelector('.data'),
+	periodAmount = document.querySelector('.period-amount'),
 	leftFields = getLeftFields.querySelectorAll("input[type=text]"),
+	allInputs = document.querySelectorAll('input'),
 	incomeItems = document.querySelectorAll('.income-items'),
 	expensesItems = document.querySelectorAll('.expenses-items'),
 	depositBank = document.querySelector('.deposit-bank'),
@@ -54,23 +56,61 @@ class AppData {
 		this.getBudget();
 		this.resetFields();
 		this.fieldValidation();
+		this.localStorage();
+		this.setCoockie(3600);
 		this.showResult();
 	}
 	showResult() {
-		budgetMonthValue.value = this.budgetMonth;
-		budgetDayValue.value = this.budgetDay;
-		expensesMonthValue.value = this.expensesMonth;
-		additionalExpensesValue.value = this.addExpenses.join(', ');
-		additionalIncomeValue.value = this.addIncome.join(', ');
-		targetMonthValue.value = Math.ceil(this.getTargetMonth());
-		incomePeriodValue.value = this.calculateSavedMoney();
+		budgetMonthValue.value = localStorage.getItem('budgetMonthValue');
+		budgetDayValue.value = localStorage.getItem('budgetDayValue');
+		expensesMonthValue.value = localStorage.getItem('expensesMonthValue');
+		additionalExpensesValue.value = localStorage.getItem('additionalExpensesValue');
+		additionalIncomeValue.value = localStorage.getItem('additionalIncomeValue');
+		targetMonthValue.value = localStorage.getItem('targetMonthValue');
+		incomePeriodValue.value = localStorage.getItem('incomePeriodValue');
 		periodSelect.addEventListener('mousemove', this.getIncomePeriodValue);
 	}
-
+	localStorage() {
+		localStorage.setItem('budgetMonthValue', this.budgetMonth);
+		localStorage.setItem('budgetDayValue', this.budgetDay);
+		localStorage.setItem('expensesMonthValue', this.expensesMonth);
+		localStorage.setItem('additionalExpensesValue', this.addExpenses.join(', '));
+		localStorage.setItem('additionalIncomeValue', this.addIncome.join(', '));
+		localStorage.setItem('targetMonthValue', this.getTargetMonth());
+		localStorage.setItem('incomePeriodValue', this.calculateSavedMoney());
+	}
+	setCoockie(time) {
+		document.cookie = `isLoad=true; max-age=${time}`;
+		document.cookie = `budgetMonthValue= ${this.budgetMonth}; max-age=${time}`;
+		document.cookie = `budgetDayValue= ${this.budgetDay}; max-age=${time}`;
+		document.cookie = `expensesMonthValue= ${this.expensesMonth}; max-age=${time}`;
+		document.cookie = `additionalExpensesValue= ${this.addExpenses.join(', ')}; max-age=${time}`;
+		document.cookie = `additionalIncomeValue= ${this.addIncome.join(', ')}; max-age=${time}`;
+		document.cookie = `targetMonthValue= ${this.getTargetMonth()}; max-age=${time}`;
+		document.cookie = `incomePeriodValue= ${this.calculateSavedMoney()}; max-age=${time}`;
+	}
+	checkCookie() {
+		const getCookie = name => {
+			const matches = document.cookie.match(new RegExp(
+				"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+			));
+			return matches ? decodeURIComponent(matches[1]) : undefined;
+		};
+		for (let i = 0; i < localStorage.length; i++) {
+			if (localStorage.getItem(localStorage.key(i)) !== getCookie(localStorage.key(i))) {
+				this.resetAll();
+			}
+		}
+	}
+	blockInput() {
+		leftFields.forEach(item => {
+			item.readOnly = true;
+		});
+		depositBank.disabled = true;
+	}
 	fieldValidation() {
 		const inputRuEnString = document.querySelectorAll('[placeholder="Наименование"]'),
-      inputNumber = document.querySelectorAll('[placeholder="Сумма"], [placeholder="Процент"]');
-      console.log(inputNumber);
+			inputNumber = document.querySelectorAll('[placeholder="Сумма"], [placeholder="Процент"]');
 
 		inputRuEnString.forEach(items => {
 			items.addEventListener('input', () => {
@@ -110,8 +150,8 @@ class AppData {
 		items = document.querySelectorAll(expenses);
 
 		if (items.length === 3) {
-      btn.style.display = 'none';
-    }
+			btn.style.display = 'none';
+		}
 	}
 	getBenefits() {
 		const count = item => {
@@ -189,36 +229,19 @@ class AppData {
 		inputRang.disabled = true;
 	}
 	resetAll() {
-		start.disabled = false;
-		// Get & Create variables of left input Fields
-		const inputs = document.querySelectorAll('input'),
-			periodAmountText = document.querySelector('.period-amount');
-		// Reset fields to zero
-		leftFields.forEach(item => { item.value = ''; item.disabled = false; });
-		inputs.forEach(element => { element.value = ''; });
-		cancelButton.style.display = 'none';
-		start.style.display = 'inline';
-		expensesPlus.style.display = 'inline';
-		incomePlus.style.display = 'inline';
-		depositPercent.style.display = 'none';
-		depositBank.disabled = false;
-		const selectOption = document.querySelectorAll('option');
-		selectOption[0].selected = true;
 
-		// depositCheck.style.display = 'none';
-		depositCheck.disabled = false;
-		depositCheck.checked = false;
-		depositBank.style.display = 'none';
-		depositAmount.style.display = 'none';
-		//periodSelect equal to 1
-		periodSelect.value = 1;
-		periodAmountText.textContent = periodSelect.value;
-		// Enable Range Slider
-		const inputRang = document.querySelector('.period-select');
-		//periodSelect.disabled
-		inputRang.disabled = false;
-
-		//Reset to zero all keys data of appData object
+		allInputs.forEach(item => {
+			item.value = '';
+		});
+		for (const key in this) {
+			if (typeof this[key] !== 'function') {
+				if (isNaN(this[key])) {
+					this[key] = '';
+				} else if (!isNaN(this[key])) {
+					this[key] = 0;
+				}
+			}
+		}
 		this.budget = 0;
 		this.budgetDay = 0;
 		this.budgetMonth = 0;
@@ -231,24 +254,85 @@ class AppData {
 		this.deposit = false;
 		this.percentDeposit = 0;
 		this.moneyDeposit = 0;
+		periodSelect.addEventListener('input', () => {
+			periodAmount.textContent = periodSelect.value;
+			incomePeriodValue.value = 0;
+		});
+		leftFields.forEach(item => {
+			item.readOnly = false;
+		});
+		periodSelect.value = 0;
+		periodAmount.textContent = 1;
+		start.style.display = 'block';
+		cancelButton.style.display = 'none';
+		depositBank.disabled = false;
+		localStorage.clear();
+		this.setCoockie(-1);
 
-		//Reset to zero all keys data of appData object
-		incomePlus.addEventListener('click', this.createBlocks);
-		expensesPlus.addEventListener('click', this.createBlocks);
-		periodSelect.removeEventListener('mousemove', this.getIncomePeriodValue);
+		// 	start.disabled = false;
+		// 	// Get & Create variables of left input Fields
+		// 	const inputs = document.querySelectorAll('input'),
+		// 		periodAmountText = document.querySelector('.period-amount');
+		// 	// Reset fields to zero
+		// 	leftFields.forEach(item => { item.value = ''; item.disabled = false; });
+		// 	inputs.forEach(element => { element.value = ''; });
+		// 	cancelButton.style.display = 'none';
+		// 	start.style.display = 'inline';
+		// 	expensesPlus.style.display = 'inline';
+		// 	incomePlus.style.display = 'inline';
+		// 	depositPercent.style.display = 'none';
+		// 	depositBank.disabled = false;
+		// 	const selectOption = document.querySelectorAll('option');
+		// 	selectOption[0].selected = true;
 
-		let elements = document.querySelectorAll('.income-items');
+		// 	// depositCheck.style.display = 'none';
+		// 	depositCheck.disabled = false;
+		// 	depositCheck.checked = false;
+		// 	depositBank.style.display = 'none';
+		// 	depositAmount.style.display = 'none';
+		// 	//periodSelect equal to 1
+		// 	periodSelect.value = 1;
+		// 	periodAmountText.textContent = periodSelect.value;
+		// 	// Enable Range Slider
+		// 	const inputRang = document.querySelector('.period-select');
+		// 	//periodSelect.disabled
+		// 	inputRang.disabled = false;
 
-		for (let i = 1; i < elements.length; i++) {
-			elements[i].parentNode.removeChild(elements[i]);
-		}
+		// 	//Reset to zero all keys data of appData object
+		// 	this.budget = 0;
+		// 	this.budgetDay = 0;
+		// 	this.budgetMonth = 0;
+		// 	this.income = {};
+		// 	this.incomeMonth = 0;
+		// 	this.addIncome = [];
+		// 	this.expenses = {};
+		// 	this.expensesMonth = 0;
+		// 	this.addExpenses = [];
+		// 	this.deposit = false;
+		// 	this.percentDeposit = 0;
+		// 	this.moneyDeposit = 0;
 
-		elements = document.querySelectorAll('.expenses-items');
-		for (let i = 1; i < elements.length; i++) {
-			elements[i].parentNode.removeChild(elements[i]);
-		}
+		// 	//Reset to zero all keys data of appData object
+		// 	incomePlus.addEventListener('click', this.createBlocks);
+		// 	expensesPlus.addEventListener('click', this.createBlocks);
+		// 	periodSelect.removeEventListener('mousemove', this.getIncomePeriodValue);
 
-		start.setAttribute('disabled', false);
+		// 	let elements = document.querySelectorAll('.income-items');
+
+		// 	for (let i = 1; i < elements.length; i++) {
+		// 		elements[i].parentNode.removeChild(elements[i]);
+		// 	}
+
+		// 	elements = document.querySelectorAll('.expenses-items');
+		// 	for (let i = 1; i < elements.length; i++) {
+		// 		elements[i].parentNode.removeChild(elements[i]);
+		// 	}
+
+		// 	start.setAttribute('disabled', false);
+
+	// 	//Clear storarage
+	// 	localStorage.clear();
+	// 	this.setCoockie(-1);
 	}
 	getInfoDeposit() {
 		if (this.deposit) {
@@ -312,8 +396,18 @@ class AppData {
 
 		depositCheck.addEventListener('change', this.dpeositHandler.bind(this));
 
+		document.addEventListener('DOMContentLoaded', () => {
+			this.showResult();
+			if (budgetMonthValue.value !== '') {
+				this.blockInput();
+				start.style.display = 'none';
+				cancelButton.style.display = 'block';
+			}
+		});
+
 	}
 }
 
 const appData = new AppData();
+setInterval(appData.checkCookie, 1000);
 appData.eventsListeners();
