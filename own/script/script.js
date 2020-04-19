@@ -7,7 +7,7 @@ const money = 0,
       mission = 0, 
       period = 30;
 
-    console.log(document.cookie = secure: true, 'max-age': 3600);
+    // console.log(document.cookie = secure: true, 'max-age': 3600);
     
 
 //setInterval(function(){ alert("Hello"); }, 3000);
