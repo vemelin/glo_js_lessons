@@ -1,3 +1,4 @@
+
 //===== Variables Types ==================
 const str = 'Hello World'.toUpperCase();
 console.log(str); /* OR */ console.log('Example'.toUpperCase());

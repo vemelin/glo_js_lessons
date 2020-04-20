@@ -43,17 +43,34 @@
 
 
 //////// ===========
-let count = 0, getMessage = name => { console.log(`Hello ${name}!`); },
-	idInterval = setInterval(getMessage, 1000, 'Vasiliy')
+// const count = 0, getMessage = name => { console.log(`Hello ${name}!`); },
+// 	idInterval = setInterval(getMessage, 1000, 'Vasiliy');
 
-setTimeout(() => clearInterval(idInterval), 3000);
+// setTimeout(() => clearInterval(idInterval), 3000);
 
-let idTimeout = setTimeout(getMessage, 5000, 'Ivan');
-clearInterval(idInterval);
+// const idTimeout = setTimeout(getMessage, 5000, 'Ivan');
+// clearInterval(idInterval);
 
+// let date = new Date('1984 January 31');
+// let date = new Date('1984, 01, 31');
+// const date = new Date(1984, 0, 31, 3, 31, 31, 31);
+// const date = new Date();
 
+// // date.setFullYear(1984, 0, 31);
+// date.setMonth(0, 31);
+// date.setMonth(0);//Set January
+// date.setDate(1);
+// date.setHours(10);
+// date.setMinutes(10);
+// date.setSeconds(10);
 
-
+// console.log('год ' + date.getUTCFullYear());
+// console.log('месяц ' + (date.getUTCMonth() + 1));
+// console.log('день ' + date.getUTCDate());
+// console.log('День недели  ' + date.getUTCDay());
+// console.log('Час  ' + date.getUTCHours());
+// console.log('Минуты  ' + date.getUTCMinutes());
+// console.log('Секунды  ' + date.getUTCSeconds());
 // Map
 // const newPeople = people.map(person => `${person.name} (${person.age})`);
 // const newPeople = people.map(person => `${person.name} (${person.age * 3})`);
