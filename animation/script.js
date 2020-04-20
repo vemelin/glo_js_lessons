@@ -1,56 +1,41 @@
 'use strict';
-function countTimer(deadline) {
-	const week = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
-    timeOfDay = document.querySelector('.time-of-day'),
-		timeDate = document.querySelector('.time-date'),
-		currentTime = document.querySelector('.current-time'),
-		leftDates = document.querySelector('.left-dates');
 
-	function getTimeRemaining() {
-		const date = new Date();
-		const day = date.getDay() - 1;
-		const localTime = date.toLocaleTimeString('en');
-		const dateStop = new Date(deadline).getTime();
-		const dateNow = date.getTime();
-		const timeRemaining = (dateStop - dateNow) / 1000;
-		const stopDay = Math.floor(timeRemaining / 60 / 60 / 24);
+window.addEventListener("DOMContentLoaded", () => {
 
-		return { timeRemaining, day, localTime, stopDay };
-	}
+  const startCTA = document.querySelector('.start');
+  const resetCTA = document.querySelector('.reset');
+  const img = document.querySelector('img');
+  img.style.cssText = 'position: relative; left: 0; margin: 50px 0 0 0;'
 
-	function updateTime() {
-		const timer = getTimeRemaining();
+let flyInterval;
+let count = 0;
+let startAnimation = false;
 
-		// Priview day time
-		for (let i = 0; i < week.length; i++) {
-			if (i === timer.day) {
-				timeDate.textContent = week[i];
-			}
-		}
+let start = function() {
+  flyInterval = requestAnimationFrame(start);
+    count++;
+      if (count < 150) {
+        img.style.left = count * 2 + 'px';
+      } else {
+        count = 0;
+      }
+};
 
-		// Preview current time
-		currentTime.textContent = timer.localTime;
+resetCTA.addEventListener('click', () => {
+  count = 0;
+  startAnimation = false;
+  img.style.left = 0;
+  cancelAnimationFrame(flyInterval);
+});
 
-		// Prview remaining dates to New Year
-		leftDates.textContent = timer.stopDay;
-
-		// время суток
-		if (timer.localTime > 4 || timer.localTime < 12) {
-			timeOfDay.textContent = 'Утро';
-		} else if (timer.localTime > 12 || timer.localTime < 17) {
-			timeOfDay.textContent = 'день';
-		} else if (timer.localTime > 17 + 'AM' || timer.localTime < 24) {
-			timeOfDay.textContent = 'вечер';
-		} else if (timer.localTime > 24 || timer.localTime < 4) {
-			timeOfDay.textContent = 'ночь';
-		}
-
-		if (timer.timeRemaining > 0) {
-			setTimeout(updateTime, 1000);
-		}
-
-	}
-	updateTime();
-}
-
-countTimer('1 january 2021');
+  startCTA.addEventListener('click', function () {
+    if (!startAnimation) {
+      startAnimation = true;
+      flyInterval = requestAnimationFrame(start);
+    } else {
+      startAnimation = false;
+      cancelAnimationFrame(flyInterval);
+    }
+    
+  });
+});
