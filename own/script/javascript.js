@@ -1,3 +1,5 @@
+'use strict';
+
 class Animal {
   constructor(options){
     this.name = options.name
