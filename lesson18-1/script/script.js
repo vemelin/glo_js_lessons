@@ -9,7 +9,7 @@ function countTimer(deadline) {
 	function getTimeRemaining() {
 		const date = new Date();
 		const day = date.getDay() - 1;
-		// const localTime = date.toLocaleTimeString('en');
+		const localTime = date.toLocaleTimeString('ru');
 		const dateStop = new Date(deadline).getTime();
 		const dateNow = date.getTime();
 		const timeRemaining = (dateStop - dateNow) / 1000;
