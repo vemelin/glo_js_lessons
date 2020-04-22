@@ -2,12 +2,12 @@
 
 window.addEventListener('DOMContentLoaded', () => {
 
-	function countTimer(deadline) {
+	const countTimer = deadline => {
 		const timerHours = document.querySelector('#timer-hours'),
 			timerMinutes = document.querySelector('#timer-minutes'),
 			timerSeconds = document.querySelector('#timer-seconds');
 
-		function getTimeRemaining() {
+		const getTimeRemaining = () => {
 			const dateStop = new Date(deadline).getTime(),
 				dateNow = new Date().getTime(),
 				timeRemaining = (dateStop - dateNow) / 1000,
@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
         hours = Math.floor(timeRemaining / 60 / 60);
 
 			return { timeRemaining, hours, minutes, seconds };
-		}
+		};
 
 		const format = value => { if (value < 10) { value = '0' + value; } return value; };
 
@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
         countTimer(deadline);
 			}
 		}, 500);
-	}
+	};
 	// countTimer('22 april 2020');
 	countTimer('21 april 2020');
 });
