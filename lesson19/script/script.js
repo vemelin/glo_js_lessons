@@ -44,16 +44,16 @@ window.addEventListener('DOMContentLoaded', () => {
 		const menuCTA = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
 			closeCTA = document.querySelector('.close-btn'),
-			menuList = menu.querySelectorAll('ul>li');
+      menuList = menu.querySelectorAll('ul>li');
 
 		let count = -100;
 
 		// Main navigation slow motion
 		const animate = () => {
 			if (document.documentElement.clientWidth < 768) {
-				menu.style.transform = `translate(0)`;
+        menu.style.transform = `translate(0)`;
 				return;
-			}
+      }
 			const requestId = requestAnimationFrame(animate);
 			count += 4;
 			menu.style.transform = `translate(${count}%)`;
@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		};
 
 		const menuHandler = input => {
-			menu.classList.toggle('active-menu');
+      menu.classList.toggle('active-menu');
 		};
 
 		// Smoothest glide for each elements which has anchors
@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			// const menuList = document.querySelectorAll('li > a');
 			menuList.forEach(eachElements => {
 				eachElements.addEventListener('click', (event) => {
-					event.preventDefault();
+          event.preventDefault();
 					const gotId = eachElements.getAttribute('href');
 					document.querySelector('' + gotId).scrollIntoView({ behavior: 'smooth', block: 'start' });
 				}); });
@@ -91,22 +91,27 @@ window.addEventListener('DOMContentLoaded', () => {
 		modal = document.querySelector('.popup');
 
 	const modalToggle = () => {
-		// Slow motion
+    // Slow motion
 		modal.style.cssText = `display: block; opacity: 0;`;
 		let count = 0;
 		const appear = () => {
 			count++;
 			modal.style.opacity = `.${count}`;
+      // document.body.style.cssText = `height: 100%; overflow: hidden;`;
 
 			if (count > 8) {
 				modal.style.opacity = '1';
 				clearInterval(stop);
-			}
+        document.body.style.cssText = `height: 100%; overflow: hidden;`;
+      }
 		};
 		const stop = setInterval(appear, 35);
 	};
 
 	modalCTA.forEach(output => output.addEventListener('click', modalToggle));
-	modalCloseButton.addEventListener('click', () => { modal.style.display = 'none'; });
+	modalCloseButton.addEventListener('click', () => { 
+    modal.style.cssText = `display: none;`; 
+    document.body.style.cssText = `height: auto; overflow: scroll;`; 
+  });
 
 });
