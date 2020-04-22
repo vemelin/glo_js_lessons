@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
         let deadline = new Date(Date.parse(new Date()) + 24 * 60 * 60 * 1000);;
         countTimer(deadline);
 			}
-		}, 500);
+		}, 1000);
 	};
 	// countTimer('22 april 2020');
   countTimer('21 april 2020');
