@@ -71,11 +71,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const modalToggle = () => {
     const modalCTA = document.querySelectorAll('.popup-btn'),
     modal = document.querySelector('.popup');
-
+    
     modalCTA.forEach(element => {
       element.addEventListener('click', () => {
           modal.style.display = 'block';
-          document.body.style.cssText = `height: 100%; overflow: hidden;`;
+          document.body.style.cssText = `overflow: hidden;`;
       });
     });
 
@@ -88,6 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
         target = target.closest('.popup-content');
         if (!target) {
           modal.style.display = 'none';
+          document.body.style.cssText = `overflow: scroll;`;
         }
       } 
     });
@@ -100,7 +101,7 @@ window.addEventListener('DOMContentLoaded', () => {
       
 			if (count > 8) {
 				modal.style.opacity = '1';
-				clearInterval(stop);
+        clearInterval(stop);
       }
 		};
     const stop = setInterval(appear, 35);
@@ -108,11 +109,11 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
   modalToggle();
 	modalCloseButton.addEventListener('click', () => { 
-    document.body.style.cssText = `height: auto; overflow: scroll;`; 
+    document.body.style.cssText = `height: auto; overflow: scroll;`;
   });
 
-  // Service block tabs
-  const tabs = () => {
+  // Our Services block
+  const serviceBlock = () => {
     const tabHeader = document.querySelector('.service-header');
     const tab = tabHeader.querySelectorAll('.service-header-tab');
     const tabContent = document.querySelectorAll('.service-tab');
@@ -142,6 +143,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
   };
-  tabs();
+  serviceBlock();
 
 });
