@@ -75,38 +75,42 @@ window.addEventListener('DOMContentLoaded', () => {
     modalCTA.forEach(element => {
       element.addEventListener('click', () => {
           modal.style.display = 'block';
-          document.body.style.cssText = `overflow: hidden;`;
       });
     });
-
+    
     modal.addEventListener('click', (event) => {
       let target = event.target;
-
+      
       if (target.classList.contains('popup-close')) {
         modal.style.display = 'none';
       } else {
         target = target.closest('.popup-content');
         if (!target) {
           modal.style.display = 'none';
-          document.body.style.cssText = `overflow: scroll;`;
         }
-      } 
+      }
+
     });
     
-    // Modal slow mo
-		let count = 0;
-		const appear = () => {
-			count++;
-      modal.style.opacity = `.${count}`;
-      
-			if (count > 8) {
-				modal.style.opacity = '1';
-        clearInterval(stop);
-      }
-		};
-    const stop = setInterval(appear, 35);
-    
+    const modalSlowMo = () => {
+      // Slow motion
+      modal.style.cssText = `display: block; opacity: 0;`;
+      let count = 0;
+      const appear = () => {
+        count++;
+        modal.style.opacity = `.${count}`;
+
+        if (count > 8) {
+          modal.style.opacity = '1';
+          clearInterval(stop);
+          document.body.style.cssText = `height: 100%; overflow: hidden;`;
+        }
+      };
+      const stop = setInterval(appear, 35);
+    };
+    modalCTA.forEach(output => output.addEventListener('click', modalSlowMo));
     modalCloseButton.addEventListener('click', () => { 
+      modal.style.cssText = `display: none;`;
       document.body.style.cssText = `height: auto; overflow: scroll;`;
     });
     
