@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
   countTimer('21 april 2020');
   
   // Main navigation
-  const menu = document.querySelector('menu');
   const togglleMenu = () => {
+    const menu = document.querySelector('menu');
       document.body.addEventListener('click', (event) =>{
           let target = event.target;
           if(target && target.closest('.menu')){
@@ -67,9 +67,9 @@ window.addEventListener('DOMContentLoaded', () => {
   smoothScroll();
 
 	// Modal window
-	const modalCloseButton = document.querySelector('.popup-close');
   const modalToggle = () => {
-    const modalCTA = document.querySelectorAll('.popup-btn'),
+    const modalCloseButton = document.querySelector('.popup-close'),
+    modalCTA = document.querySelectorAll('.popup-btn'),
     modal = document.querySelector('.popup');
     
     modalCTA.forEach(element => {
@@ -106,11 +106,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		};
     const stop = setInterval(appear, 35);
     
+    modalCloseButton.addEventListener('click', () => { 
+      document.body.style.cssText = `height: auto; overflow: scroll;`;
+    });
+    
 	};
   modalToggle();
-	modalCloseButton.addEventListener('click', () => { 
-    document.body.style.cssText = `height: auto; overflow: scroll;`;
-  });
 
   // Our Services block
   const serviceBlock = () => {
