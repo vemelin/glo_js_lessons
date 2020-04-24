@@ -253,7 +253,18 @@ window.addEventListener('DOMContentLoaded', () => {
     startPlay(1500);
 
   };
-
   slider();
+
+  // Form validation
+  const formValidation = () => {
+    const checkInputs = document.querySelectorAll('.calc-item');
+    calculatorBlock.forEach(output => {
+      output.addEventListener('input', ()=>{
+        checkInputs.value = checkInputs.value.replace(/\D/g, '');
+      });
+    });
+  };
+  
+  formValidation();
 
 });
