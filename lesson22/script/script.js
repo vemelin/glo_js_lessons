@@ -65,8 +65,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Menu slow mo
 	const smoothScroll = () => {
-		// const menuList = document.querySelectorAll('a[href*="#"]');
-		const menuList = document.querySelectorAll('li > a');
+		// const input = document.querySelectorAll('input[class*="calc-item calc"]');
+		const menuList = document.querySelectorAll('li>a[href*="#"]');
+		const arrow = document.querySelector('a>img');
+		console.log(arrow);
+
+		// const menuList = document.querySelectorAll('li > a');
 		menuList.forEach(eachElements => {
 			eachElements.addEventListener('click', event => {
 				event.preventDefault();
@@ -77,6 +81,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 			});
 		});
+
+		// Arrow scroll
+		arrow.addEventListener('click', () => {
+			event.preventDefault();
+			arrow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		});
+
 	};
 	smoothScroll();
 
