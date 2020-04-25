@@ -273,6 +273,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Form validation
 	const formValidation = () => {
+
 		// Calculator amount block
 		const input = document.querySelectorAll('input[class*="calc-item calc"]');
 		input.forEach(item => {
@@ -280,6 +281,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				item.value = item.value.replace(/\D/g, "");
 			});
 		});
+
 	};
 	formValidation();
 
