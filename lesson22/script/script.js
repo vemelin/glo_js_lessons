@@ -65,12 +65,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// Menu slow mo
 	const smoothScroll = () => {
-		// const input = document.querySelectorAll('input[class*="calc-item calc"]');
 		const menuList = document.querySelectorAll('li>a[href*="#"]');
 		const arrow = document.querySelector('a>img');
-		console.log(arrow);
-
-		// const menuList = document.querySelectorAll('li > a');
+    
 		menuList.forEach(eachElements => {
 			eachElements.addEventListener('click', event => {
 				event.preventDefault();
