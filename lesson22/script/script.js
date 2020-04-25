@@ -87,13 +87,14 @@ window.addEventListener('DOMContentLoaded', () => {
         target = target.closest('.popup-content');
         if (!target) {
           modal.style.display = 'none';
+          document.body.style.cssText = `overflow: scroll;`;
         }
       }
 
     });
-    
+
+    // Slow motion
     const modalSlowMo = () => {
-      // Slow motion
       modal.style.cssText = `display: block; opacity: 0;`;
       let count = 0;
       const appear = () => {
@@ -103,7 +104,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (count > 8) {
           modal.style.opacity = '1';
           clearInterval(stop);
-          document.body.style.cssText = `height: 100%; overflow: hidden;`;
+          document.body.style.cssText = `overflow: hidden;`;
         }
       };
       const stop = setInterval(appear, 35);
@@ -111,7 +112,7 @@ window.addEventListener('DOMContentLoaded', () => {
     modalCTA.forEach(output => output.addEventListener('click', modalSlowMo));
     modalCloseButton.addEventListener('click', () => { 
       modal.style.cssText = `display: none;`;
-      document.body.style.cssText = `height: auto; overflow: scroll;`;
+      document.body.style.cssText = `overflow: scroll;`;
     });
     
 	};
@@ -257,14 +258,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Form validation
   const formValidation = () => {
-    const checkInputs = document.querySelectorAll('.calc-item');
+    const inputElements = document.querySelectorAll('.calc-item');
     calculatorBlock.forEach(output => {
       output.addEventListener('input', ()=>{
-        checkInputs.value = checkInputs.value.replace(/\D/g, '');
+        inputElements.value = inputElements.value.replace(/\D/g, '');
       });
     });
   };
-  
+
   formValidation();
 
 });
