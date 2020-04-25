@@ -286,7 +286,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const input = document.querySelectorAll('input[class*="calc-item calc"]');
 		input.forEach(item => {
 			item.addEventListener('input', () => {
-				item.value = item.value.replace(/\D/g, "");
+				item.value = item.value.replace(/\D/g, '');
 			});
 		});
 
