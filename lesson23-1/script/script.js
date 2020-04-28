@@ -292,7 +292,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const input = document.querySelector('.calc-block');
     input.addEventListener('input', (event) => {    
       const target = event.target;
-      if(target.classList.contains('calc-item')) {
+      if(target.classList.contains('calc-block')) {
         target.value = target.value.replace(/\D/g, '');
       }
     });
@@ -339,16 +339,17 @@ window.addEventListener('DOMContentLoaded', () => {
 				start = 0;
       }
 
-      const step = 10000,
-        seconds = 1;
+      const step = 50000;
+        // seconds = 1;
         
-      let setTime = Math.round((seconds/(input/step))/100);
+      // let setTime = Math.round((seconds/(input/step))/1000);
+      let setTime = Math.round((input/step)/1000);
 
 			interval = setInterval(() => {
 				start += input.toString().length;
 				getTotalElement.textContent = start;
 				if (start >= input) {
-					getTotalElement.textContent = input;
+					getTotalElement.textContent = Math.round(input);
 					clearInterval(interval);
 				}
 			}, setTime);
