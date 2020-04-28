@@ -282,13 +282,20 @@ window.addEventListener('DOMContentLoaded', () => {
 	// Form validation
 	const formValidation = () => {
 
-		// Calculator amount block
-		const input = document.querySelectorAll('input[class*="calc-item calc"]');
-		input.forEach(item => {
-			item.addEventListener('input', () => {
-				item.value = item.value.replace(/\D/g, '');
-			});
-		});
+		// // Calculator amount block
+		// const input = document.querySelectorAll('input[class*="calc-item calc"]');
+		// input.forEach(item => {
+		// 	item.addEventListener('input', () => {
+		// 		item.value = item.value.replace(/\D/g, '');
+		// 	});
+    // });
+    const input = document.querySelector('.calc-block');
+    input.addEventListener('input', (event) => {    
+      const target = event.target;
+      if(target.classList.contains('calc-item')) {
+        target.value = target.value.replace(/\D/g, '');
+      }
+    });
 
 	};
 	formValidation();
@@ -321,15 +328,21 @@ window.addEventListener('DOMContentLoaded', () => {
 			getTotalElement = document.getElementById('total');
 
 		// Run number slow motion
-		let interval;
 		const runNumber = input => {
-			let start = 0;
+      let interval,
+      start = 0;
+      
 			clearInterval(interval);
 
 			if (getTypeElement.options[getTypeElement.selectedIndex] === 0) {
 				clearInterval(interval);
 				start = 0;
-			}
+      }
+
+      const step = 10000,
+        seconds = 1;
+        
+      let setTime = Math.round((seconds/(input/step))/100);
 
 			interval = setInterval(() => {
 				start += input.toString().length;
@@ -338,7 +351,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					getTotalElement.textContent = input;
 					clearInterval(interval);
 				}
-			}, 10);
+			}, setTime);
 		};
 
 		// Mathematics addition
