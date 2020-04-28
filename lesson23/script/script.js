@@ -320,6 +320,27 @@ window.addEventListener('DOMContentLoaded', () => {
 			getCountElement = document.querySelector('.calc-count'),
 			getTotalElement = document.getElementById('total');
 
+		// Run number slow motion
+		let interval;
+		const runNumber = input => {
+			let start = 0;
+			clearInterval(interval);
+
+			if (getTypeElement.options[getTypeElement.selectedIndex] === 0) {
+				clearInterval(interval);
+				start = 0;
+			}
+
+			interval = setInterval(() => {
+				start += input.toString().length;
+				getTotalElement.textContent = start;
+				if (start >= input) {
+					getTotalElement.textContent = input;
+					clearInterval(interval);
+				}
+			}, 10);
+		};
+
 		// Mathematics addition
 		const addition = () => {
 			let amount = 0,
@@ -342,16 +363,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				amount = price * addValue * addSquare * roomValue * dayValue;
 			}
 
-			getTotalElement.textContent = amount;
+			// getTotalElement.textContent = amount;
+			runNumber(amount);
 		};
 
 		// Check event from block
 		getBlockElement.addEventListener('change', event => {
 			const target = event.target;
-			// const item = data => target.matches(data);
-			// if(item('.calc-type') || item('.calc-square') || item('.calc-day') || item('.calc-count')){
-			//   console.log(1);
-			// }
 			if (target.matches('select') || target.matches('input')) {
 				addition();
 			}
