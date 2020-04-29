@@ -90,7 +90,7 @@ class formValidator {
       this.pattern.phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
     }
     if(!this.pattern.email) {
-      this.pattern.email = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+      this.pattern.email = /^\w+@\w+\.\w{2,}$/;
     }
   }
 }

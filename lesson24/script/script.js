@@ -396,8 +396,8 @@ window.addEventListener('DOMContentLoaded', () => {
 const valid = new formValidator({
   selector: '#form1',
   pattern: {
-    phone: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
-    email: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
+    // phone: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+    email: /^\w+@\w+\.\w{2,}$/,
   },
   method: {			
     'form1-name': [
