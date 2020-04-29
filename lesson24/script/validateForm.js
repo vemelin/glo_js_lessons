@@ -84,7 +84,7 @@ class formValidator {
       this.pattern.name = /^[а-яА-Я]+$/i;
     }
     if (!this.pattern.message) {     
-      this.pattern.message = /^[а-яА-Я ]+$/i;
+      this.pattern.message = /^[A-zА-яёЁ ,.!]+$/i;
     }
     if(!this.pattern.phone) {
       this.pattern.phone = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
