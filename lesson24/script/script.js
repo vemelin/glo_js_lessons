@@ -390,6 +390,72 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 
 	};
-	calculatorBlock(100);
+  calculatorBlock(100);
+  
+// Form validator
+const valid = new formValidator({
+  selector: '#form1',
+  pattern: {
+    phone: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
+    email: /^[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/,
+  },
+  method: {			
+    'form1-name': [
+      ['anEmpty'],
+      ['pattern', 'name'],
+    ],
+    'form1-phone': [
+      ['anEmpty'],
+      ['pattern', 'phone'],
+    ],
+    'form1-email': [
+      ['anEmpty'],
+      ['pattern', 'email'],
+    ]
+  },
+});
+valid.init();	
+
+const valid2 = new formValidator({
+  selector: '#form2',
+  pattern: {},
+  method: {
+    'form2-name': [
+      ['anEmpty'],
+      ['pattern', 'name'],
+    ],
+    'form2-message': [
+      ['anEmpty'],
+      ['pattern', 'message'],
+    ],
+    'form2-phone': [
+      ['anEmpty'],
+      ['pattern', 'phone'],
+    ],
+    'form2-email': [
+      ['anEmpty'],
+      ['pattern', 'email'],
+    ]
+  },
+});
+
+valid2.init();
+
+const valid3 = new formValidator({
+  selector: '#form3',
+  pattern: {},
+  method: {
+    'form3-phone': [
+      ['anEmpty'],
+      ['pattern', 'phone'],
+    ],
+    'form3-email': [
+      ['anEmpty'],
+      ['pattern', 'email'],
+    ]
+  },
+});
+
+valid3.init();
 
 });
