@@ -391,71 +391,82 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	};
   calculatorBlock(100);
-  
-// Form validator
-const valid = new formValidator({
-  selector: '#form1',
-  pattern: {
-    // phone: /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/,
-    email: /^\w+@\w+\.\w{2,}$/,
-  },
-  method: {			
-    'form1-name': [
-      ['anEmpty'],
-      ['pattern', 'name'],
-    ],
-    'form1-phone': [
-      ['anEmpty'],
-      ['pattern', 'phone'],
-    ],
-    'form1-email': [
-      ['anEmpty'],
-      ['pattern', 'email'],
-    ]
-  },
-});
-valid.init();	
 
-const valid2 = new formValidator({
-  selector: '#form2',
-  pattern: {},
-  method: {
-    'form2-name': [
-      ['anEmpty'],
-      ['pattern', 'name'],
-    ],
-    'form2-message': [
-      ['anEmpty'],
-      ['pattern', 'message'],
-    ],
-    'form2-phone': [
-      ['anEmpty'],
-      ['pattern', 'phone'],
-    ],
-    'form2-email': [
-      ['anEmpty'],
-      ['pattern', 'email'],
-    ]
-  },
-});
+  // Send AJAX form
+  const sendFormData = () => {
+    const errorMessage = 'Something went wrong',
+          loadMessage = 'Loading...',
+          successMessage = 'Thank you for response! We reach out to you quickly!',
+          // form = document.getElementById('form1'),
+          form = document.querySelectorAll('form'),
+          statusMessage = document.createElement('div'),
+          bodyElement = document.querySelector('body');
+          
+          statusMessage.classList.add('status-message');
+          statusMessage.style.cssText = `font: normal 2rem Roboto;`;
 
-valid2.init();
+    const rmMessage = () => {
+      const status = document.querySelector('.status-message');
+      if (!status) return;
+        setTimeout(() => {
+        status.remove();
+      }, 5000);
+    };
 
-const valid3 = new formValidator({
-  selector: '#form3',
-  pattern: {},
-  method: {
-    'form3-phone': [
-      ['anEmpty'],
-      ['pattern', 'phone'],
-    ],
-    'form3-email': [
-      ['anEmpty'],
-      ['pattern', 'email'],
-    ]
-  },
-});
+    // Server requests function
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        // Добавить какой-нибудь спиннер
+        if(request.readyState !== 4) {
+          return;
+        }
+        (request.status == 200) ? outputData() : errorData(request.status);
+      });
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    };
 
-valid3.init();
+    // Forms validation
+    form.forEach(output => {
+      output.addEventListener('input', (event) => {
+        let target = event.target;
+
+        if (target.name === 'user_phone') {
+          target.value = target.value.replace(/[^\+\d]/g, '');
+        }
+
+        if (target.name === 'user_name' || target.name === 'user_message') {
+          target.value = target.value.replace(/[^A-z]/gi, '');
+        }
+      });
+
+      output.addEventListener('submit', (event) => {
+        event.preventDefault();
+        output.appendChild(statusMessage);
+
+        const formData = new FormData(output);
+        statusMessage.textContent = loadMessage;
+
+        let body = {};
+        for (let val of formData.entries()) {
+          body[val[0]] = val[1];
+        }
+        postData(body,
+          () => {
+            rmMessage();
+            statusMessage.textContent = successMessage;
+            output.reset();
+          },
+          (error) => {
+            rmMessage();
+            statusMessage.textContent = errorMessage;
+          });
+      });
+    });
+
+  };
+  sendFormData();
 
 });
