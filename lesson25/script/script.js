@@ -403,7 +403,7 @@ window.addEventListener('DOMContentLoaded', () => {
           bodyElement = document.querySelector('body');
           
           statusMessage.classList.add('status-message');
-          statusMessage.style.cssText = `font: normal 2rem Roboto;`;
+          statusMessage.style.cssText = `font: normal 2rem Roboto; color: white;`;
 
     const rmMessage = () => {
       const status = document.querySelector('.status-message');
