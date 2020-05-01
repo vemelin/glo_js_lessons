@@ -417,6 +417,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const postData = (body, outputData, errorData) => {
       const request = new XMLHttpRequest();
       request.addEventListener('readystatechange', () => {
+        // Добавить какой-нибудь спиннер
         if(request.readyState !== 4) {
           return;
         }
@@ -429,54 +430,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Forms validation
     form.forEach(output => {
-
       output.addEventListener('input', (event) => {
         let target = event.target;
+
         if (target.name === 'user_phone') {
-          if (target.style) {
-            target.style.border = 'none';
-          }
           target.value = target.value.replace(/[^\+\d]/g, '');
-          if (!/^\+?(\d){0,18}$/.test(target.value)) {
-            target.value = target.value.substring(0, target.value.length - 1);
-          }
         }
+
         if (target.name === 'user_name' || target.name === 'user_message') {
-          target.value = target.value.replace(/[^A-z ]/gi, '');
+          target.value = target.value.replace(/[^A-z]/gi, '');
         }
       });
-
-      // output.addEventListener('input', (event) => {
-      //   let target = event.target;
-        
-
-      //   if (target.name === 'user_phone') {
-              
-      //         target.value = target.value.replace(/(\+|\d){1}(\d){12,16}(?![A-Za-zА-Яа-яЁё])/, '');
-      //         console.log(event.target.value.toString());
-      //   }
-
-          
-      //     // target.value = target.value.replace(/([^\+\d\s*])/g, (...match) => {
-      //     //   let groups = match.pop();
-      //     //   return `${groups.$1}, $1`;
-      //     // });
-      //     // target.value = target.value.replace(/([A-Za-zА-Яа-яЁё])/g, '');
-      //     // target.value = target.value.replace(/([^\+\d\s*])/g, '$1 $2');
-      //     // target.value = target.value.replace(/(\d{3})(\d{3})(\d{4})(\d{0,5})/, '$1-$2-$3 #$4');
-      //     // target.value = target.value.replace(/^\+?^[\D]/g, '');
-      //     // target.value = target.value.replace(/[^а-яА-я\s]/g, '');
-      //           // let res = elem.value.match(/^\+?[0-9]*$/g);
-      //           // elem.value = '';
-      //           // if (res) {
-      //           //     elem.value = res.join(',');
-      //           // }
-      //     // target.value = target.value.replace(/[^\+\d]/g, '');
-
-      //   if (target.name === 'user_name' || target.name === 'user_message') {
-      //     target.value = target.value.replace(/[^A-z]/gi, '');
-      //   }
-      // });
 
       output.addEventListener('submit', (event) => {
         event.preventDefault();
