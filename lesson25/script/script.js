@@ -440,40 +440,56 @@ window.addEventListener('DOMContentLoaded', () => {
         // Input filter validation handler
         form.addEventListener('input', event => {
           const target = event.target,
-          sendButton = document.querySelector('.form-btn');
-          
-          const rmMessage = () => {
-            target.style.cssText = `border: auto;`;
+          sendButton = document.querySelector('.btn');
+  
+          const addStyles = () => {
+            target.style.cssText = `border: 1px solid red`;
+            form.appendChild(statusMessage);
+            statusMessage.textContent = 'You have entered an insufficient number of digits, must be from 8 up to 12 numbers';
+            statusMessage.style.cssText = `color: #E25741;`;
+          }
+  
+          const resetStyles = () => {
             statusMessage.remove();
             sendButton.disabled = false;
+            target.style.cssText = `border: auto;`;
+            statusMessage.style.cssText = `color: #FFFFFF;`;
           };
   
-          if(target.name === 'user_phone'){
-  
-            // Minium letters, need to show message + hilight input
-            if(target.value.length <= 8){
-              target.style.cssText = `border: 1px solid red`;
-              sendButton.disabled = true;
-              form.appendChild(statusMessage);
-              statusMessage.textContent = 'You have entered an insufficient number of digits, must be from 8 up to 12 numbers';
-              statusMessage.style.cssText = `color: #E25741; position: relative; top: -15px;`;
-            }
-  
-            // Maxium, enter only one plus
-            if(target.value.length > 8) {
-              rmMessage();
-              if (!/^\+?(\d){0,18}$/g.test(target.value) || target.value.length > 18) {
-                target.value = target.value.substring(0, target.value.length - 1);
-              } 
-            }
-  
+          // Name Field
+          if(target.name === 'user_name') {
+            target.value = target.value.replace(/[^A-z-]/gi, '');
           }
-          if(target.name === 'user_name' || target.name === 'user_message') {
-            target.value = target.value.replace(/[^A-z]/gi, '');
-          }
+          // Email Field
           if(target.name === 'user_email') {
             target.value = target.value.replace(/^\w+@\w+\.\w{4,}$/gi, '');
           }
+          // Phone# Field
+          if(target.name === 'user_phone'){
+  
+            // Minium letters, hilight error message + hilight input
+            if(target.value.length <= 8){
+              sendButton.disabled = true;
+              addStyles();
+            }
+            if(target.value.length > 8){
+              resetStyles();
+            }
+            // Limitation of typing plus(+) button
+            if(!/^\+?(\d){0,18}$/g.test(target.value)) {
+              target.value = target.value.substring(0, target.value.length - 1);
+            }
+            // If field is empty reset all styles
+            if(target.value === ''){
+              resetStyles();
+            }
+  
+          }
+          // Message Field
+          if(target.name === 'user_message') {
+            target.value = target.value.replace(/[^A-z-!?\s]/gi, '');
+          }
+  
         });
   
       });
