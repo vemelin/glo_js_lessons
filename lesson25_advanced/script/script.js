@@ -412,11 +412,11 @@ window.addEventListener("DOMContentLoaded", () => {
 				// After click on send CTA show >> Loading message...
         // statusMessage.textContent = loadMessage;
         
-        // After click on send button > show preloader ...
+        // After click on send button > show spinner instead loading text
         const preloader = () => {
           return (`
             <div class="preloader">
-              <img class="papa" src="https://cdn.discordapp.com/attachments/691908252677439488/707284938767990784/svg_preloader.svg"></img>
+              <img src="https://cdn.discordapp.com/attachments/691908252677439488/707284938767990784/svg_preloader.svg"></img>
             </div>
           `);
         };
