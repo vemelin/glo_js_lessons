@@ -432,7 +432,7 @@ window.addEventListener("DOMContentLoaded", () => {
             // Clear all inputs after message was sent
             input.forEach((input) => (input.value = ""));
           },
-          error = () => {
+          error = (error) => {
             statusMessage.textContent = errorMessage;
             console.error(error);
           };
