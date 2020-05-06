@@ -438,8 +438,18 @@ window.addEventListener("DOMContentLoaded", () => {
           };
 
         // Send to promise on execution
-        postData(body).then(outputData).catch(error);
-
+        postData(body)
+          .then((response) => {
+            if (response.status !== 200) {
+              throw new Error("status newtwork not 200");
+            }
+            console.log(response);
+            statusMessage.textContent = successMessage;
+          })
+          .catch((error) => {
+            statusMessage.textContent = errorMessage;
+            console.error(error);
+          });
       });
 
       // Input filter validation handler
@@ -498,27 +508,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // AJAX Connection setup
     const postData = (body) => {
-      return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest();
-        // When Status is equal = 1
-        request.addEventListener("readystatechange", () => {
-          if (request.readyState !== 4) {
-            return;
-          }
-          if (request.status === 200) {
-            resolve();
-          } else {
-            reject(request.status);
-          }
-        });
-
-        // Connection set-up
-        request.open("POST", "./server.php");
-        request.setRequestHeader(
-          "Content-Type",
-          "application/json; charset=utf-8"
-        );
-        request.send(JSON.stringify(body));
+      return fetch("./server.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(body),
       });
     };
   };
