@@ -1,72 +1,73 @@
 const calculatorBlock = (price = 100) => {
-  const getBlockElement = document.querySelector(".calc-block"),
-    getTypeElement = document.querySelector(".calc-type"),
-    getSquareElement = document.querySelector(".calc-square"),
-    getDayElement = document.querySelector(".calc-day"),
-    getCountElement = document.querySelector(".calc-count"),
-    getTotalElement = document.getElementById("total");
+  const getBlock = document.querySelector(".calc-block"),
+    getType = document.querySelector(".calc-type"),
+    getSquare = document.querySelector(".calc-square"),
+    getDay = document.querySelector(".calc-day"),
+    getCount = document.querySelector(".calc-count"),
+    getTotal = document.getElementById("total");
 
-  // Run number slow motion
-  const runNumber = (input) => {
-    let interval,
-      start = 0;
+  // Slow motion
+  const motion = ({timing, draw, duration}) => {
+    const start = performance.now();
+    requestAnimationFrame(function animate(time) {
+      // Frame rate
+      let timeFraction = (time - start) / duration;
+      if (timeFraction > 1) timeFraction = 1;
 
-    clearInterval(interval);
+      // Calculation of current frame rate
+      const progress = timing(timeFraction);
 
-    if (getTypeElement.options[getTypeElement.selectedIndex] === 0) {
-      clearInterval(interval);
-      start = 0;
-    }
+      draw(progress);
 
-    const step = 50000;
-    // seconds = 1;
-
-    // let setTime = Math.round((seconds/(input/step))/1000);
-    const setTime = Math.round(input / step / 1000);
-
-    interval = setInterval(() => {
-      start += input.toString().length;
-      getTotalElement.textContent = start;
-      if (start >= input) {
-        getTotalElement.textContent = Math.round(input);
-        clearInterval(interval);
+      if (timeFraction < 1) {
+        requestAnimationFrame(animate);
       }
-    }, setTime);
+    });
   };
 
-  // Mathematics addition
-  const addition = () => {
-    let amount = 0,
-      dayValue = 1,
-      roomValue = 1;
-    const addValue = getTypeElement.options[getTypeElement.selectedIndex].value,
-      addSquare = +getSquareElement.value;
+  const count = () => {
+    let [total, count, day] = [0, 1, 1];
+    const type = getType.options[getType.selectedIndex].value,
+      square = +getSquare.value;
 
-    if (getCountElement.value > 1) {
-      roomValue += (getCountElement.value - 1) / 10;
+    if (getCount.value > 1) {
+        count += (getCount.value - 1) / 10;
     }
-
-    if (getDayElement.value && getDayElement.value < 5) {
-      dayValue *= 2;
-    } else if (getDayElement.value && getDayElement.value < 10) {
-      dayValue *= 1.5;
+    if (getDay.value && getDay.value < 5) {
+        day *= 2;
+    } else if (getDay.value && getDay.value < 10) {
+        day *= 1.5;
     }
-
-    if (addValue && addSquare) {
-      amount = price * addValue * addSquare * roomValue * dayValue;
+    if (type && square) {
+        total = price * type * square * count * day;
     }
-
-    // getTotalElement.textContent = amount;
-    runNumber(amount);
+    if (type > 0) {
+      const slowMotion = () => motion({
+          duration: 1000,
+          timing(timeFraction) { return timeFraction; },
+          draw(progress) { getTotal.textContent = Math.floor(progress * total); }
+      });
+      slowMotion();
+    }
   };
-
-  // Check event from block
-  getBlockElement.addEventListener("change", (event) => {
+  getBlock.addEventListener('change', event => {
     const target = event.target;
-    if (target.matches("select") || target.matches("input")) {
-      addition();
+    if (target.matches('select') || target.matches('input')) {
+        count();
     }
   });
 };
+
+const calculatorFormValidation = () => {
+  // Calculator amount block
+  const input = document.querySelectorAll('input[class*="calc-item calc"]');
+  input.forEach((item) => {
+    item.addEventListener("input", () => {
+      item.value = item.value.replace(/\D/g, "");
+    });
+  });
+};
+
+calculatorFormValidation();
 
 export default calculatorBlock;
