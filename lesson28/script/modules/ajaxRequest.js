@@ -104,7 +104,7 @@ const sendForm = () => {
       }
       // Message Field
       if (target.name === "user_message") {
-        target.value = target.value.replace(/[^A-z-!?\s]/gi, "");
+        target.value = target.value.replace(/[^A-z-!,.?;:'"-\s]/gi, "");
       }
     });
   });
