@@ -1179,120 +1179,34 @@ var slider = function slider() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var modalToggle = function modalToggle() {
-  var modalCloseButton = document.querySelector(".popup-close"),
-      modalCTA = document.querySelectorAll(".popup-btn"),
+  var close = document.querySelector(".popup-close"),
+      open = document.querySelectorAll(".popup-btn"),
       modal = document.querySelector(".popup"),
-      pageWidth = document.documentElement.clientWidth;
-  modal.addEventListener("click", function (event) {
-    var target = event.target; // Close modal when click out of modal window
+      style = document.createElement('style'); // Custom css
 
-    modalCTA.forEach(function (element) {
-      return element.style.display = "block";
-    });
-
-    if (target.classList.contains("popup-close")) {
-      modal.style.display = "none";
-    } else {
-      target = target.closest(".popup-content");
-
-      if (!target) {
-        modal.style.display = "none";
-        document.body.style.cssText = "overflow: scroll;";
-      }
-    }
-  }); // Slow motion
-
-  var modalSlowMo = function modalSlowMo() {
-    modal.style.cssText = "display: block; opacity: 0;";
-    var count = 0;
-
-    var appear = function appear() {
-      count++;
-      modal.style.opacity = ".".concat(count);
-
-      if (count > 8) {
-        modal.style.opacity = "1";
-        clearInterval(stop);
-        document.body.style.cssText = "overflow: hidden;";
-      }
-    };
-
-    var stop = setInterval(appear, 35);
-  }; // modalCTA.forEach((output) => output.addEventListener("click", modalSlowMo));
-  // function reportWindowSize() {
-  //   let width = window.innerWidth;
-  //   return width;
-  // }
-  // window.addEventListener('resize', reportWindowSize);
-  // let width = window.innerWidth;
-
-
+  style.append(document.createTextNode("\n    .popup{perspective: 500px;}\n    .popup-content{\n      transform: rotateX(0deg);\n      animation-name: popup-content;\n      animation-duration:.8s;\n    }\n    @keyframes popup-content{\n      from {\n        opacity: 0; \n        top: 0;\n        padding: 2rem 6rem;\n        transform: rotateX(15deg);\n      }\n      to {\n        opacity: 1; \n        top: 10%;\n        lef: 38%;\n        margin: 0;\n        padding: 2rem 6rem;\n        transform: rotateX(0deg);\n        }\n    }\n\n    @media (max-width:767px) {\n      @keyframes popup-content{\n        to {lef: 30%;}\n      }\n    }\n\n    @media (max-width:690px) {\n      @keyframes popup-content{\n        to {lef: 25%;}\n      }\n    }\n    @media (max-width:500px) {\n      @keyframes popup-content{\n        to {lef: 18%;}\n      }\n    }\n    @media (max-width:448px) {\n      @keyframes popup-content{\n        to {lef: 15%;}\n      }\n    }\n  "));
+  document.head.append(style);
+  style.type = 'text/css';
   var width = window.innerWidth;
   window.addEventListener('resize', function () {
     width = window.innerWidth;
-    modalCTA.forEach(function (output) {
-      if (width > 768) {
-        console.log(width);
-        output.addEventListener("click", modalSlowMo);
-      } else if (width < 768) {
-        console.log(width); // cancelAnimationFrame(modalSlowMo)
-
-        output.addEventListener('click', function () {
-          return modal.style.display = 'block';
-        });
-      }
-    });
-  }); // modalCTA.forEach(output => {
-  //   output.addEventListener('click', (event) => {
-  //     let target = event.target;
-  //     if (width > 768) {         
-  //       target.requestAnimationFrame(modalSlowMo);
-  //       // target.addEventListener("click", modalSlowMo)
-  //     }
-  //     else if (width < 768){
-  //       console.log(modalSlowMo);
-  //       console.log(width);        
-  //       cancelAnimationFrame(modalSlowMo)
-  //       target.addEventListener('click', () => modal.style.display = 'block');
-  //     }
-  //     // if(width > 768) {
-  //     //   console.log(width + ' > 768');
-  //     // } else if(width < 768) {
-  //     //   console.log(width + ' < 768');
-  //     // }
-  //     // (pageWidth > 768) ? target.addEventListener("click", modalSlowMo) :
-  //     // target.addEventListener('click', () => modal.style.display = 'block');
-  //   });
-  // });
-  // modalCTA.forEach(element => {
-  //   if (width > 768) {element.addEventListener("click", modalSlowMo)};
-  //   if(width < 768) {
-  //     console.log(width + ' > 768');
-  //     element.addEventListener ('click', () => {
-  //       modal.style.cssText = `display: block; opacity: 1;`;
-  //     });
-  //   } else if (width > 768) {
-  //     element.addEventListener("click", modalSlowMo);
-  //     modal.style.cssText = `display: block; opacity: 0;`;
-  //     console.log(width + ' < 768');
-  //   }
-  // });
-  // if(width > 768) {
-  //   moveModal = requestAnimationFrame(modalSlowMo);
-  //   console.log(width + ' > 768');
-  // } else if(width < 768) {
-  //   cancelAnimationFrame(moveModal);
-  //   console.log(width + ' < 768');
-  // }
-
-  modalCTA.forEach(function (output) {
-    pageWidth > 768 ? output.addEventListener("click", modalSlowMo) : output.addEventListener('click', function () {
-      return modal.style.display = 'block';
+  });
+  open.forEach(function (output) {
+    output.addEventListener('click', function () {
+      modal.style.display = 'block';
+      document.body.style.cssText = "overflow: hidden;";
     });
   });
-  modalCloseButton.addEventListener("click", function () {
-    modal.style.cssText = "display: none;";
-    document.body.style.cssText = "overflow: scroll;";
+  window.addEventListener('click', function (event) {
+    if (event.target == close) {
+      modal.style.display = 'none';
+      document.body.style.cssText = "overflow: auto;";
+    }
+
+    if (event.target == modal) {
+      modal.style.display = 'none';
+      document.body.style.cssText = "overflow: auto;";
+    }
   });
 };
 
