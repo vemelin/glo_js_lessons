@@ -14,40 +14,37 @@ const modalToggle = () => {
     }
     @keyframes popup-content{
       from {
-        opacity: 0; 
-        top: 0;
+        opacity: 0;
         padding: 2rem 6rem;
-        transform: rotateX(15deg);
+        transform: rotateX(25deg);
       }
       to {
         opacity: 1; 
+        left: 38%;
         top: 10%;
-        lef: 38%;
-        margin: 0;
         padding: 2rem 6rem;
+        background-color: #24241f
         transform: rotateX(0deg);
         }
     }
-
     @media (max-width:767px) {
       @keyframes popup-content{
-        to {lef: 30%;}
+        to {left: 30%;}
       }
     }
-
     @media (max-width:690px) {
       @keyframes popup-content{
-        to {lef: 25%;}
+        to {left: 25%;}
       }
     }
     @media (max-width:500px) {
       @keyframes popup-content{
-        to {lef: 18%;}
+        to {left: 18%;}
       }
     }
     @media (max-width:448px) {
       @keyframes popup-content{
-        to {lef: 15%;}
+        to {left: 15%;}
       }
     }
   `));
@@ -57,7 +54,8 @@ const modalToggle = () => {
 
   let width = window.innerWidth;
 
-  window.addEventListener('resize', () => {  
+  window.addEventListener('resize', () => { 
+    console.log(width);    
     width = window.innerWidth;
   });
 
