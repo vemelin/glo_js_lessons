@@ -1182,30 +1182,41 @@ var modalToggle = function modalToggle() {
   var close = document.querySelector(".popup-close"),
       open = document.querySelectorAll(".popup-btn"),
       modal = document.querySelector(".popup"),
-      style = document.createElement('style'); // Custom css
+      modalWindow = document.querySelector(".popup-content");
+  var count = -200;
 
-  style.append(document.createTextNode("\n    .popup{perspective: 500px;}\n    .popup-content{\n      transform: rotateX(0deg);\n      animation-name: popup-content;\n      animation-duration:.8s;\n    }\n    @keyframes popup-content{\n      from {\n        opacity: 0;\n        padding: 2rem 6rem;\n        transform: rotateX(25deg);\n      }\n      to {\n        opacity: 1; \n        left: 38%;\n        top: 10%;\n        padding: 2rem 6rem;\n        background-color: #24241f\n        transform: rotateX(0deg);\n        }\n    }\n    @media (max-width:767px) {\n      @keyframes popup-content{\n        to {left: 30%;}\n      }\n    }\n    @media (max-width:690px) {\n      @keyframes popup-content{\n        to {left: 25%;}\n      }\n    }\n    @media (max-width:500px) {\n      @keyframes popup-content{\n        to {left: 18%;}\n      }\n    }\n    @media (max-width:448px) {\n      @keyframes popup-content{\n        to {left: 15%;}\n      }\n    }\n  "));
-  document.head.append(style);
-  style.type = 'text/css';
-  var width = window.innerWidth;
-  window.addEventListener('resize', function () {
-    console.log(width);
-    width = window.innerWidth;
-  });
-  open.forEach(function (output) {
-    output.addEventListener('click', function () {
-      modal.style.display = 'block';
-      document.body.style.cssText = "overflow: hidden;";
+  var animate = function animate() {
+    if (document.documentElement.clientWidth < 768) {
+      modalWindow.style.transform = "translate(0)";
+      return;
+    }
+
+    var requestId = requestAnimationFrame(animate);
+    count += 5;
+    modalWindow.style.transform = "translate(".concat(count, "%)");
+
+    if (count >= 0) {
+      cancelAnimationFrame(requestId);
+    }
+  };
+
+  open.forEach(function (button) {
+    button.addEventListener("click", function () {
+      modal.style.display = "block";
+      animate();
     });
   });
-  window.addEventListener('click', function (event) {
-    if (event.target == close) {
-      modal.style.display = 'none';
+  modal.addEventListener("click", function (event) {
+    var target = event.target;
+    count = -200;
+
+    if (target == close) {
+      modal.style.display = "none";
       document.body.style.cssText = "overflow: auto;";
     }
 
-    if (event.target == modal) {
-      modal.style.display = 'none';
+    if (target == modal) {
+      target.style.display = "none";
       document.body.style.cssText = "overflow: auto;";
     }
   });
