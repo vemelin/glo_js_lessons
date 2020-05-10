@@ -52,14 +52,19 @@ const modalToggle = () => {
     width = window.innerWidth;
     modalCTA.forEach(output => {
   
-        if (width > 768) {
-          console.log(width);
-          output.addEventListener("click", modalSlowMo)
-        }
-        else if (width < 768){
-          console.log(width);          
-          // cancelAnimationFrame(modalSlowMo)
-          output.addEventListener('click', () => modal.style.display = 'block');
+      let animation;
+
+      if (width > 768) {
+        console.log(width);
+        // output.addEventListener("click", modalSlowMo)
+        animation = requestAnimationFrame(modalSlowMo);
+        return;
+      }
+      else if (width < 768){
+        console.log(width);
+        modal.style.cssText = 'opacity: 0;';
+        cancelAnimationFrame(animation);
+        // output.addEventListener('click', () => modal.style.display = 'block');
         }
 
     });
