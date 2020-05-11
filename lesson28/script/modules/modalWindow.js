@@ -7,12 +7,12 @@ const modalToggle = () => {
   let count = -200;
   const animate = () => {
     if (document.documentElement.clientWidth < 768) {
-      modalWindow.style.transform = `translate(0)`;
+      modalWindow.style.transform = `translate(-57px, 0)`;
       return;
     }
     let requestId = requestAnimationFrame(animate);
     count += 5;
-    modalWindow.style.transform = `translate(${count}%)`;
+    modalWindow.style.transform = `translate(-57px, ${count}%)`;
     if (count >= 0) {
       cancelAnimationFrame(requestId);
     }
