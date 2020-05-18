@@ -11,6 +11,23 @@
       rel="stylesheet">
   <link rel="stylesheet" href="./css/style.min.css">
   <title>Relax Live</title></head>
+  <style type="text/css">
+    /* Header phone toggle switcher */
+    .hidden-phone {top: 25px;}
+    .hidden-phone a {opacity: 1;}
+    /* Main navigation */
+    .menu-toggle {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    @media (max-width: 1024px) {
+      .popup-dialog-menu {
+        width: 549px;
+        height: 841px;
+        -webkit-transform: translate3d(555px, 0, 0);
+        transform: translate3d(555px, 0, 0); } 
+      }
+  </style>
 <body>
 <div class="main" id="main">
   <header class="header">
@@ -18,10 +35,10 @@
       <div class="header-contacts__phone-icon"><a href="tel:+79123456789"><img src="./images/header/phoneIcon.svg"
                                                                                alt="phoneIcon"></a></div>
       <div class="header-contacts-wrap">
-        <div class="header-contacts__phone-number-wrap"><a class="header-contacts__phone-number"
-                                                           href="tel:+79123456789">+7 (123) 456-78-90</a></div>
-        <div class="header-contacts__phone-number-accord"><a class="header-contacts__phone-number"
-                                                             href="tel:+79876543210">+7 (987) 654-32-10</a>
+        <div class="header-contacts__phone-number-wrap">
+          <a class="header-contacts__phone-number" href="tel:+79123456789">+7 (123) 456-78-90</a></div>
+        <div class="header-contacts__phone-number-accord">
+          <a class="header-contacts__phone-number" href="tel:+79876543210">+7 (987) 654-32-10</a>
           <div class="header-contacts__messagers"><img src="./images/header/viber.svg" alt="viber"> <img
               src="./images/header/whatsApp.svg" alt="whatsApp"> <span class="header-contacts__messagers-descr">Viber / WhatsApp</span>
           </div><!-- contacts__messagers --></div>

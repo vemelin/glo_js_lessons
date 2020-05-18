@@ -1,23 +1,23 @@
-// Polyfills
-import 'url-polyfill';
-import "regenerator-runtime/runtime";
-import 'element-remove';
-import "@babel/polyfill";
-import 'formdata-polyfill';
-import elementClosest from 'element-closest';
-import 'es6-promise';
-import 'element-closest/browser';
-import 'whatwg-fetch';
-import "scroll-behavior-polyfill";
-import smoothscroll from 'smoothscroll-polyfill';
-import 'element-remove';
-elementClosest(window);
-smoothscroll.polyfill();
+// Polyfills, that helps solve cross-browser compatibility for IE11 agent
+// import 'url-polyfill';
+// import "regenerator-runtime/runtime";
+// import 'element-remove';
+// import "@babel/polyfill";
+// import 'formdata-polyfill';
+// import elementClosest from 'element-closest';
+// import 'es6-promise';
+// import 'element-closest/browser';
+// import 'whatwg-fetch';
+// import "scroll-behavior-polyfill";
+// import smoothscroll from 'smoothscroll-polyfill';
+// import 'element-remove';
+// elementClosest(window);
+// smoothscroll.polyfill();
 
 // Import list of Modules
 import headerPhoneSwitcher from './modules/headerPhoneSwitcher';
 import mainNav from './modules/mainNav';
-import mainNavAdoptive from './modules/mainNavAdoptive';
+import mainNavAdaptive from './modules/mainNavAdaptive';
 import smoothScroll from './modules/smoothScroll';
 import expandList from './modules/expandList';
 import regExpPhoneMask from './modules/regExpPhoneMask';
@@ -45,7 +45,7 @@ import formParsing from './modules/ajaxRequests';
 headerPhoneSwitcher();
 // Main Navigation
 mainNav();
-mainNavAdoptive();
+mainNavAdaptive();
 // Smooth Scroll
 smoothScroll();
 // Overview all available list
