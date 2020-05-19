@@ -1,21 +1,15 @@
-const expandNav = () => document.querySelector('.popup-dialog-menu').classList.toggle('menu-toggle');
-
 const mainNav = () => {
-  const click = document.querySelector('.menu'),
-        menu = document.querySelector('.popup-menu');
 
-  click.addEventListener('click', () => {
-      document.querySelector('.popup-menu').classList.toggle('visible');
-      expandNav();
-  });
+  const cta = document.querySelector('.menu'),
+        modal = document.querySelector('.popup-dialog-menu'),
+        hideNav = () => modal.style.cssText = 'transform: translateX(645px);'
 
-  menu.addEventListener('click', event => {
-      let target = event.target;
-      if (target.classList.contains('close-menu') || !target.closest('.popup-dialog-menu')) {
-        expandNav();
-      }
+  cta.addEventListener('click', () => modal.style.cssText = 'transform: translateY(0);');
+
+  modal.addEventListener('click', event => {
+    if (event.target.classList.contains('close-menu')) {hideNav();}
+    else if (event.target.classList.contains('menu-link')) {hideNav();}
   });
+  
 };
-
-// export default mainNavAdaptive;
 export default mainNav;

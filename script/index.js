@@ -23,7 +23,8 @@ import expandList from './modules/expandList';
 import regExpPhoneMask from './modules/regExpPhoneMask';
 import eulaModal from './modules/eulaModal';
 import hintPopup from './modules/hintPopup';
-import typesOfRepairs from './modules/typesOfRepairs';
+import repairModal from './modules/repairModal';
+import repairModalContent from './modules/repairModalContent';
 import portfolioSlider from './modules/portfolioSlider';
 import sliderModal from './modules/sliderModal';
 import documentsModule from './modules/documentsModule';
@@ -57,7 +58,8 @@ eulaModal();
 // Tooltip popup
 hintPopup();
 // Type of Repairs block
-typesOfRepairs();
+repairModal();
+repairModalContent();
 // Portfolio block slider
 portfolioSlider();
 // Modal Window block slider
