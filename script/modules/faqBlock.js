@@ -1,11 +1,7 @@
 const faqBlock = () => {
-  document.querySelector('#faq').addEventListener(`click`, event => {
-    let target = event.target;
-    if(target.classList.contains('msg-active')){
-      target.classList.remove('msg-active');
-    } else if(target.classList.contains('title_block')) {
-      target.classList.add('msg-active');
-    }
+  let li = document.querySelectorAll('.accordion .title_block');
+  document.querySelector('.accordion ul').addEventListener(`click`, e => {
+    li.forEach(item => item == e.target ? item.classList.toggle('msg-active') : item.classList.remove('msg-active'));
   });
 }; 
 export default faqBlock;
