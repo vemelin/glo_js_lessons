@@ -17,7 +17,6 @@
 // Import list of Modules
 import headerPhoneSwitcher from './modules/headerPhoneSwitcher';
 import mainNav from './modules/mainNav';
-import mainNavAdaptive from './modules/mainNavAdaptive';
 import smoothScroll from './modules/smoothScroll';
 import expandList from './modules/expandList';
 import regExpPhoneMask from './modules/regExpPhoneMask';
@@ -46,7 +45,6 @@ import formParsing from './modules/ajaxRequests';
 headerPhoneSwitcher();
 // Main Navigation
 mainNav();
-mainNavAdaptive();
 // Smooth Scroll
 smoothScroll();
 // Overview all available list
@@ -89,5 +87,3 @@ thankYouModal();
 uploadServicesData();
 // Send Form through AJAX
 formParsing();
-
-console.log('25 — Code Review');
