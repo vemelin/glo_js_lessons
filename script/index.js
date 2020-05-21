@@ -27,7 +27,7 @@ import repairModalContent from './modules/repairModalContent';
 import portfolioSlider from './modules/portfolioSlider';
 import sliderModal from './modules/sliderModal';
 import documentsModule from './modules/documentsModule';
-import documentsPreviewModal from './modules/documentsPreviewModal';
+import DocumentsSlider from './modules/documentsPreviewModal';
 import issuesBlock from './modules/issuesBlock';
 import tabSlider from './modules/tabSlider';
 import sliderTabSwitcher from './modules/sliderTabSwitcher';
@@ -36,7 +36,6 @@ import testimonialsBlock from './modules/testimonialsBlock';
 import howWeWork from './modules/howWeWork';
 import faqBlock from './modules/faqBlock';
 import ourPartners from './modules/ourPartners';
-import thankYouModal from './modules/thankYouModal';
 import uploadServicesData from './modules/uploadServicesData';
 import formParsing from './modules/ajaxRequests';
 
@@ -64,7 +63,8 @@ portfolioSlider();
 sliderModal();
 // Documents Block
 documentsModule();
-documentsPreviewModal();
+const docsModal = new DocumentsSlider();
+docsModal.start();
 // Blocks with issues
 issuesBlock();
 // Tabs with slider block
@@ -80,9 +80,8 @@ howWeWork();
 // FAQ - Accordion block
 faqBlock();
 // Our Partners block
-ourPartners();
-// Thank you modal
-thankYouModal();
+const ourPartnersBlock = new ourPartners();
+ourPartnersBlock.start();
 // Upload Services and Prices Data
 uploadServicesData();
 // Send Form through AJAX

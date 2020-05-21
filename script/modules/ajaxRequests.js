@@ -1,124 +1,113 @@
-// Send Form through AJAX function
-const formParsing = () => {
-  const input = document.querySelectorAll("input");
+const thankYouModal = () => {
+  const modal = document.querySelector('.popup-thank');
 
-  // Validation Messages
-  const errorMessage = "Something went wrong...",
-    successMessage = "Message successfully sent!",
-    loadMessage = "Loading...";
+  modal.style.cssText = 'visibility: visible;';
 
-  // Get form
-  const forms = document.querySelectorAll("form");
+  modal.addEventListener(`click`, e => {
+    if(e.target.classList.contains('close-thank')){
+      modal.style.cssText = 'visibility: hidden;';
+    }else if (e.target.classList.contains('popup-thank')){
+      modal.style.cssText = 'visibility: hidden;';
+    }
+  });
+}; 
 
-  // Status Message
-  const statusMessage = document.createElement("div");
-  statusMessage.classList.add("status-message");
-  statusMessage.style.cssText = `font: normal 2rem Roboto; color: white;`;
+const formParsing = () => {  
+  const forms = document.querySelectorAll('form');
+  let loaderHtml = '';
 
-  // Parse all forms and went through event handler
-  forms.forEach((form) => {
-    form.addEventListener("submit", (event) => {
+  const addStatus = (form, status, color = 'red') => {
+    const stratus = `
+    <style>
+      .preloader{
+      width: 100%;
+      text-align: center;
+      color: ${color};
+      margin: 5px 0;
+      }
+    </style>
+    <div class="preloader">${status}</div>`;
+
+      if (document.querySelector('.preloader')) {
+        return;
+      }
+
+    form.insertAdjacentHTML(`afterbegin`, stratus);
+    loaderHtml = document.querySelector('.preloader');
+
+    setTimeout(() => {
+      loaderHtml.remove();
+    }, 5000);
+  };
+
+
+  forms.forEach(form => {
+
+    const postData = (body) => {
+      return fetch('./server.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body),
+        mode: 'cors'
+      }); 
+    };
+
+    form.addEventListener('submit', (event) => {
       event.preventDefault();
-      form.appendChild(statusMessage);
 
-      // After click on send button > show spinner instead loading text
-      const preloader = () => {
-        return `
-          <div class="preloader">
-            <img src="https://cdn.discordapp.com/attachments/691908252677439488/707284938767990784/svg_preloader.svg"></img>
-          </div>
-        `;
-      };
-      statusMessage.innerHTML = preloader();
 
-      // Prepare object
+      const checkbox = [...event.target.elements].filter((item) => item.type === 'checkbox');
+      if (!checkbox[0].checked) {
+        addStatus(form, 'Согласитесь на обработку своих персональных данных');
+        return;
+      } 
+      const formTel = [...event.target.elements].filter((item) => item.name === 'phone');
+      if (validateTel(formTel)) {
+        addStatus(form, 'Не верно введен номер телефона');
+        return;
+      } 
       const formData = new FormData(form);
-      const body = {};
-      formData.forEach((value, key) => (body[key] = value));
 
-      // Send to promise on execution
+      let body = {};
+      for (let val of formData.entries()) {
+        body[val[0]] = val[1];
+      }
+
+      const outputData = () => {
+        thankYouModal();
+        addStatus(form, 'Заявка отправлена', 'green');
+        form.reset();
+      };
+
+      const error = () => {
+        addStatus(form, 'Ошибка запроса', 'red');
+        form.reset();
+      };
+      
+
       postData(body)
         .then((response) => {
           if (response.status !== 200) {
-            throw new Error("status newtwork not 200");
-          }
+              throw 'error !!! ';
+          }          
+          outputData();
         })
-        .then(() => {
-          // Clear all inputs after message was sent
-          input.forEach((input) => (input.value = ""));
-          statusMessage.textContent = successMessage;
-        })
-        .catch((error) => {
-          statusMessage.textContent = errorMessage;
-          console.error(error);
-        });
-    });
+        .catch(error);
 
-    // Input filter validation handler
-    form.addEventListener("input", (event) => {
-      const target = event.target,
-        sendButton = document.querySelectorAll(".btn");
-
-      const addStyles = () => {
-        target.style.cssText = `border: 1px solid red`;
-        form.appendChild(statusMessage);
-        statusMessage.textContent =
-          "You have entered an insufficient number of digits, must be from 8 up to 12 numbers";
-        statusMessage.style.cssText = `color: #E25741;`;
-      };
-
-      const resetStyles = () => {
-        statusMessage.remove();
-        sendButton.forEach((item) => (item.disabled = false));
-        target.style.cssText = `border: auto;`;
-        statusMessage.style.cssText = `color: #FFFFFF;`;
-      };
-
-      // Name Field
-      if (target.name === "user_name") {
-        target.value = target.value.replace(/[^A-z-]/gi, "");
-      }
-      // Email Field
-      if (target.name === "user_email") {
-        target.value = target.value.replace(/^\w+@\w+\.\w{4,}$/gi, "");
-      }
-      // Phone# Field
-      if (target.name === "user_phone") {
-        // Minium letters, hilight error message + hilight input
-        if (target.value.length <= 8) {
-          sendButton.forEach((item) => (item.disabled = true));
-
-          addStyles();
-        }
-        if (target.value.length > 8) {
-          resetStyles();
-        }
-        // Limitation of typing plus(+) button
-        if (!/^\+?(\d){0,18}$/g.test(target.value)) {
-          target.value = target.value.substring(0, target.value.length - 1);
-        }
-        // If field is empty reset all styles
-        if (target.value === "") {
-          resetStyles();
-        }
-      }
-      // Message Field
-      if (target.name === "user_message") {
-        target.value = target.value.replace(/[^A-z-!,.?;:'"-\s]/gi, "");
-      }
     });
   });
 
-  // AJAX Connection setup
-  const postData = (body) => {
-    return fetch("./server.php", {
-      method: "POST",
-      headers: {"Content-Type": "application/json; charset=utf-8",},
-      body: JSON.stringify(body),
-    });
-  };
-  console.log('imported > 24 AJAX - Parse all forms module');
-  
+  const validateTel = (tel) => {
+    let str = tel[0].value.length;
+    if (str === 18) {
+      return false;
+    } else {
+      return true;
+    }
+
+  };  
 };
 
 export default formParsing;
