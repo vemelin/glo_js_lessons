@@ -13,6 +13,7 @@
 // import 'element-remove';
 // elementClosest(window);
 // smoothscroll.polyfill();
+// import 'mdn-polyfills/Node.prototype.append';
 
 // Import list of Modules
 import headerPhoneSwitcher from './modules/headerPhoneSwitcher';
@@ -34,7 +35,8 @@ import sliderTabSwitcher from './modules/sliderTabSwitcher';
 import advicesBlock from './modules/advicesBlock';
 import testimonialsBlock from './modules/testimonialsBlock';
 import howWeWork from './modules/howWeWork';
-import faqBlock from './modules/faqBlock';
+// import faqBlock from './modules/faqBlock';
+import accordion from './modules/faqBlock';
 import ourPartners from './modules/ourPartners';
 import uploadServicesData from './modules/uploadServicesData';
 import formParsing from './modules/ajaxRequests';
@@ -78,7 +80,8 @@ testimonialsBlock();
 // How we work block
 howWeWork();
 // FAQ - Accordion block
-faqBlock();
+// faqBlock();
+accordion();
 // Our Partners block
 const ourPartnersBlock = new ourPartners();
 ourPartnersBlock.start();
