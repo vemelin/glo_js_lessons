@@ -11,10 +11,10 @@ const eulaModal = () => {
       });
     });
   
-    outOfModal.addEventListener(`click`, (evt) => {
-      if (evt.target.classList.contains('popup-privacy')) {
+    outOfModal.addEventListener(`click`, e => {
+      if (e.target.classList.contains('popup-privacy')) {
         outOfModal.style = "visibility: hidden;";
-        document.body.style.cssText = `overflow: auto; height: auto;`;
+        document.body.removeAttribute('style'); //Reset styles
       }
     });
   

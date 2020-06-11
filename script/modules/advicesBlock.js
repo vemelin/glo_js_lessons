@@ -4,7 +4,7 @@ const advicesBlock = () => {
         close = modal.querySelector('.close-consultation'),
         hidden = () => {
           modal.style.cssText = "visibility: hidden;";
-          document.body.style.cssText = `overflow: auto; height: auto;`;
+          document.body.removeAttribute('style'); //Clear styles
         },
         visible = () => {
           document.body.style.cssText = `overflow: hidden; height: 100%;`;

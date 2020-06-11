@@ -1,27 +1,7 @@
-
-const checkboxes = document.querySelectorAll('.checkbox__input');
-checkboxes.forEach(element => element.removeAttribute("required"));
-
-const styles = color => {
-  const style = document.createElement('style');
-  style.id = 'form-send-request-styles';
-  style.type = 'text/css';
-  style.textContent = `
-    /* Form render request data styles */
-    .preloader{
-      width: 100%;
-      text-align: center;
-      color: ${color};
-      margin: 5px 0;
-    }
-  `;
-  document.head.appendChild(style);
-};
-
-const successPopup = () => {
+const thankYouModal = () => {
   const modal = document.querySelector('.popup-thank');
 
-  modal.style.cssText = `visibility: visible;`;
+  modal.style.cssText = 'visibility: visible;';
 
   modal.addEventListener(`click`, e => {
     if(e.target.classList.contains('close-thank')){
@@ -30,70 +10,74 @@ const successPopup = () => {
       modal.style.cssText = 'visibility: hidden;';
     }
   });
-}; 
+};
 
-const form = () => {
+const formParsing = () => {  
   const forms = document.querySelectorAll('form');
-
   let loaderHtml = '';
 
   const addStatus = (form, status, color = 'red') => {
-    styles(color);
-    const preloader = `<div class="preloader">${status}</div>`;
+    const msgStatus = `
+    <style>
+      .preloader{
+      width: 100%;
+      text-align: center;
+      color: ${color};
+      margin: 5px 0;
+      }
+    </style>
+    <div class="preloader">${status}</div>`;
 
       if (document.querySelector('.preloader')) {
         return;
       }
 
-    form.insertAdjacentHTML(`afterbegin`, preloader);
+    form.insertAdjacentHTML(`afterbegin`, msgStatus);
     loaderHtml = document.querySelector('.preloader');
 
     setTimeout(() => {
       loaderHtml.remove();
     }, 5000);
-    
   };
 
 
   forms.forEach(form => {
 
-    const postData = data => {
+    const postData = (body) => {
       return fetch('./server.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: data,
+        body: JSON.stringify(body),
         mode: 'cors'
       }); 
     };
-    
-    
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      console.log([...event.target.elements]);
-      
-      const checkbox = [...event.target.elements].filter(item => item.type === 'checkbox');
-      
+
+
+      const checkbox = [...event.target.elements].filter((item) => item.type === 'checkbox');
       if (!checkbox[0].checked) {
-        addStatus(form, 'Согласитесь на обработку данных');
+        addStatus(form, 'Подтвердите согласие');
         return;
       } 
       const formTel = [...event.target.elements].filter((item) => item.name === 'phone');
-      if (phoneValidation(formTel)) {
-        addStatus(form, 'Неверный номер телефона');
+      if (validateTel(formTel)) {
+        addStatus(form, 'Не верно введен номер телефона');
         return;
       } 
       const formData = new FormData(form);
 
-      // let body = {};
-      // for (let val of formData.entries()) {
-      //   body[val[0]] = val[1];
-      // }
+      let body = {};
+      for (let val of formData.entries()) {
+        body[val[0]] = val[1];
+      }
 
       const outputData = () => {
-        successPopup();
-        addStatus(form, 'Спасибо, мы получили ваш запрос!', 'green');
+        thankYouModal();
+        addStatus(form, 'Заявка отправлена', 'green');
         form.reset();
       };
 
@@ -103,7 +87,7 @@ const form = () => {
       };
       
 
-      postData(formData)
+      postData(body)
         .then((response) => {
           if (response.status !== 200) {
               throw 'error !!! ';
@@ -115,7 +99,7 @@ const form = () => {
     });
   });
 
-  const phoneValidation = (tel) => {
+  const validateTel = (tel) => {
     let str = tel[0].value.length;
     if (str === 18) {
       return false;
@@ -126,4 +110,4 @@ const form = () => {
   };  
 };
 
-export default form;
+export default formParsing;

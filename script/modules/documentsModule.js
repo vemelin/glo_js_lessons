@@ -1,5 +1,4 @@
-const documentsModule = () => {
-  let windowWidth = window.innerWidth;
+const documentsModule = (windowWidth) => {
   const transparency = document.querySelector('#transparency');
   const transparencyItem = transparency.querySelectorAll('.transparency-item');
   const transparencyItemCount = transparencyItem.length;
