@@ -162,7 +162,7 @@ window.addEventListener(`resize`, () => {
 
   Object(_modules_formula__WEBPACK_IMPORTED_MODULE_19__["default"])(windowWidth);
   Object(_modules_hintPopup__WEBPACK_IMPORTED_MODULE_5__["default"])(windowWidth);
-  documentSlider(windowWidth);
+  Object(_modules_documentsModule__WEBPACK_IMPORTED_MODULE_9__["default"])(windowWidth);
 
   if (windowWidth > 1024) {
     Object(_modules_desing_pagination_boolet__WEBPACK_IMPORTED_MODULE_21__["desingBoolet"])();
@@ -200,13 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //   // popupRepairTypes();
   //   // telMask();
   //   // linkPrivacy();
-  //   formula(windowWidth);
-  //   problems(windowWidth);
+  Object(_modules_formula__WEBPACK_IMPORTED_MODULE_19__["default"])(windowWidth); //   problems(windowWidth);
   //   const sliderRepair = new repairViews();
   //   sliderRepair.start();
   //   accordion();
-  //   // documentSlider(windowWidth);
-  //   // const sliderTransparency = new slider();
+
+  Object(_modules_documentsModule__WEBPACK_IMPORTED_MODULE_9__["default"])(windowWidth); //   // const sliderTransparency = new slider();
   //   // sliderTransparency.start();
   //   // buttonWide();
   //   // const partners = new Carousel();
@@ -214,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   // sliderReviews();
   //   // inspirationalPortfolio();
   //   // inspirationalPortfolioPopup();
+
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_20__["default"])({
     block: '#designs',
     blockWrapper: '.nav',
@@ -305,8 +305,8 @@ Object(_modules_ajaxRequests__WEBPACK_IMPORTED_MODULE_16__["default"])(); //Repa
 
 const sliderRepair = new _modules_repairViews__WEBPACK_IMPORTED_MODULE_17__["default"]();
 sliderRepair.start(); //Formula
-
-Object(_modules_formula__WEBPACK_IMPORTED_MODULE_19__["default"])(windowWidth); //Render Content
+// formula(windowWidth);
+//Render Content
 
 Object(_modules_repair_render_content__WEBPACK_IMPORTED_MODULE_18__["default"])();
 
@@ -713,6 +713,7 @@ const documentsModule = windowWidth => {
 
     if (transparencyItemCount <= sliderCount) {
       sliderCount = 0;
+      3;
     }
 
     render();
@@ -725,6 +726,11 @@ const documentsModule = windowWidth => {
     }
 
     render();
+  });
+  document.querySelector('.popup-transparency').addEventListener('click', e => {
+    if (e.target.classList.contains('popup-transparency')) {
+      e.target.style.cssText = `visibility: none;`;
+    }
   });
 };
 
@@ -1304,6 +1310,10 @@ const styles = () => {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
     }
+    .popup-dialog-menu{
+      background-color: #ffffff;
+      opacity: 0.6;
+    }
   `;
   document.head.appendChild(style);
 };
@@ -1316,16 +1326,41 @@ const mainNav = () => {
   open[1].style.cssText = `display: block;`;
   open.forEach(element => element.addEventListener('click', () => modal.classList.toggle('selected'))); // open.addEventListener('click', () => modal.classList.toggle('selected'));
 
-  modal.addEventListener('click', e => {
+  document.body.addEventListener('click', e => {
+    console.log(e.target);
+
     if (e.target.classList.contains('close-menu')) {
-      modal.classList.toggle('selected');
-    } else if (e.target.closest('.popup-dialog-menu')) {
-      modal.classList.toggle('selected');
-    }
+      modal.classList.toggle('selected'); // } else if (e.target.closest('.popup-dialog-menu')) {
+    } // if (e.target.closest('.popup-dialog-menu')) {
+    //   modal.classList.toggle('selected');
+    // }
+
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (mainNav); // .visible {
+/* harmony default export */ __webpack_exports__["default"] = (mainNav); // const mainNav = () => {
+//   const menuBtn = document.querySelector('.menu .menu__icon');
+//   const popupMenu = document.querySelector('.popup-menu');
+//   let popupDialogMenu = popupMenu.querySelector('.popup-dialog-menu');
+//   const closeMenuBtn = popupMenu.querySelector('.close-menu');
+//   if (windowWidth < 576) {
+//     popupDialogMenu.style.cssText = 'transform: translateY(-1500px);';    
+//   } else {
+//     popupDialogMenu.style.cssText = 'transform: translateX(645px);';
+//   }
+//   menuBtn.addEventListener('click', () => {
+//     popupDialogMenu.style.cssText = 'transform: translateY(0);';
+//   });
+//   closeMenuBtn.addEventListener('click', () => {
+//     if (windowWidth < 576) {
+//       popupDialogMenu.style.cssText = 'transform: translateY(-1500px);';
+//     } else {
+//       popupDialogMenu.style.cssText = 'transform: translateX(645px);';
+//     }
+//   });
+// };
+// export default mainNav;
+// .visible {
 //   display: -webkit-box;
 //   display: -ms-flexbox;
 //   display: flex; }

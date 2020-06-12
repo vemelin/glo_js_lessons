@@ -32,7 +32,7 @@ const documentsModule = (windowWidth) => {
   arrowRight.addEventListener(`click`, (evt) => {
     ++sliderCount;
     if (transparencyItemCount <= sliderCount) {
-      sliderCount = 0;
+      sliderCount = 0;3
     }
     render();
   });
@@ -44,5 +44,12 @@ const documentsModule = (windowWidth) => {
     }
     render();
   });
+  
+  document.querySelector('.popup-transparency').addEventListener('click', e => {
+    if(e.target.classList.contains('popup-transparency')){
+      e.target.style.cssText = `visibility: none;`;
+    }
+  });
+
 }; 
 export default documentsModule;

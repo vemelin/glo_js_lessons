@@ -46,7 +46,7 @@ window.addEventListener(`resize`, () => {
   // burgerMenu(windowWidth);
   formula(windowWidth);
   problems(windowWidth);
-  documentSlider(windowWidth);
+  documentsModule(windowWidth);
   if (windowWidth > 1024) {
     desingBoolet();
   } else {
@@ -84,12 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
 //   // popupRepairTypes();
 //   // telMask();
 //   // linkPrivacy();
-//   formula(windowWidth);
+  formula(windowWidth);
 //   problems(windowWidth);
 //   const sliderRepair = new repairViews();
 //   sliderRepair.start();
 //   accordion();
-//   // documentSlider(windowWidth);
+  documentsModule(windowWidth);
 
 //   // const sliderTransparency = new slider();
 //   // sliderTransparency.start();
@@ -201,6 +201,6 @@ formParsing();
 const sliderRepair = new repairViews();
 sliderRepair.start();
 //Formula
-formula(windowWidth);
+// formula(windowWidth);
 //Render Content
 repairContent();
