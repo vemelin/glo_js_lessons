@@ -1,19 +1,19 @@
 // Polyfills, that helps solve cross-browser compatibility for IE11 agent
-// import 'url-polyfill';
-// import "regenerator-runtime/runtime";
-// import 'element-remove';
-// import "@babel/polyfill";
-// import 'formdata-polyfill';
-// import elementClosest from 'element-closest';
-// import 'es6-promise';
-// import 'element-closest/browser';
-// import 'whatwg-fetch';
-// import "scroll-behavior-polyfill";
-// import smoothscroll from 'smoothscroll-polyfill';
-// import 'element-remove';
-// elementClosest(window);
-// smoothscroll.polyfill();
-// import 'mdn-polyfills/Node.prototype.append';
+import 'url-polyfill';
+import "regenerator-runtime/runtime";
+import 'element-remove';
+import "@babel/polyfill";
+import 'formdata-polyfill';
+import elementClosest from 'element-closest';
+import 'es6-promise';
+import 'element-closest/browser';
+import 'whatwg-fetch';
+import "scroll-behavior-polyfill";
+import smoothscroll from 'smoothscroll-polyfill';
+import 'element-remove';
+elementClosest(window);
+smoothscroll.polyfill();
+import 'mdn-polyfills/Node.prototype.append';
 
 // Import list of Modules
 import headerPhoneSwitcher from './modules/headerPhoneSwitcher';
@@ -43,7 +43,6 @@ import {desingBoolet, desingSliders, desingPopup} from './modules/desing-paginat
 let windowWidth = window.innerWidth;
 window.addEventListener(`resize`, () => {
   windowWidth = window.innerWidth;
-  // burgerMenu(windowWidth);
   formula(windowWidth);
   problems(windowWidth);
   documentsModule(windowWidth);
@@ -78,29 +77,8 @@ window.addEventListener(`resize`, () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-//   // telMenu();
-//   // burgerMenu(windowWidth);
-//   // smoothScrolling();
-//   // popupRepairTypes();
-//   // telMask();
-//   // linkPrivacy();
   formula(windowWidth);
-//   problems(windowWidth);
-//   const sliderRepair = new repairViews();
-//   sliderRepair.start();
-//   accordion();
   documentsModule(windowWidth);
-
-//   // const sliderTransparency = new slider();
-//   // sliderTransparency.start();
-//   // buttonWide();
-
-//   // const partners = new Carousel();
-//   // // partners.start();
-
-//   // sliderReviews();
-//   // inspirationalPortfolio();
-//   // inspirationalPortfolioPopup();
 
   tabs({
     block: '#designs',
@@ -156,11 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dispFlex: '.popup-design-slider-wrap',
 
   });
-
-  // keyDownEsc();
   desingPopup();
-  // ajaxPost();
-  // get();
 });
 
 // Header Phone Switcher — Phone list
